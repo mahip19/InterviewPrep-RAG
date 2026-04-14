@@ -122,6 +122,145 @@ function SuggestionPill({ text, onClick }) {
   );
 }
 
+function DocumentPanel({ documents, onDelete, onUpload, uploading }) {
+  const fileInputRef = useRef(null);
+
+  return (
+    <div
+      style={{
+        padding: "16px 24px",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        background: "rgba(12,15,26,0.6)",
+        animation: "fadeIn 0.2s ease",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "800px",
+          margin: "0 auto",
+        }}
+      >
+        {/* Upload area */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            marginBottom: documents.length > 0 ? "16px" : 0,
+          }}
+        >
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".md,.txt,.html,.pdf"
+            onChange={onUpload}
+            style={{ display: "none" }}
+          />
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+            style={{
+              padding: "8px 16px",
+              borderRadius: "8px",
+              border: "1px solid rgba(99,102,241,0.3)",
+              background: uploading
+                ? "rgba(99,102,241,0.1)"
+                : "rgba(99,102,241,0.15)",
+              color: uploading ? "#64748b" : "#a5b4fc",
+              fontSize: "13px",
+              fontFamily: "'DM Sans', sans-serif",
+              cursor: uploading ? "default" : "pointer",
+              transition: "all 0.2s",
+            }}
+          >
+            {uploading ? "Processing..." : "Upload Document"}
+          </button>
+          <span
+            style={{
+              fontSize: "12px",
+              color: "#475569",
+              fontFamily: "'IBM Plex Mono', monospace",
+            }}
+          >
+            .md, .txt, .html, .pdf
+          </span>
+        </div>
+
+        {/* Document list */}
+        {documents.length > 0 && (
+          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+            {documents.map((doc) => (
+              <div
+                key={doc.filename}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "8px 12px",
+                  borderRadius: "8px",
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", minWidth: 0 }}>
+                  <span style={{ fontSize: "14px", flexShrink: 0 }}>📄</span>
+                  <span
+                    style={{
+                      fontSize: "13px",
+                      color: "#e2e8f0",
+                      fontFamily: "'DM Sans', sans-serif",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {doc.filename}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "11px",
+                      color: "#64748b",
+                      fontFamily: "'IBM Plex Mono', monospace",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {doc.chunkCount} chunks
+                  </span>
+                </div>
+                <button
+                  onClick={() => onDelete(doc.filename)}
+                  style={{
+                    padding: "4px 10px",
+                    borderRadius: "6px",
+                    border: "1px solid rgba(239,68,68,0.2)",
+                    background: "rgba(239,68,68,0.08)",
+                    color: "#f87171",
+                    fontSize: "11px",
+                    fontFamily: "'DM Sans', sans-serif",
+                    cursor: "pointer",
+                    transition: "all 0.2s",
+                    flexShrink: 0,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = "rgba(239,68,68,0.18)";
+                    e.target.style.borderColor = "rgba(239,68,68,0.4)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = "rgba(239,68,68,0.08)";
+                    e.target.style.borderColor = "rgba(239,68,68,0.2)";
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 const SUGGESTIONS = [
   "Tell me about a time I showed leadership",
   "What's my experience with distributed systems?",
@@ -134,7 +273,10 @@ export default function App() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [docCount, setDocCount] = useState(null);
+  const [stats, setStats] = useState({ totalChunks: null, totalDocs: null });
+  const [showDocs, setShowDocs] = useState(false);
+  const [documents, setDocuments] = useState([]);
+  const [uploading, setUploading] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -142,12 +284,67 @@ export default function App() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  useEffect(() => {
+  const fetchStats = () => {
     fetch(`${API_URL}/api/stats`)
       .then((r) => r.json())
-      .then((d) => setDocCount(d.totalChunks))
+      .then((d) => setStats({ totalChunks: d.totalChunks, totalDocs: d.totalDocs }))
       .catch(() => {});
+  };
+
+  const fetchDocuments = () => {
+    fetch(`${API_URL}/api/documents`)
+      .then((r) => r.json())
+      .then((d) => setDocuments(d.documents || []))
+      .catch(() => {});
+  };
+
+  useEffect(() => {
+    fetchStats();
   }, []);
+
+  useEffect(() => {
+    if (showDocs) fetchDocuments();
+  }, [showDocs]);
+
+  const handleUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch(`${API_URL}/api/upload`, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      fetchDocuments();
+      fetchStats();
+    } catch (err) {
+      alert(`Upload failed: ${err.message}`);
+    }
+    setUploading(false);
+    e.target.value = "";
+  };
+
+  const handleDelete = async (filename) => {
+    if (!confirm(`Remove "${filename}" from context?`)) return;
+
+    try {
+      const res = await fetch(
+        `${API_URL}/api/documents/${encodeURIComponent(filename)}`,
+        { method: "DELETE" }
+      );
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      fetchDocuments();
+      fetchStats();
+    } catch (err) {
+      alert(`Delete failed: ${err.message}`);
+    }
+  };
 
   const sendMessage = async (text) => {
     const query = text || input.trim();
@@ -275,22 +472,54 @@ export default function App() {
             </p>
           </div>
         </div>
-        {docCount !== null && (
-          <div
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <button
+            onClick={() => setShowDocs((prev) => !prev)}
             style={{
               padding: "5px 12px",
               borderRadius: "8px",
-              background: "rgba(34,197,94,0.1)",
-              border: "1px solid rgba(34,197,94,0.2)",
+              border: showDocs
+                ? "1px solid rgba(99,102,241,0.4)"
+                : "1px solid rgba(255,255,255,0.1)",
+              background: showDocs
+                ? "rgba(99,102,241,0.15)"
+                : "rgba(255,255,255,0.05)",
+              color: showDocs ? "#a5b4fc" : "#94a3b8",
               fontSize: "12px",
-              color: "#4ade80",
               fontFamily: "'IBM Plex Mono', monospace",
+              cursor: "pointer",
+              transition: "all 0.2s",
             }}
           >
-            {docCount} chunks indexed
-          </div>
-        )}
+            Manage Docs
+          </button>
+          {stats.totalChunks !== null && (
+            <div
+              style={{
+                padding: "5px 12px",
+                borderRadius: "8px",
+                background: "rgba(34,197,94,0.1)",
+                border: "1px solid rgba(34,197,94,0.2)",
+                fontSize: "12px",
+                color: "#4ade80",
+                fontFamily: "'IBM Plex Mono', monospace",
+              }}
+            >
+              {stats.totalDocs} docs / {stats.totalChunks} chunks
+            </div>
+          )}
+        </div>
       </header>
+
+      {/* Document management panel */}
+      {showDocs && (
+        <DocumentPanel
+          documents={documents}
+          onDelete={handleDelete}
+          onUpload={handleUpload}
+          uploading={uploading}
+        />
+      )}
 
       {/* Messages */}
       <main
