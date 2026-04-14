@@ -82,21 +82,11 @@ Opens on `http://localhost:5173`.
 
 ---
 
-## How It Works
+## Architecture
 
-```
-You ask a question
-       ↓
-Backend embeds your query locally (all-MiniLM-L6-v2 via Transformers.js)
-       ↓
-PostgreSQL + pgvector returns top 5 most relevant chunks (cosine similarity)
-       ↓
-Chunks + your question → Groq API (Llama 3.3 70B)
-       ↓
-LLM answers grounded in YOUR documents
-       ↓
-Response + source citations shown in UI
-```
+<p align="center">
+  <img src="architecture.svg" alt="System Architecture" width="680">
+</p>
 
 ## API Endpoints
 
