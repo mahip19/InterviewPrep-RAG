@@ -1,11 +1,19 @@
 import express from "express";
 import cors from "cors";
 import pg from "pg";
+import fs from "fs";
+import path from "path";
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
 import { pipeline } from "@huggingface/transformers";
 import Groq from "groq-sdk";
+import multer from "multer";
+import { setupSchema, processFile, ingestDocument } from "./ingestUtils.js";
 
 dotenv.config();
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DOCS_DIR = path.join(__dirname, "docs");
 
 const app = express();
 app.use(cors());
@@ -23,10 +31,13 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 async function initDB() {
   try {
+    const client = await pool.connect();
+    await setupSchema(client);
+    client.release();
     const res = await pool.query("SELECT COUNT(*) FROM chunks");
-    console.log(`✅ Connected to PostgreSQL — ${res.rows[0].count} chunks indexed`);
+    console.log(`Connected to PostgreSQL — ${res.rows[0].count} chunks indexed`);
   } catch (err) {
-    console.error("❌ Could not connect to PostgreSQL:", err.message);
+    console.error("Could not connect to PostgreSQL:", err.message);
     console.log("   Make sure Postgres is running and DATABASE_URL is set in .env");
     console.log("   Run npm run ingest first to create the schema and load chunks");
     process.exit(1);
@@ -81,7 +92,20 @@ async function chat(userMessage) {
   return completion.choices[0]?.message?.content || "No response generated.";
 }
 
-// ── Retrieve-only endpoint (test retrieval without LLM) ─────────────
+// ── File upload (multer) ────────────────────────────────────────────
+if (!fs.existsSync(DOCS_DIR)) fs.mkdirSync(DOCS_DIR, { recursive: true });
+
+const upload = multer({
+  dest: DOCS_DIR,
+  limits: { fileSize: 50 * 1024 * 1024 },
+  fileFilter: (_req, file, cb) => {
+    const allowed = [".md", ".txt", ".html", ".pdf"];
+    const ext = path.extname(file.originalname).toLowerCase();
+    cb(null, allowed.includes(ext));
+  },
+});
+
+// ── Retrieve-only endpoint ──────────────────────────────────────────
 app.post("/api/retrieve", async (req, res) => {
   const { query } = req.body;
   if (!query) return res.status(400).json({ error: "query is required" });
@@ -139,13 +163,93 @@ app.post("/api/query", async (req, res) => {
   }
 });
 
-// ── Stats endpoint ───────────────────────────────────────────────────
-app.get("/api/stats", async (req, res) => {
+// ── Upload + ingest endpoint ────────────────────────────────────────
+app.post("/api/upload", upload.single("file"), async (req, res) => {
+  if (!req.file) return res.status(400).json({ error: "No valid file uploaded. Supported: .md, .txt, .html, .pdf" });
+
+  const tempPath = req.file.path;
+  const originalName = req.file.originalname;
+  const finalPath = path.join(DOCS_DIR, originalName);
+
   try {
-    const result = await pool.query("SELECT COUNT(*) FROM chunks");
-    res.json({ totalChunks: parseInt(result.rows[0].count), collection: "postgres/chunks" });
+    // Rename from multer's random name to original filename
+    fs.renameSync(tempPath, finalPath);
+
+    // Convert file to text and ingest
+    const content = await processFile(finalPath, originalName);
+    const result = await ingestDocument(pool, originalName, content);
+
+    res.json({
+      message: `Uploaded and ingested ${originalName}`,
+      filename: result.filename,
+      chunkCount: result.chunkCount,
+    });
+  } catch (err) {
+    // Clean up temp file on error
+    if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
+    if (fs.existsSync(finalPath)) fs.unlinkSync(finalPath);
+    console.error("Upload error:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── List documents endpoint ─────────────────────────────────────────
+app.get("/api/documents", async (_req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT filename, COUNT(*) as chunk_count
+       FROM chunks
+       GROUP BY filename
+       ORDER BY filename`
+    );
+    res.json({
+      documents: result.rows.map((r) => ({
+        filename: r.filename,
+        chunkCount: parseInt(r.chunk_count),
+      })),
+    });
+  } catch (err) {
+    console.error("Documents list error:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── Delete document endpoint ────────────────────────────────────────
+app.delete("/api/documents/:filename", async (req, res) => {
+  const filename = decodeURIComponent(req.params.filename);
+
+  try {
+    const result = await pool.query(
+      `DELETE FROM chunks WHERE filename = $1`,
+      [filename]
+    );
+
+    // Also delete the file from disk
+    const filePath = path.join(DOCS_DIR, filename);
+    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+
+    res.json({
+      message: `Deleted ${filename}`,
+      deletedChunks: parseInt(result.rowCount),
+    });
+  } catch (err) {
+    console.error("Delete error:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── Stats endpoint ──────────────────────────────────────────────────
+app.get("/api/stats", async (_req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT COUNT(*) as total_chunks, COUNT(DISTINCT filename) as total_docs FROM chunks`
+    );
+    res.json({
+      totalChunks: parseInt(result.rows[0].total_chunks),
+      totalDocs: parseInt(result.rows[0].total_docs),
+    });
   } catch {
-    res.json({ totalChunks: 0 });
+    res.json({ totalChunks: 0, totalDocs: 0 });
   }
 });
 
@@ -154,7 +258,7 @@ const PORT = process.env.PORT || 3001;
 
 initDB().then(() => {
   app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);
     console.log(`   LLM: ${CHAT_MODEL} | Embeddings: ${EMBEDDING_MODEL}`);
   });
 });
