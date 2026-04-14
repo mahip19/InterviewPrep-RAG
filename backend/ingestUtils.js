@@ -6,9 +6,10 @@ import { pipeline } from "@huggingface/transformers";
 const execFileAsync = promisify(execFile);
 
 // ── Config ──────────────────────────────────────────────────────────
-const CHUNK_SIZE = 800;
-const CHUNK_OVERLAP = 150;
-const EMBEDDING_MODEL = process.env.EMBEDDING_MODEL || "Xenova/all-MiniLM-L6-v2";
+const CHUNK_SIZE = 1250;
+const CHUNK_OVERLAP = 200;
+const EMBEDDING_MODEL =
+  process.env.EMBEDDING_MODEL || "Xenova/all-MiniLM-L6-v2";
 
 // ── Embedder (lazy-loaded, shared) ──────────────────────────────────
 let embedder;
@@ -69,7 +70,9 @@ export async function convertPdfToText(filePath) {
     return stdout;
   } catch (err) {
     if (err.code === "ENOENT") {
-      throw new Error("pdftotext not found. Install poppler: brew install poppler");
+      throw new Error(
+        "pdftotext not found. Install poppler: brew install poppler",
+      );
     }
     throw err;
   }
@@ -127,7 +130,7 @@ export async function ingestDocument(pool, filename, content) {
         chunks.length,
         chunks[i],
         `[${embedding.join(",")}]`,
-      ]
+      ],
     );
   }
 

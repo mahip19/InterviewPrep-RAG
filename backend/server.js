@@ -22,8 +22,9 @@ app.use(express.json());
 const { Pool } = pg;
 
 // ── Config ──────────────────────────────────────────────────────────
-const TOP_K = 5;
-const EMBEDDING_MODEL = process.env.EMBEDDING_MODEL || "Xenova/all-MiniLM-L6-v2";
+const TOP_K = 10;
+const EMBEDDING_MODEL =
+  process.env.EMBEDDING_MODEL || "Xenova/all-MiniLM-L6-v2";
 const CHAT_MODEL = process.env.CHAT_MODEL || "llama-3.3-70b-versatile";
 
 // ── DB client ────────────────────────────────────────────────────────
@@ -35,11 +36,17 @@ async function initDB() {
     await setupSchema(client);
     client.release();
     const res = await pool.query("SELECT COUNT(*) FROM chunks");
-    console.log(`Connected to PostgreSQL — ${res.rows[0].count} chunks indexed`);
+    console.log(
+      `Connected to PostgreSQL — ${res.rows[0].count} chunks indexed`,
+    );
   } catch (err) {
     console.error("Could not connect to PostgreSQL:", err.message);
-    console.log("   Make sure Postgres is running and DATABASE_URL is set in .env");
-    console.log("   Run npm run ingest first to create the schema and load chunks");
+    console.log(
+      "   Make sure Postgres is running and DATABASE_URL is set in .env",
+    );
+    console.log(
+      "   Run npm run ingest first to create the schema and load chunks",
+    );
     process.exit(1);
   }
 }
@@ -47,20 +54,20 @@ async function initDB() {
 // ── System Prompt ───────────────────────────────────────────────────
 const SYSTEM_PROMPT = `You are an interview preparation assistant. You help the user prepare for software engineering interviews using THEIR OWN documents, experiences, and notes.
 
-Your job:
-- Answer questions using the retrieved context from the user's documents
-- When asked for STAR stories, structure them clearly (Situation, Task, Action, Result)
-- When asked about technical topics, reference the user's own notes and approaches
-- When asked about behavioral questions, draw from the user's documented experiences
-- If the context doesn't contain relevant info, say so honestly — don't make things up
-- Be concise and practical — this is interview prep, not an essay
-
-Always ground your answers in the provided context. Cite which document the info comes from when possible.`;
+CRITICAL RULES:
+- ONLY use information from the retrieved context below. NEVER generate, invent, or paraphrase beyond what the documents say.
+- When the user asks for something that exists in the context (an introduction, a STAR story, a response), quote it DIRECTLY from their documents. Do not rephrase or rewrite it.
+- When asked for STAR stories, use the exact content from their documents, structured as Situation, Task, Action, Result.
+- When asked about technical topics, reference the user's own notes and approaches verbatim.
+- If the context doesn't contain relevant info, say "I couldn't find this in your documents" — don't make things up.
+- Be concise and practical — this is interview prep, not an essay.
+- Always cite which document the info comes from.`;
 
 // ── Embedder (lazy-loaded, shared across requests) ───────────────────
 let embedder;
 async function embedQuery(text) {
-  if (!embedder) embedder = await pipeline("feature-extraction", EMBEDDING_MODEL);
+  if (!embedder)
+    embedder = await pipeline("feature-extraction", EMBEDDING_MODEL);
   const output = await embedder(text, { pooling: "mean", normalize: true });
   return Array.from(output.data);
 }
@@ -73,7 +80,7 @@ async function retrieve(embedding, topK = TOP_K) {
      FROM chunks
      ORDER BY embedding <=> $1::vector
      LIMIT $2`,
-    [`[${embedding.join(",")}]`, topK]
+    [`[${embedding.join(",")}]`, topK],
   );
   return res.rows;
 }
@@ -137,7 +144,9 @@ app.post("/api/query", async (req, res) => {
     const rows = await retrieve(embedding);
 
     const context = rows
-      .map((r) => `[Source: ${r.filename}, Chunk ${r.chunk_index}]\n${r.content}`)
+      .map(
+        (r) => `[Source: ${r.filename}, Chunk ${r.chunk_index}]\n${r.content}`,
+      )
       .join("\n\n---\n\n");
 
     let answer;
@@ -165,7 +174,12 @@ app.post("/api/query", async (req, res) => {
 
 // ── Upload + ingest endpoint ────────────────────────────────────────
 app.post("/api/upload", upload.single("file"), async (req, res) => {
-  if (!req.file) return res.status(400).json({ error: "No valid file uploaded. Supported: .md, .txt, .html, .pdf" });
+  if (!req.file)
+    return res
+      .status(400)
+      .json({
+        error: "No valid file uploaded. Supported: .md, .txt, .html, .pdf",
+      });
 
   const tempPath = req.file.path;
   const originalName = req.file.originalname;
@@ -200,7 +214,7 @@ app.get("/api/documents", async (_req, res) => {
       `SELECT filename, COUNT(*) as chunk_count
        FROM chunks
        GROUP BY filename
-       ORDER BY filename`
+       ORDER BY filename`,
     );
     res.json({
       documents: result.rows.map((r) => ({
@@ -219,10 +233,9 @@ app.delete("/api/documents/:filename", async (req, res) => {
   const filename = decodeURIComponent(req.params.filename);
 
   try {
-    const result = await pool.query(
-      `DELETE FROM chunks WHERE filename = $1`,
-      [filename]
-    );
+    const result = await pool.query(`DELETE FROM chunks WHERE filename = $1`, [
+      filename,
+    ]);
 
     // Also delete the file from disk
     const filePath = path.join(DOCS_DIR, filename);
@@ -242,7 +255,7 @@ app.delete("/api/documents/:filename", async (req, res) => {
 app.get("/api/stats", async (_req, res) => {
   try {
     const result = await pool.query(
-      `SELECT COUNT(*) as total_chunks, COUNT(DISTINCT filename) as total_docs FROM chunks`
+      `SELECT COUNT(*) as total_chunks, COUNT(DISTINCT filename) as total_docs FROM chunks`,
     );
     res.json({
       totalChunks: parseInt(result.rows[0].total_chunks),
