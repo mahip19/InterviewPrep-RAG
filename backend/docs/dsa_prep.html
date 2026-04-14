@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Interview Revision Guide</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fff; color: #1a1a1a; line-height: 1.6; padding: 40px; max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 28px; border-bottom: 3px solid #2563eb; padding-bottom: 10px; margin-bottom: 30px; color: #1e3a5f; }
+  h2 { font-size: 20px; color: #1e3a5f; margin-top: 40px; margin-bottom: 8px; border-left: 4px solid #2563eb; padding-left: 12px; }
+  h3 { font-size: 15px; color: #374151; margin-top: 12px; margin-bottom: 4px; }
+  p, li { font-size: 14px; margin-bottom: 6px; }
+  .tag { display: inline-block; background: #2563eb; color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-right: 4px; margin-bottom: 4px; }
+  .tag.green { background: #16a34a; }
+  .tag.orange { background: #ea580c; }
+  .tag.purple { background: #7c3aed; }
+  .complexity { background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px 14px; margin: 10px 0; font-size: 13px; }
+  .complexity strong { color: #1e3a5f; }
+  .insight { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 10px 14px; margin: 10px 0; font-size: 13px; border-radius: 0 6px 6px 0; }
+  .bug-warning { background: #fef2f2; border-left: 4px solid #ef4444; padding: 10px 14px; margin: 10px 0; font-size: 13px; border-radius: 0 6px 6px 0; }
+  pre { background: #1e293b; color: #e2e8f0; border-radius: 8px; padding: 16px; overflow-x: auto; margin: 10px 0; font-size: 12.5px; line-height: 1.5; }
+  code { font-family: 'Consolas', 'Fira Code', monospace; }
+  pre code { color: #e2e8f0; }
+  .kw { color: #c084fc; }
+  .type { color: #67e8f9; }
+  .str { color: #86efac; }
+  .num { color: #fbbf24; }
+  .cmt { color: #64748b; font-style: italic; }
+  .fn { color: #93c5fd; }
+  .op { color: #f472b6; }
+  hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th { background: #1e3a5f; color: #fff; padding: 8px 12px; text-align: left; }
+  td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; }
+  tr:nth-child(even) { background: #f8fafc; }
+  .page-break { page-break-before: always; }
+  @media print {
+    body { padding: 20px; }
+    pre { font-size: 11px; padding: 10px; }
+    h2 { margin-top: 24px; }
+    .page-break { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<h1>DSA Interview Revision Guide</h1>
+
+<!-- ==================== 1 ==================== -->
+<h2>1. Regular Expression Matching <span class="tag purple">Hard</span></h2>
+<span class="tag">DP</span> <span class="tag">Recursion + Memoization</span>
+
+<div class="insight">
+<strong>Intuition:</strong> <code>*</code> means zero or more of the <em>preceding</em> element, not a wildcard. Two choices when you see <code>x*</code>: skip it entirely (zero occurrences → j+2) or consume one character if it matches (stay at j). This branching makes it a DP problem.
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="type">Boolean</span>[][] memo;
+
+    <span class="kw">public</span> <span class="type">boolean</span> <span class="fn">isMatch</span>(<span class="type">String</span> s, <span class="type">String</span> p) {
+        memo = <span class="kw">new</span> <span class="type">Boolean</span>[s.<span class="fn">length</span>() + <span class="num">1</span>][p.<span class="fn">length</span>() + <span class="num">1</span>];
+        <span class="kw">return</span> <span class="fn">solve</span>(s, p, <span class="num">0</span>, <span class="num">0</span>);
+    }
+
+    <span class="kw">private</span> <span class="type">boolean</span> <span class="fn">solve</span>(<span class="type">String</span> s, <span class="type">String</span> p, <span class="type">int</span> i, <span class="type">int</span> j) {
+        <span class="kw">if</span> (j == p.<span class="fn">length</span>()) <span class="kw">return</span> i == s.<span class="fn">length</span>();
+        <span class="kw">if</span> (memo[i][j] != <span class="kw">null</span>) <span class="kw">return</span> memo[i][j];
+
+        <span class="type">boolean</span> firstMatch = (i < s.<span class="fn">length</span>()) &&
+            (s.<span class="fn">charAt</span>(i) == p.<span class="fn">charAt</span>(j) || p.<span class="fn">charAt</span>(j) == <span class="str">'.'</span>);
+
+        <span class="type">boolean</span> result;
+        <span class="kw">if</span> (j + <span class="num">1</span> < p.<span class="fn">length</span>() && p.<span class="fn">charAt</span>(j + <span class="num">1</span>) == <span class="str">'*'</span>) {
+            result = <span class="fn">solve</span>(s, p, i, j + <span class="num">2</span>) ||              <span class="cmt">// skip x*</span>
+                     (firstMatch && <span class="fn">solve</span>(s, p, i + <span class="num">1</span>, j)); <span class="cmt">// consume one</span>
+        } <span class="kw">else</span> {
+            result = firstMatch && <span class="fn">solve</span>(s, p, i + <span class="num">1</span>, j + <span class="num">1</span>);
+        }
+        memo[i][j] = result;
+        <span class="kw">return</span> result;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n × m) &nbsp;|&nbsp; <strong>Space:</strong> O(n × m)</div>
+
+<hr>
+
+<!-- ==================== 2 ==================== -->
+<h2>2. kSum (3Sum / 4Sum Generalized)</h2>
+<span class="tag">Recursion</span> <span class="tag">Backtracking</span> <span class="tag">Two Pointers</span>
+
+<div class="insight">
+<strong>Intuition:</strong> kSum fixes one element, calls (k-1)Sum recursively. Base case is 2Sum. <code>current</code> is a shared list → must backtrack. Use <code>long</code> for target to avoid overflow.
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; result = <span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+
+    <span class="kw">public</span> <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; <span class="fn">fourSum</span>(<span class="type">int</span>[] nums, <span class="type">int</span> target) {
+        <span class="type">Arrays</span>.<span class="fn">sort</span>(nums);
+        <span class="fn">solve</span>(nums, (<span class="type">long</span>) target, <span class="num">4</span>, <span class="num">0</span>, <span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;());
+        <span class="kw">return</span> result;
+    }
+
+    <span class="kw">private void</span> <span class="fn">solve</span>(<span class="type">int</span>[] nums, <span class="type">long</span> target, <span class="type">int</span> k, <span class="type">int</span> start, <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; current) {
+        <span class="kw">if</span> (k == <span class="num">2</span>) { <span class="fn">twoSum</span>(nums, target, start, current); <span class="kw">return</span>; }
+        <span class="kw">for</span> (<span class="type">int</span> i = start; i < nums.length; i++) {
+            <span class="kw">if</span> (i > start && nums[i] == nums[i - <span class="num">1</span>]) <span class="kw">continue</span>;
+            current.<span class="fn">add</span>(nums[i]);
+            <span class="fn">solve</span>(nums, target - nums[i], k - <span class="num">1</span>, i + <span class="num">1</span>, current);
+            current.<span class="fn">remove</span>(current.<span class="fn">size</span>() - <span class="num">1</span>); <span class="cmt">// backtrack</span>
+        }
+    }
+
+    <span class="kw">private void</span> <span class="fn">twoSum</span>(<span class="type">int</span>[] nums, <span class="type">long</span> target, <span class="type">int</span> start, <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; current) {
+        <span class="type">int</span> left = start, right = nums.length - <span class="num">1</span>;
+        <span class="kw">while</span> (left < right) {
+            <span class="type">long</span> sum = (<span class="type">long</span>) nums[left] + nums[right];
+            <span class="kw">if</span> (sum == target) {
+                <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; combo = <span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;(current);
+                combo.<span class="fn">add</span>(nums[left]); combo.<span class="fn">add</span>(nums[right]);
+                result.<span class="fn">add</span>(combo);
+                left++; right--;
+                <span class="kw">while</span> (left < right && nums[left] == nums[left-<span class="num">1</span>]) left++;
+                <span class="kw">while</span> (left < right && nums[right] == nums[right+<span class="num">1</span>]) right--;
+            } <span class="kw">else if</span> (sum < target) left++;
+            <span class="kw">else</span> right--;
+        }
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n^(k-1)) — e.g. 3Sum=O(n²), 4Sum=O(n³) &nbsp;|&nbsp; <strong>Space:</strong> O(k)</div>
+
+<hr>
+
+<!-- ==================== 3 ==================== -->
+<h2>3. Combination Sum I <span class="tag green">Medium</span></h2>
+<span class="tag">Backtracking</span> <span class="tag">Unbounded</span>
+
+<div class="insight">
+<strong>Intuition:</strong> Pick current element (stay at same index — reuse allowed) or skip it (move to next). Check success BEFORE pruning.
+</div>
+
+<div class="bug-warning">
+<strong>Bug to avoid:</strong> Checking <code>candidates[index] > target</code> BEFORE <code>target == 0</code> causes valid answers to be skipped.
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; <span class="fn">combinationSum</span>(<span class="type">int</span>[] candidates, <span class="type">int</span> target) {
+        <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; combos = <span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+        <span class="type">Arrays</span>.<span class="fn">sort</span>(candidates);
+        <span class="fn">solve</span>(candidates, target, <span class="num">0</span>, combos, <span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;());
+        <span class="kw">return</span> combos;
+    }
+    <span class="kw">private void</span> <span class="fn">solve</span>(<span class="type">int</span>[] c, <span class="type">int</span> target, <span class="type">int</span> idx,
+                       <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; combos, <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; cur) {
+        <span class="kw">if</span> (target == <span class="num">0</span>) { combos.<span class="fn">add</span>(<span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;(cur)); <span class="kw">return</span>; }
+        <span class="kw">if</span> (target < <span class="num">0</span> || idx >= c.length) <span class="kw">return</span>;
+        <span class="kw">if</span> (c[idx] > target) <span class="kw">return</span>;
+
+        cur.<span class="fn">add</span>(c[idx]);
+        <span class="fn">solve</span>(c, target - c[idx], idx, combos, cur); <span class="cmt">// pick (stay)</span>
+        cur.<span class="fn">remove</span>(cur.<span class="fn">size</span>() - <span class="num">1</span>);
+        <span class="fn">solve</span>(c, target, idx + <span class="num">1</span>, combos, cur);      <span class="cmt">// skip</span>
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n^(target/min)) &nbsp;|&nbsp; <strong>Space:</strong> O(target/min)</div>
+
+<hr>
+
+<!-- ==================== 4 ==================== -->
+<h2>4. Combination Sum II <span class="tag green">Medium</span></h2>
+<span class="tag">Backtracking</span> <span class="tag">Bounded</span> <span class="tag">Skip Duplicates</span>
+
+<div class="insight">
+<strong>Intuition:</strong> Same pick/skip but pass <code>index+1</code> when picking (can't reuse). Sort array and skip duplicates in the skip branch.
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; <span class="fn">combinationSum2</span>(<span class="type">int</span>[] c, <span class="type">int</span> target) {
+        <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; combos = <span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+        <span class="type">Arrays</span>.<span class="fn">sort</span>(c);
+        <span class="fn">solve</span>(c, target, <span class="num">0</span>, combos, <span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;());
+        <span class="kw">return</span> combos;
+    }
+    <span class="kw">private void</span> <span class="fn">solve</span>(<span class="type">int</span>[] c, <span class="type">int</span> target, <span class="type">int</span> idx,
+                       <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; combos, <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; cur) {
+        <span class="kw">if</span> (target == <span class="num">0</span>) { combos.<span class="fn">add</span>(<span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;(cur)); <span class="kw">return</span>; }
+        <span class="kw">if</span> (target < <span class="num">0</span> || idx >= c.length) <span class="kw">return</span>;
+
+        cur.<span class="fn">add</span>(c[idx]);
+        <span class="fn">solve</span>(c, target - c[idx], idx + <span class="num">1</span>, combos, cur); <span class="cmt">// pick (move on)</span>
+        cur.<span class="fn">remove</span>(cur.<span class="fn">size</span>() - <span class="num">1</span>);
+
+        <span class="kw">while</span> (idx+<span class="num">1</span> < c.length && c[idx] == c[idx+<span class="num">1</span>]) idx++; <span class="cmt">// skip dupes</span>
+        <span class="fn">solve</span>(c, target, idx + <span class="num">1</span>, combos, cur);
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(2^n) &nbsp;|&nbsp; <strong>Space:</strong> O(n)</div>
+
+<hr>
+
+<!-- ==================== 5 ==================== -->
+<h2>5. Reverse Integer <span class="tag green">Medium</span></h2>
+<span class="tag">Math</span> <span class="tag">Overflow Handling</span>
+
+<div class="insight">
+<strong>Intuition:</strong> Pop last digit with <code>% 10</code>, build result with <code>res * 10 + digit</code>. Check overflow BEFORE the multiply using <code>MAX_VALUE / 10</code>. Java's <code>%</code> and <code>/</code> handle negatives naturally.
+</div>
+
+<div class="bug-warning">
+<strong>Bugs to avoid:</strong> (1) <code>while(x > 0)</code> fails for negatives — use <code>x != 0</code>. (2) <code>Math.abs()</code> inside loop breaks negative handling. (3) Must check overflow before <code>res*10</code>, not after.
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">reverse</span>(<span class="type">int</span> x) {
+        <span class="type">int</span> res = <span class="num">0</span>;
+        <span class="kw">while</span> (x != <span class="num">0</span>) {
+            <span class="type">int</span> digit = x % <span class="num">10</span>;
+            <span class="kw">if</span> (res > Integer.MAX_VALUE/<span class="num">10</span> ||
+                (res == Integer.MAX_VALUE/<span class="num">10</span> && digit > <span class="num">7</span>)) <span class="kw">return</span> <span class="num">0</span>;
+            <span class="kw">if</span> (res < Integer.MIN_VALUE/<span class="num">10</span> ||
+                (res == Integer.MIN_VALUE/<span class="num">10</span> && digit < -<span class="num">8</span>)) <span class="kw">return</span> <span class="num">0</span>;
+            res = res * <span class="num">10</span> + digit;
+            x /= <span class="num">10</span>;
+        }
+        <span class="kw">return</span> res;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(log x) &nbsp;|&nbsp; <strong>Space:</strong> O(1)</div>
+
+<hr>
+
+<!-- ==================== 6 ==================== -->
+<h2>6. Count Subarrays With Median K</h2>
+<span class="tag">Prefix Sum</span> <span class="tag">HashMap</span>
+
+<div class="insight">
+<strong>Intuition:</strong> Transform: &gt;k → +1, &lt;k → -1, ==k → 0. For k to be median, subarray sum = 0 (odd) or 1 (even). Store left prefix sum <em>frequencies</em> in HashMap, match with right extensions.
+</div>
+
+<div class="bug-warning">
+<strong>Bugs to avoid:</strong> (1) Use HashMap not HashSet — counting problem needs frequencies. (2) Use separate <code>+=</code> not <code>if(a || b)</code> — <code>||</code> short-circuits and misses valid subarrays.
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">countSubarrays</span>(<span class="type">int</span>[] nums, <span class="type">int</span> k) {
+        <span class="type">int</span> n = nums.length, m = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>; i < n; i++)
+            <span class="kw">if</span> (nums[i] == k) { m = i; <span class="kw">break</span>; }
+
+        <span class="type">Map</span>&lt;<span class="type">Integer</span>,<span class="type">Integer</span>&gt; left = <span class="kw">new</span> <span class="type">HashMap</span>&lt;&gt;();
+        left.<span class="fn">put</span>(<span class="num">0</span>, <span class="num">1</span>);
+        <span class="type">int</span> sum = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="type">int</span> i = m-<span class="num">1</span>; i >= <span class="num">0</span>; i--) {
+            sum += (nums[i] > k) ? <span class="num">1</span> : -<span class="num">1</span>;
+            left.<span class="fn">merge</span>(sum, <span class="num">1</span>, Integer::sum);
+        }
+        <span class="type">int</span> res = <span class="num">0</span>; sum = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="type">int</span> i = m; i < n; i++) {
+            sum += (nums[i] > k) ? <span class="num">1</span> : (nums[i] < k) ? -<span class="num">1</span> : <span class="num">0</span>;
+            res += left.<span class="fn">getOrDefault</span>(-sum, <span class="num">0</span>);
+            res += left.<span class="fn">getOrDefault</span>(-sum + <span class="num">1</span>, <span class="num">0</span>);
+        }
+        <span class="kw">return</span> res;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n) &nbsp;|&nbsp; <strong>Space:</strong> O(n)</div>
+
+<hr>
+
+<!-- ==================== 7 ==================== -->
+<h2>7. Sell Colored Balls (Max Profit)</h2>
+<span class="tag">Binary Search</span> <span class="tag">Arithmetic Series</span> <span class="tag">Greedy</span>
+
+<div class="insight">
+<strong>Intuition:</strong> Instead of selling one-by-one (TLE), binary search for threshold T. Sell all balls above T using arithmetic series. Handle leftover orders at value T. Think of balls as stacked columns — sell entire rows from top down.
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">maxProfit</span>(<span class="type">int</span>[] inv, <span class="type">int</span> orders) {
+        <span class="type">long</span> MOD = <span class="num">1_000_000_007</span>;
+        <span class="type">long</span> lo = <span class="num">0</span>, hi = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="type">int</span> v : inv) hi = Math.<span class="fn">max</span>(hi, v);
+
+        <span class="kw">while</span> (lo < hi) {
+            <span class="type">long</span> mid = lo + (hi - lo) / <span class="num">2</span>;
+            <span class="type">long</span> cnt = <span class="num">0</span>;
+            <span class="kw">for</span> (<span class="type">int</span> v : inv) <span class="kw">if</span> (v > mid) cnt += v - mid;
+            <span class="kw">if</span> (cnt <= orders) hi = mid;
+            <span class="kw">else</span> lo = mid + <span class="num">1</span>;
+        }
+        <span class="type">long</span> T = lo, profit = <span class="num">0</span>, rem = orders;
+        <span class="kw">for</span> (<span class="type">int</span> v : inv) {
+            <span class="kw">if</span> (v > T) {
+                profit = (profit + (<span class="type">long</span>)v*(v+<span class="num">1</span>)/<span class="num">2</span> - T*(T+<span class="num">1</span>)/<span class="num">2</span>) % MOD;
+                rem -= v - T;
+            }
+        }
+        profit = (profit + rem * T) % MOD;
+        <span class="kw">return</span> (<span class="type">int</span>) profit;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n × log(max_val)) &nbsp;|&nbsp; <strong>Space:</strong> O(1)</div>
+
+<hr>
+
+<!-- ==================== 8 ==================== -->
+<h2>8. Longest Palindromic Substring <span class="tag green">Medium</span></h2>
+<span class="tag">DP</span> <span class="tag">Gap-based</span>
+
+<div class="insight">
+<strong>Intuition:</strong> <code>dp[i][j]</code> = is substring i..j a palindrome? Iterate by gap. gap=0: true. gap=1: true if chars match. gap≥2: chars match AND <code>dp[i+1][j-1]</code>.
+</div>
+
+<div class="bug-warning">
+<strong>Bug to avoid:</strong> gap=1 means TWO characters — it's NOT always true, only when <code>s[i]==s[j]</code>.
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">String</span> <span class="fn">longestPalindrome</span>(<span class="type">String</span> s) {
+        <span class="type">int</span> n = s.<span class="fn">length</span>();
+        <span class="type">boolean</span>[][] dp = <span class="kw">new</span> <span class="type">boolean</span>[n][n];
+        <span class="type">int</span>[] idx = <span class="kw">new</span> <span class="type">int</span>[<span class="num">2</span>];
+        <span class="kw">for</span> (<span class="type">int</span> gap = <span class="num">0</span>; gap < n; gap++) {
+            <span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>, j = gap; j < n; i++, j++) {
+                <span class="kw">if</span> (gap == <span class="num">0</span>) dp[i][j] = <span class="kw">true</span>;
+                <span class="kw">else if</span> (gap == <span class="num">1</span>) dp[i][j] = s.<span class="fn">charAt</span>(i) == s.<span class="fn">charAt</span>(j);
+                <span class="kw">else</span> dp[i][j] = s.<span class="fn">charAt</span>(i) == s.<span class="fn">charAt</span>(j) && dp[i+<span class="num">1</span>][j-<span class="num">1</span>];
+                <span class="kw">if</span> (dp[i][j]) { idx[<span class="num">0</span>] = i; idx[<span class="num">1</span>] = j; }
+            }
+        }
+        <span class="kw">return</span> s.<span class="fn">substring</span>(idx[<span class="num">0</span>], idx[<span class="num">1</span>] + <span class="num">1</span>);
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n²) &nbsp;|&nbsp; <strong>Space:</strong> O(n²)</div>
+
+<hr>
+
+<!-- ==================== 9 ==================== -->
+<h2>9. Search in Rotated Sorted Array <span class="tag green">Medium</span></h2>
+<span class="tag">Binary Search</span>
+
+<div class="insight">
+<strong>Intuition:</strong> Find min element index first, then binary search in the correct half.
+</div>
+
+<div class="bug-warning">
+<strong>Bugs to avoid:</strong> (1) <code>mid = low + (high-low)/2</code> not <code>high - (high-low)/2</code>. (2) <code>low = mid+1</code> not <code>low = mid</code> — causes infinite loop.
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">search</span>(<span class="type">int</span>[] nums, <span class="type">int</span> target) {
+        <span class="type">int</span> n = nums.length;
+        <span class="type">int</span> min = <span class="fn">getMinIndex</span>(nums, n);
+        <span class="type">int</span> lo = target <= nums[n-<span class="num">1</span>] ? min : <span class="num">0</span>;
+        <span class="type">int</span> hi = target > nums[n-<span class="num">1</span>] ? min - <span class="num">1</span> : n - <span class="num">1</span>;
+        <span class="kw">while</span> (lo <= hi) {
+            <span class="type">int</span> mid = lo + (hi - lo) / <span class="num">2</span>;
+            <span class="kw">if</span> (nums[mid] == target) <span class="kw">return</span> mid;
+            <span class="kw">if</span> (nums[mid] < target) lo = mid + <span class="num">1</span>;
+            <span class="kw">else</span> hi = mid - <span class="num">1</span>;
+        }
+        <span class="kw">return</span> -<span class="num">1</span>;
+    }
+    <span class="kw">private</span> <span class="type">int</span> <span class="fn">getMinIndex</span>(<span class="type">int</span>[] a, <span class="type">int</span> n) {
+        <span class="type">int</span> lo = <span class="num">0</span>, hi = n - <span class="num">1</span>;
+        <span class="kw">while</span> (lo < hi) {
+            <span class="type">int</span> mid = (lo + hi) / <span class="num">2</span>;
+            <span class="kw">if</span> (a[mid] <= a[hi]) hi = mid;
+            <span class="kw">else</span> lo = mid + <span class="num">1</span>;
+        }
+        <span class="kw">return</span> lo;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(log n) &nbsp;|&nbsp; <strong>Space:</strong> O(1)</div>
+
+<hr>
+
+<!-- ==================== 10 ==================== -->
+<h2>10. Longest Valid Parentheses <span class="tag purple">Hard</span></h2>
+<span class="tag">Stack</span>
+
+<div class="insight">
+<strong>Intuition:</strong> Stack holds indices of unmatched chars. Push -1 as boundary. When <code>)</code> matches, pop the <code>(</code>. Then <code>i - stack.peek()</code> = length of current valid sequence (top of stack = index just before valid part starts).
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">longestValidParentheses</span>(<span class="type">String</span> s) {
+        <span class="type">LinkedList</span>&lt;<span class="type">Integer</span>&gt; stack = <span class="kw">new</span> <span class="type">LinkedList</span>&lt;&gt;();
+        stack.<span class="fn">push</span>(-<span class="num">1</span>);
+        <span class="type">int</span> res = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>; i < s.<span class="fn">length</span>(); i++) {
+            <span class="kw">if</span> (s.<span class="fn">charAt</span>(i) == <span class="str">')'</span> && stack.<span class="fn">size</span>() > <span class="num">1</span>
+                && s.<span class="fn">charAt</span>(stack.<span class="fn">peek</span>()) == <span class="str">'('</span>) {
+                stack.<span class="fn">pop</span>();
+                res = Math.<span class="fn">max</span>(res, i - stack.<span class="fn">peek</span>());
+            } <span class="kw">else</span> stack.<span class="fn">push</span>(i);
+        }
+        <span class="kw">return</span> res;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n) &nbsp;|&nbsp; <strong>Space:</strong> O(n)</div>
+
+<hr>
+
+<!-- ==================== 11 ==================== -->
+<h2>11. Sudoku Solver <span class="tag purple">Hard</span></h2>
+<span class="tag">Backtracking</span>
+
+<div class="insight">
+<strong>Intuition:</strong> Find empty cell, try 1-9, check safety, recurse. Box corner formula: <code>r - r%3</code>, <code>c - c%3</code>. Row/col check needs only ONE loop, not nested.
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public void</span> <span class="fn">solveSudoku</span>(<span class="type">char</span>[][] board) { <span class="fn">solve</span>(board); }
+
+    <span class="kw">private</span> <span class="type">boolean</span> <span class="fn">solve</span>(<span class="type">char</span>[][] b) {
+        <span class="type">int</span> r = -<span class="num">1</span>, c = -<span class="num">1</span>; <span class="type">boolean</span> found = <span class="kw">false</span>;
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">0</span>; i<<span class="num">9</span> && !found; i++)
+            <span class="kw">for</span> (<span class="type">int</span> j=<span class="num">0</span>; j<<span class="num">9</span> && !found; j++)
+                <span class="kw">if</span> (b[i][j]==<span class="str">'.'</span>) { r=i; c=j; found=<span class="kw">true</span>; }
+        <span class="kw">if</span> (!found) <span class="kw">return true</span>;
+        <span class="kw">for</span> (<span class="type">char</span> x=<span class="str">'1'</span>; x<=<span class="str">'9'</span>; x++) {
+            <span class="kw">if</span> (<span class="fn">isSafe</span>(b,r,c,x)) {
+                b[r][c]=x;
+                <span class="kw">if</span> (<span class="fn">solve</span>(b)) <span class="kw">return true</span>;
+                b[r][c]=<span class="str">'.'</span>;
+            }
+        }
+        <span class="kw">return false</span>;
+    }
+    <span class="kw">private</span> <span class="type">boolean</span> <span class="fn">isSafe</span>(<span class="type">char</span>[][] b, <span class="type">int</span> r, <span class="type">int</span> c, <span class="type">char</span> x) {
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">0</span>; i<<span class="num">9</span>; i++)
+            <span class="kw">if</span> (b[r][i]==x || b[i][c]==x) <span class="kw">return false</span>;
+        <span class="type">int</span> nr=r-r%<span class="num">3</span>, nc=c-c%<span class="num">3</span>;
+        <span class="kw">for</span> (<span class="type">int</span> i=nr; i<nr+<span class="num">3</span>; i++)
+            <span class="kw">for</span> (<span class="type">int</span> j=nc; j<nc+<span class="num">3</span>; j++)
+                <span class="kw">if</span> (b[i][j]==x) <span class="kw">return false</span>;
+        <span class="kw">return true</span>;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(9^(empty cells)) &nbsp;|&nbsp; <strong>Space:</strong> O(81)</div>
+
+<hr>
+
+<!-- ==================== 12 ==================== -->
+<h2>12. Find Duplicate Number (Floyd's Cycle)</h2>
+<span class="tag">Linked List Cycle</span> <span class="tag">Tortoise & Hare</span>
+
+<div class="insight">
+<strong>Intuition:</strong> Treat array as linked list: index → nums[index]. Duplicate = cycle. Phase 1: slow + fast meet inside cycle. Phase 2: reset one to 0, both move 1 step → meet at cycle entry = duplicate.
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">findDuplicate</span>(<span class="type">int</span>[] nums) {
+        <span class="type">int</span> slow = nums[<span class="num">0</span>], fast = nums[nums[<span class="num">0</span>]];
+        <span class="kw">while</span> (slow != fast) {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }
+        fast = <span class="num">0</span>;
+        <span class="kw">while</span> (slow != fast) {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        <span class="kw">return</span> slow;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n) &nbsp;|&nbsp; <strong>Space:</strong> O(1)</div>
+
+<hr>
+
+<!-- ==================== 13 ==================== -->
+<h2>13. Permutations <span class="tag green">Medium</span></h2>
+<span class="tag">Backtracking</span>
+
+<div class="insight">
+<strong>Intuition:</strong> Try all unused elements at each position. Use <code>boolean[] used</code> for O(1) lookup instead of <code>list.contains()</code> which is O(n).
+</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; <span class="fn">permute</span>(<span class="type">int</span>[] nums) {
+        <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; res = <span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+        <span class="fn">solve</span>(nums, res, <span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;(), <span class="kw">new</span> <span class="type">boolean</span>[nums.length]);
+        <span class="kw">return</span> res;
+    }
+    <span class="kw">private void</span> <span class="fn">solve</span>(<span class="type">int</span>[] a, <span class="type">List</span>&lt;<span class="type">List</span>&lt;<span class="type">Integer</span>&gt;&gt; res,
+                       <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; cur, <span class="type">boolean</span>[] used) {
+        <span class="kw">if</span> (cur.<span class="fn">size</span>() == a.length) {
+            res.<span class="fn">add</span>(<span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;(cur)); <span class="kw">return</span>;
+        }
+        <span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>; i < a.length; i++) {
+            <span class="kw">if</span> (used[i]) <span class="kw">continue</span>;
+            used[i] = <span class="kw">true</span>;
+            cur.<span class="fn">add</span>(a[i]);
+            <span class="fn">solve</span>(a, res, cur, used);
+            cur.<span class="fn">remove</span>(cur.<span class="fn">size</span>()-<span class="num">1</span>);
+            used[i] = <span class="kw">false</span>;
+        }
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n! × n) &nbsp;|&nbsp; <strong>Space:</strong> O(n)</div>
+
+<hr>
+
+<!-- ==================== 14 ==================== -->
+<h2>14. Zigzag Conversion <span class="tag green">Medium</span></h2>
+<span class="tag">Simulation</span>
+
+<div class="insight"><strong>Intuition:</strong> Array of StringBuilders, one per row. Bounce pointer down then up. Use <code>numRows</code> not string length <code>n</code> for loop bounds.</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">String</span> <span class="fn">convert</span>(<span class="type">String</span> s, <span class="type">int</span> numRows) {
+        <span class="kw">if</span> (numRows == <span class="num">1</span>) <span class="kw">return</span> s;
+        <span class="type">StringBuilder</span>[] sb = <span class="kw">new</span> <span class="type">StringBuilder</span>[numRows];
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">0</span>; i<numRows; i++) sb[i] = <span class="kw">new</span> <span class="type">StringBuilder</span>();
+        <span class="type">int</span> c = <span class="num">0</span>, n = s.<span class="fn">length</span>();
+        <span class="kw">while</span> (c < n) {
+            <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">0</span>; i<numRows && c<n; i++) sb[i].<span class="fn">append</span>(s.<span class="fn">charAt</span>(c++));
+            <span class="kw">for</span> (<span class="type">int</span> j=numRows-<span class="num">2</span>; j>=<span class="num">1</span> && c<n; j--) sb[j].<span class="fn">append</span>(s.<span class="fn">charAt</span>(c++));
+        }
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">1</span>; i<numRows; i++) sb[<span class="num">0</span>].<span class="fn">append</span>(sb[i]);
+        <span class="kw">return</span> sb[<span class="num">0</span>].<span class="fn">toString</span>();
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n) &nbsp;|&nbsp; <strong>Space:</strong> O(n)</div>
+
+<hr>
+
+<!-- ==================== 15 ==================== -->
+<h2>15. Trapping Rain Water <span class="tag purple">Hard</span></h2>
+<span class="tag">Prefix Arrays</span> <span class="tag">Two Pointers</span>
+
+<div class="insight"><strong>Intuition:</strong> Water at index i = <code>min(maxLeft, maxRight) - height[i]</code>. Precompute maxLeft[] and maxRight[]. Optimized: two pointers O(1) space.</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">trap</span>(<span class="type">int</span>[] h) {
+        <span class="type">int</span> n = h.length;
+        <span class="type">int</span>[] mL = <span class="kw">new</span> <span class="type">int</span>[n], mR = <span class="kw">new</span> <span class="type">int</span>[n];
+        mL[<span class="num">0</span>] = h[<span class="num">0</span>]; mR[n-<span class="num">1</span>] = h[n-<span class="num">1</span>];
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">1</span>; i<n; i++) mL[i] = Math.<span class="fn">max</span>(mL[i-<span class="num">1</span>], h[i]);
+        <span class="kw">for</span> (<span class="type">int</span> i=n-<span class="num">2</span>; i>=<span class="num">0</span>; i--) mR[i] = Math.<span class="fn">max</span>(mR[i+<span class="num">1</span>], h[i]);
+        <span class="type">int</span> water = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">1</span>; i<n; i++)
+            water += Math.<span class="fn">min</span>(mL[i], mR[i]) - h[i];
+        <span class="kw">return</span> water;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n) &nbsp;|&nbsp; <strong>Space:</strong> O(n) — or O(1) with two pointers</div>
+
+<hr>
+
+<!-- ==================== 16 ==================== -->
+<h2>16. Container With Most Water <span class="tag green">Medium</span></h2>
+<span class="tag">Two Pointers</span>
+
+<div class="insight"><strong>Intuition:</strong> Start from both ends. Always move the shorter side inward — moving the taller side can never increase area.</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">maxArea</span>(<span class="type">int</span>[] h) {
+        <span class="type">int</span> i=<span class="num">0</span>, j=h.length-<span class="num">1</span>, max=<span class="num">0</span>;
+        <span class="kw">while</span> (i < j) {
+            max = Math.<span class="fn">max</span>(max, Math.<span class="fn">min</span>(h[i],h[j]) * (j-i));
+            <span class="kw">if</span> (h[i] < h[j]) i++; <span class="kw">else</span> j--;
+        }
+        <span class="kw">return</span> max;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n) &nbsp;|&nbsp; <strong>Space:</strong> O(1)</div>
+
+<hr>
+
+<!-- ==================== 17 ==================== -->
+<h2>17. Jump Game II <span class="tag green">Medium</span></h2>
+<span class="tag">Greedy</span>
+
+<div class="insight"><strong>Intuition:</strong> Track <code>farthest</code> reachable and <code>currentEnd</code>. When you hit currentEnd, you must jump.</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">jump</span>(<span class="type">int</span>[] nums) {
+        <span class="type">int</span> jumps=<span class="num">0</span>, end=<span class="num">0</span>, far=<span class="num">0</span>, n=nums.length;
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">0</span>; i<n-<span class="num">1</span>; i++) {
+            far = Math.<span class="fn">max</span>(far, i+nums[i]);
+            <span class="kw">if</span> (far >= n-<span class="num">1</span>) { jumps++; <span class="kw">break</span>; }
+            <span class="kw">if</span> (i == end) { jumps++; end = far; }
+        }
+        <span class="kw">return</span> jumps;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n) &nbsp;|&nbsp; <strong>Space:</strong> O(1)</div>
+
+<hr>
+
+<!-- ==================== 18 ==================== -->
+<h2>18. First Missing Positive <span class="tag purple">Hard</span></h2>
+<span class="tag">In-place Marking</span>
+
+<div class="insight"><strong>Intuition:</strong> Replace out-of-range with n+1. Negate element at value's index to mark "seen." First positive index+1 = answer.</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">firstMissingPositive</span>(<span class="type">int</span>[] nums) {
+        <span class="type">int</span> n = nums.length;
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">0</span>; i<n; i++)
+            <span class="kw">if</span> (nums[i]<=<span class="num">0</span> || nums[i]>n) nums[i] = n+<span class="num">1</span>;
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">0</span>; i<n; i++) {
+            <span class="type">int</span> v = Math.<span class="fn">abs</span>(nums[i]);
+            <span class="kw">if</span> (v > n) <span class="kw">continue</span>;
+            <span class="kw">if</span> (nums[v-<span class="num">1</span>] > <span class="num">0</span>) nums[v-<span class="num">1</span>] *= -<span class="num">1</span>;
+        }
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">0</span>; i<n; i++)
+            <span class="kw">if</span> (nums[i] > <span class="num">0</span>) <span class="kw">return</span> i+<span class="num">1</span>;
+        <span class="kw">return</span> n+<span class="num">1</span>;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n) &nbsp;|&nbsp; <strong>Space:</strong> O(1)</div>
+
+<hr>
+
+<!-- ==================== 19 ==================== -->
+<h2>19. Longest Common Prefix</h2>
+<span class="tag">Divide and Conquer</span>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">String</span> <span class="fn">longestCommonPrefix</span>(<span class="type">String</span>[] strs) {
+        <span class="kw">return</span> <span class="fn">solve</span>(strs, <span class="num">0</span>, strs.length-<span class="num">1</span>);
+    }
+    <span class="kw">private</span> <span class="type">String</span> <span class="fn">solve</span>(<span class="type">String</span>[] s, <span class="type">int</span> l, <span class="type">int</span> r) {
+        <span class="kw">if</span> (l==r) <span class="kw">return</span> s[l];
+        <span class="type">int</span> mid = (l+r)/<span class="num">2</span>;
+        <span class="kw">return</span> <span class="fn">lcp</span>(<span class="fn">solve</span>(s,l,mid), <span class="fn">solve</span>(s,mid+<span class="num">1</span>,r));
+    }
+    <span class="kw">private</span> <span class="type">String</span> <span class="fn">lcp</span>(<span class="type">String</span> a, <span class="type">String</span> b) {
+        <span class="type">int</span> i=<span class="num">0</span>, min=Math.<span class="fn">min</span>(a.<span class="fn">length</span>(),b.<span class="fn">length</span>());
+        <span class="kw">while</span> (i<min && a.<span class="fn">charAt</span>(i)==b.<span class="fn">charAt</span>(i)) i++;
+        <span class="kw">return</span> a.<span class="fn">substring</span>(<span class="num">0</span>,i);
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n × m) &nbsp;|&nbsp; <strong>Space:</strong> O(m × log n)</div>
+
+<hr>
+
+<!-- ==================== 20 ==================== -->
+<h2>20. Remove Nth Node From End</h2>
+<span class="tag">Linked List</span> <span class="tag">Two Pointers</span>
+
+<div class="insight"><strong>Intuition:</strong> Dummy node + move fast n steps ahead, then both until fast hits end. Slow is before target node.</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">ListNode</span> <span class="fn">removeNthFromEnd</span>(<span class="type">ListNode</span> head, <span class="type">int</span> n) {
+        <span class="type">ListNode</span> dummy = <span class="kw">new</span> <span class="type">ListNode</span>(<span class="num">0</span>, head);
+        <span class="type">ListNode</span> fast = dummy, slow = dummy;
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">0</span>; i<=n; i++) fast = fast.next;
+        <span class="kw">while</span> (fast != <span class="kw">null</span>) { fast=fast.next; slow=slow.next; }
+        slow.next = slow.next.next;
+        <span class="kw">return</span> dummy.next;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(L) one pass &nbsp;|&nbsp; <strong>Space:</strong> O(1)</div>
+
+<hr>
+
+<!-- ==================== 21 ==================== -->
+<h2>21. Kth Largest Element</h2>
+<span class="tag">Heap</span> <span class="tag">Quickselect</span>
+
+<div class="insight"><strong>Heap:</strong> Min-heap of size k. Top = kth largest. <strong>Quickselect:</strong> Partition, recurse only into side with target index n-k.</div>
+
+<h3>Heap Approach</h3>
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">findKthLargest</span>(<span class="type">int</span>[] nums, <span class="type">int</span> k) {
+        <span class="type">PriorityQueue</span>&lt;<span class="type">Integer</span>&gt; pq = <span class="kw">new</span> <span class="type">PriorityQueue</span>&lt;&gt;();
+        <span class="kw">for</span> (<span class="type">int</span> i : nums) {
+            pq.<span class="fn">add</span>(i);
+            <span class="kw">if</span> (pq.<span class="fn">size</span>() > k) pq.<span class="fn">poll</span>();
+        }
+        <span class="kw">return</span> pq.<span class="fn">poll</span>();
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Heap — Time:</strong> O(n log k), <strong>Space:</strong> O(k) &nbsp;|&nbsp; <strong>Quickselect — Time:</strong> O(n) avg, <strong>Space:</strong> O(1)</div>
+
+<hr>
+
+<!-- ==================== 22 ==================== -->
+<h2>22. Count Primes (Sieve of Eratosthenes)</h2>
+<span class="tag">Sieve</span>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">countPrimes</span>(<span class="type">int</span> n) {
+        <span class="kw">if</span> (n <= <span class="num">2</span>) <span class="kw">return</span> <span class="num">0</span>;
+        <span class="type">boolean</span>[] notPrime = <span class="kw">new</span> <span class="type">boolean</span>[n];
+        <span class="type">int</span> count = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">2</span>; i<n; i++) {
+            <span class="kw">if</span> (!notPrime[i]) {
+                count++;
+                <span class="kw">for</span> (<span class="type">long</span> j=(<span class="type">long</span>)i*i; j<n; j+=i)
+                    notPrime[(<span class="type">int</span>)j] = <span class="kw">true</span>;
+            }
+        }
+        <span class="kw">return</span> count;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n log log n) &nbsp;|&nbsp; <strong>Space:</strong> O(n)</div>
+
+<hr>
+
+<!-- ==================== 23 ==================== -->
+<h2>23. Next Permutation</h2>
+<span class="tag">Array</span>
+
+<div class="insight"><strong>Intuition:</strong> 1) Find rightmost pivot where nums[i]&lt;nums[i+1]. 2) No pivot → reverse all. 3) Find rightmost element &gt; pivot, swap. 4) Reverse after pivot.</div>
+
+<div class="bug-warning"><strong>Bug:</strong> After reversing when no pivot found, must <code>return</code> — otherwise code continues with pivot=-1.</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public void</span> <span class="fn">nextPermutation</span>(<span class="type">int</span>[] nums) {
+        <span class="type">int</span> n=nums.length, p=-<span class="num">1</span>;
+        <span class="kw">for</span> (<span class="type">int</span> i=n-<span class="num">2</span>; i>=<span class="num">0</span>; i--)
+            <span class="kw">if</span> (nums[i]<nums[i+<span class="num">1</span>]) { p=i; <span class="kw">break</span>; }
+        <span class="kw">if</span> (p==-<span class="num">1</span>) { <span class="fn">rev</span>(nums,<span class="num">0</span>,n-<span class="num">1</span>); <span class="kw">return</span>; }
+        <span class="kw">for</span> (<span class="type">int</span> i=n-<span class="num">1</span>; i>p; i--)
+            <span class="kw">if</span> (nums[i]>nums[p]) {
+                <span class="type">int</span> t=nums[i]; nums[i]=nums[p]; nums[p]=t; <span class="kw">break</span>;
+            }
+        <span class="fn">rev</span>(nums, p+<span class="num">1</span>, n-<span class="num">1</span>);
+    }
+    <span class="kw">private void</span> <span class="fn">rev</span>(<span class="type">int</span>[] a, <span class="type">int</span> l, <span class="type">int</span> r) {
+        <span class="kw">while</span>(l<r){<span class="type">int</span> t=a[l];a[l]=a[r];a[r]=t;l++;r--;}
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n) &nbsp;|&nbsp; <strong>Space:</strong> O(1)</div>
+
+<hr>
+
+<!-- ==================== 24 ==================== -->
+<h2>24. Generate Parentheses <span class="tag green">Medium</span></h2>
+<span class="tag">Backtracking</span>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">List</span>&lt;<span class="type">String</span>&gt; <span class="fn">generateParenthesis</span>(<span class="type">int</span> n) {
+        <span class="type">List</span>&lt;<span class="type">String</span>&gt; res = <span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+        <span class="fn">solve</span>(n, <span class="kw">new</span> <span class="type">StringBuilder</span>(), <span class="num">0</span>, <span class="num">0</span>, res);
+        <span class="kw">return</span> res;
+    }
+    <span class="kw">private void</span> <span class="fn">solve</span>(<span class="type">int</span> n, <span class="type">StringBuilder</span> sb, <span class="type">int</span> o, <span class="type">int</span> c, <span class="type">List</span>&lt;<span class="type">String</span>&gt; res) {
+        <span class="kw">if</span> (sb.<span class="fn">length</span>()==n*<span class="num">2</span>) { res.<span class="fn">add</span>(sb.<span class="fn">toString</span>()); <span class="kw">return</span>; }
+        <span class="kw">if</span> (o<n) { sb.<span class="fn">append</span>(<span class="str">'('</span>); <span class="fn">solve</span>(n,sb,o+<span class="num">1</span>,c,res); sb.<span class="fn">deleteCharAt</span>(sb.<span class="fn">length</span>()-<span class="num">1</span>); }
+        <span class="kw">if</span> (c<o) { sb.<span class="fn">append</span>(<span class="str">')'</span>); <span class="fn">solve</span>(n,sb,o,c+<span class="num">1</span>,res); sb.<span class="fn">deleteCharAt</span>(sb.<span class="fn">length</span>()-<span class="num">1</span>); }
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(4^n / √n) &nbsp;|&nbsp; <strong>Space:</strong> O(n)</div>
+
+<hr>
+
+<!-- ==================== 25 ==================== -->
+<h2>25. Letter Combinations of Phone Number <span class="tag green">Medium</span></h2>
+<span class="tag">Backtracking</span>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">static final</span> <span class="type">String</span>[] MAP = {<span class="str">""</span>,<span class="str">""</span>,<span class="str">"abc"</span>,<span class="str">"def"</span>,<span class="str">"ghi"</span>,<span class="str">"jkl"</span>,<span class="str">"mno"</span>,<span class="str">"pqrs"</span>,<span class="str">"tuv"</span>,<span class="str">"wxyz"</span>};
+    <span class="kw">public</span> <span class="type">List</span>&lt;<span class="type">String</span>&gt; <span class="fn">letterCombinations</span>(<span class="type">String</span> digits) {
+        <span class="kw">if</span> (digits.<span class="fn">isEmpty</span>()) <span class="kw">return new</span> <span class="type">ArrayList</span>&lt;&gt;();
+        <span class="type">List</span>&lt;<span class="type">String</span>&gt; res = <span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+        <span class="fn">solve</span>(digits, <span class="num">0</span>, <span class="kw">new</span> <span class="type">char</span>[digits.<span class="fn">length</span>()], res);
+        <span class="kw">return</span> res;
+    }
+    <span class="kw">private void</span> <span class="fn">solve</span>(<span class="type">String</span> d, <span class="type">int</span> idx, <span class="type">char</span>[] cur, <span class="type">List</span>&lt;<span class="type">String</span>&gt; res) {
+        <span class="kw">if</span> (idx==d.<span class="fn">length</span>()) { res.<span class="fn">add</span>(<span class="kw">new</span> <span class="type">String</span>(cur)); <span class="kw">return</span>; }
+        <span class="kw">for</span> (<span class="type">char</span> c : MAP[d.<span class="fn">charAt</span>(idx)-<span class="str">'0'</span>].<span class="fn">toCharArray</span>()) {
+            cur[idx] = c;
+            <span class="fn">solve</span>(d, idx+<span class="num">1</span>, cur, res);
+        }
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(4^n) &nbsp;|&nbsp; <strong>Space:</strong> O(n)</div>
+
+<hr>
+
+<!-- ==================== 26 ==================== -->
+<h2>26. Merge K Sorted Lists <span class="tag purple">Hard</span></h2>
+<span class="tag">Divide and Conquer</span> <span class="tag">Linked List</span>
+
+<div class="insight"><strong>Intuition:</strong> Split in half, merge recursively. Remaining nodes attach automatically with <code>curr.next = a</code>.</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">ListNode</span> <span class="fn">mergeKLists</span>(<span class="type">ListNode</span>[] lists) {
+        <span class="kw">if</span> (lists.length==<span class="num">0</span>) <span class="kw">return null</span>;
+        <span class="kw">return</span> <span class="fn">merge</span>(lists, <span class="num">0</span>, lists.length-<span class="num">1</span>);
+    }
+    <span class="kw">private</span> <span class="type">ListNode</span> <span class="fn">merge</span>(<span class="type">ListNode</span>[] l, <span class="type">int</span> lo, <span class="type">int</span> hi) {
+        <span class="kw">if</span> (lo==hi) <span class="kw">return</span> l[lo];
+        <span class="type">int</span> mid=(lo+hi)/<span class="num">2</span>;
+        <span class="kw">return</span> <span class="fn">mergeTwo</span>(<span class="fn">merge</span>(l,lo,mid), <span class="fn">merge</span>(l,mid+<span class="num">1</span>,hi));
+    }
+    <span class="kw">private</span> <span class="type">ListNode</span> <span class="fn">mergeTwo</span>(<span class="type">ListNode</span> a, <span class="type">ListNode</span> b) {
+        <span class="type">ListNode</span> dummy=<span class="kw">new</span> <span class="type">ListNode</span>(<span class="num">0</span>), c=dummy;
+        <span class="kw">while</span>(a!=<span class="kw">null</span>&&b!=<span class="kw">null</span>) {
+            <span class="kw">if</span>(a.val<b.val){c.next=a;a=a.next;}
+            <span class="kw">else</span>{c.next=b;b=b.next;}
+            c=c.next;
+        }
+        <span class="kw">if</span>(a!=<span class="kw">null</span>) c.next=a;
+        <span class="kw">if</span>(b!=<span class="kw">null</span>) c.next=b;
+        <span class="kw">return</span> dummy.next;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n log k) &nbsp;|&nbsp; <strong>Space:</strong> O(log k)</div>
+
+<hr>
+
+<!-- ==================== 27 ==================== -->
+<h2>27. Min Primes to Sum to N (Coin Change)</h2>
+<span class="tag">DP</span> <span class="tag">Unbounded Knapsack</span>
+
+<div class="insight"><strong>Intuition:</strong> Generate first m primes. <code>dp[i] = min primes to sum to i</code>. For each value, try every prime. 1D DP is optimal.</div>
+
+<pre><code><span class="kw">class</span> <span class="type">Solution</span> {
+    <span class="kw">public</span> <span class="type">int</span> <span class="fn">minPrimes</span>(<span class="type">int</span> n, <span class="type">int</span> m) {
+        <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; primes = <span class="fn">genPrimes</span>(m);
+        <span class="type">int</span>[] dp = <span class="kw">new</span> <span class="type">int</span>[n+<span class="num">1</span>];
+        <span class="type">Arrays</span>.<span class="fn">fill</span>(dp, Integer.MAX_VALUE);
+        dp[<span class="num">0</span>] = <span class="num">0</span>;
+        <span class="kw">for</span> (<span class="type">int</span> i=<span class="num">1</span>; i<=n; i++)
+            <span class="kw">for</span> (<span class="type">int</span> p : primes) {
+                <span class="kw">if</span> (p>i) <span class="kw">break</span>;
+                <span class="kw">if</span> (dp[i-p] != Integer.MAX_VALUE)
+                    dp[i] = Math.<span class="fn">min</span>(dp[i], dp[i-p]+<span class="num">1</span>);
+            }
+        <span class="kw">return</span> dp[n]==Integer.MAX_VALUE ? -<span class="num">1</span> : dp[n];
+    }
+    <span class="kw">private</span> <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; <span class="fn">genPrimes</span>(<span class="type">int</span> m) {
+        <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; p = <span class="kw">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+        <span class="type">int</span> num = <span class="num">2</span>;
+        <span class="kw">while</span> (p.<span class="fn">size</span>() < m) { <span class="kw">if</span>(<span class="fn">isPrime</span>(num)) p.<span class="fn">add</span>(num); num++; }
+        <span class="kw">return</span> p;
+    }
+    <span class="kw">private</span> <span class="type">boolean</span> <span class="fn">isPrime</span>(<span class="type">int</span> n) {
+        <span class="kw">if</span>(n<<span class="num">2</span>) <span class="kw">return false</span>;
+        <span class="kw">for</span>(<span class="type">int</span> i=<span class="num">2</span>;i*i<=n;i++) <span class="kw">if</span>(n%i==<span class="num">0</span>) <span class="kw">return false</span>;
+        <span class="kw">return true</span>;
+    }
+}</code></pre>
+
+<div class="complexity"><strong>Time:</strong> O(n × m) &nbsp;|&nbsp; <strong>Space:</strong> O(n)</div>
+
+<hr>
+<div class="page-break"></div>
+
+<!-- ==================== CHEAT SHEET ==================== -->
+<h1>Key Patterns Cheat Sheet</h1>
+
+<table>
+<tr><th>Pattern</th><th>When to Use</th><th>Key Insight</th></tr>
+<tr><td><strong>HashMap vs HashSet</strong></td><td>"How many?" → HashMap<br>"Does it exist?" → HashSet</td><td>Counting needs frequencies</td></tr>
+<tr><td><strong>Success before pruning</strong></td><td>Backtracking with target</td><td><code>target==0</code> check goes FIRST</td></tr>
+<tr><td><strong>Shared list → backtrack</strong></td><td>Recursion with mutable list</td><td>add → recurse → remove</td></tr>
+<tr><td><strong>+= not ||</strong></td><td>Multiple conditions contribute count</td><td>|| short-circuits, misses counts</td></tr>
+<tr><td><strong>Binary search: advance</strong></td><td><code>low = mid+1</code> always</td><td>Prevents infinite loops</td></tr>
+<tr><td><strong>Overflow before operation</strong></td><td><code>res*10+digit</code></td><td>Check vs <code>MAX/10</code> first</td></tr>
+<tr><td><strong>Prefix sum + HashMap</strong></td><td>Count subarrays with sum/property</td><td>Subarray Sum = K family</td></tr>
+<tr><td><strong>Binary search on answer</strong></td><td>Optimize per-item to O(log)</td><td>Sell balls, Koko bananas</td></tr>
+<tr><td><strong>Floyd's cycle</strong></td><td>Duplicate in array, LL cycle</td><td>Array as implicit linked list</td></tr>
+<tr><td><strong>Arithmetic series</strong></td><td>Sum consecutive ints in O(1)</td><td><code>sum = n*(n+1)/2</code></td></tr>
+</table>
+
+<hr>
+
+<h2 style="border-left: 4px solid #ef4444; color: #ef4444;">Common Bugs to Watch For</h2>
+
+<table>
+<tr><th>Bug</th><th>Problem</th><th>Fix</th></tr>
+<tr><td><code>while(x > 0)</code></td><td>Fails for negatives</td><td>Use <code>x != 0</code></td></tr>
+<tr><td><code>low = mid</code></td><td>Infinite loop in binary search</td><td><code>low = mid + 1</code></td></tr>
+<tr><td><code>mid = high - (high-low)/2</code></td><td>Wrong mid calculation</td><td><code>mid = low + (high-low)/2</code></td></tr>
+<tr><td>HashSet for counting</td><td>Loses duplicate frequencies</td><td>Use HashMap</td></tr>
+<tr><td><code>if(a || b) count++</code></td><td>Short-circuits, counts max 1</td><td>Separate <code>count += ...</code> lines</td></tr>
+<tr><td>Prune before success check</td><td>Skips valid base case</td><td><code>target==0</code> first, then prune</td></tr>
+<tr><td>No <code>return</code> after edge case</td><td>Code continues with bad state</td><td>Always return after handling</td></tr>
+<tr><td><code>numRows</code> vs <code>n</code></td><td>Wrong loop bound (Zigzag)</td><td>Read variable names carefully</td></tr>
+<tr><td><code>list.contains()</code></td><td>O(n) per call in backtracking</td><td>Use <code>boolean[] used</code></td></tr>
+</table>
+
+</body>
+</html>
