@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+
+# ChromaDB data (legacy)
+chroma/
+chroma_data/
+
+# Personal interview docs
+backend/docs/*.md
+backend/docs/*.txt
+backend/docs/*.html
+backend/docs/*.pdf
+
+# Claude Code
+.claude/
