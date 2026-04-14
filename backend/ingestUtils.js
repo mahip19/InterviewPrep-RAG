@@ -5,13 +5,12 @@ import { pipeline } from "@huggingface/transformers";
 
 const execFileAsync = promisify(execFile);
 
-// ── Config ──────────────────────────────────────────────────────────
+// chunking params - bigger chunks = less splitting mid-sentence
 const CHUNK_SIZE = 1250;
 const CHUNK_OVERLAP = 200;
 const EMBEDDING_MODEL =
   process.env.EMBEDDING_MODEL || "Xenova/all-MiniLM-L6-v2";
 
-// ── Embedder (lazy-loaded, shared) ──────────────────────────────────
 let embedder;
 export async function getEmbedder() {
   if (!embedder) {
@@ -28,7 +27,7 @@ export async function embed(text) {
   return Array.from(output.data);
 }
 
-// ── Chunking ────────────────────────────────────────────────────────
+// splits text into overlapping chunks, tries to break at sentence/line boundaries
 export function chunkText(text, size = CHUNK_SIZE, overlap = CHUNK_OVERLAP) {
   const chunks = [];
   let start = 0;
@@ -48,7 +47,6 @@ export function chunkText(text, size = CHUNK_SIZE, overlap = CHUNK_OVERLAP) {
   return chunks;
 }
 
-// ── Strip HTML ──────────────────────────────────────────────────────
 export function stripHtml(html) {
   return html
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
@@ -63,7 +61,7 @@ export function stripHtml(html) {
     .trim();
 }
 
-// ── PDF to text ─────────────────────────────────────────────────────
+// shells out to pdftotext (poppler) - needs `brew install poppler`
 export async function convertPdfToText(filePath) {
   try {
     const { stdout } = await execFileAsync("pdftotext", [filePath, "-"]);
@@ -78,7 +76,6 @@ export async function convertPdfToText(filePath) {
   }
 }
 
-// ── Read + convert a file to plain text ─────────────────────────────
 export async function processFile(filePath, filename) {
   const ext = filename.toLowerCase().split(".").pop();
   if (ext === "pdf") {
@@ -89,7 +86,7 @@ export async function processFile(filePath, filename) {
   return content;
 }
 
-// ── Setup DB schema ─────────────────────────────────────────────────
+// creates the chunks table + hnsw index if they don't exist yet
 export async function setupSchema(client) {
   await client.query(`CREATE EXTENSION IF NOT EXISTS vector`);
   await client.query(`
@@ -109,12 +106,12 @@ export async function setupSchema(client) {
   `);
 }
 
-// ── Ingest a single document into DB ────────────────────────────────
+// chunk a document, embed each chunk, and store in postgres
+// deletes old chunks for this file first so re-uploads work
 export async function ingestDocument(pool, filename, content) {
   const chunks = chunkText(content);
   if (chunks.length === 0) return { filename, chunkCount: 0 };
 
-  // Delete existing chunks for this file (allows re-upload)
   await pool.query(`DELETE FROM chunks WHERE filename = $1`, [filename]);
 
   for (let i = 0; i < chunks.length; i++) {
