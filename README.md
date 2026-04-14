@@ -1,10 +1,10 @@
 # Interview Prep RAG Assistant
 
-A personal RAG-powered interview preparation tool that lets you chat with your own documents — STAR stories, LeetCode notes, behavioral prep, and more.
+A personal RAG-powered interview preparation tool that lets you chat with your own documents -STAR stories, LeetCode notes, behavioral prep, and more.
 
 **Stack:** React + Vite (frontend), Express (backend), PostgreSQL + pgvector (vector store), Transformers.js (local embeddings), Groq + Llama 3.3 70B (chat)
 
-**Cost:** $0 — embeddings run locally, chat uses Groq's free tier.
+**Cost:** $0 -embeddings run locally, chat uses Groq's free tier.
 
 ---
 
@@ -60,7 +60,7 @@ backend/docs/
 npm run ingest
 ```
 
-Reads your docs, chunks them (800 chars, 150 overlap), generates embeddings locally via Transformers.js, and stores everything in PostgreSQL with pgvector.
+Reads your docs, chunks them (1250 chars, 200 overlap), generates embeddings locally via Transformers.js, and stores everything in PostgreSQL with pgvector. You can also upload documents through the UI after the app is running.
 
 ### 5. Start the backend
 
@@ -92,17 +92,21 @@ Opens on `http://localhost:5173`.
 
 | Endpoint | Method | Description |
 |---|---|---|
-| `/api/query` | POST | Full RAG — retrieves chunks + generates answer |
-| `/api/retrieve` | POST | Retrieval only — returns matching chunks without LLM |
-| `/api/stats` | GET | Returns total chunk count |
+| `/api/query` | POST | Full RAG - retrieves chunks + generates answer |
+| `/api/retrieve` | POST | Retrieval only - returns matching chunks without LLM |
+| `/api/upload` | POST | Upload and ingest a document (multipart form) |
+| `/api/documents` | GET | List all documents with chunk counts |
+| `/api/documents/:filename` | DELETE | Remove a document and its chunks |
+| `/api/stats` | GET | Returns total chunk and document count |
 
 ## Project Structure
 
 ```
 InterviewPrep-RAG/
 ├── backend/
-│   ├── server.js          # Express API — orchestrates RAG pipeline
-│   ├── ingest.js          # Document chunking + embedding + pgvector storage
+│   ├── server.js          # Express API + upload/document management endpoints
+│   ├── ingest.js          # CLI script for bulk document ingestion
+│   ├── ingestUtils.js     # Shared chunking, embedding, and DB helpers
 │   ├── docs/              # Your documents go here (gitignored)
 │   ├── .env.example
 │   └── package.json
@@ -119,7 +123,7 @@ InterviewPrep-RAG/
 ## Things to Experiment With
 
 - **Chunk size:** Try 500 vs 800 vs 1200 characters and see how retrieval quality changes
-- **Top K:** Retrieve 3 vs 5 vs 10 chunks — more context isn't always better
+- **Top K:** Retrieve 3 vs 5 vs 10 chunks -more context isn't always better
 - **System prompt:** Tweak the prompt in `server.js` for different response styles
 - **Embedding models:** Try different Hugging Face models via Transformers.js
 - **Metadata filtering:** Add tags to your docs and filter at query time

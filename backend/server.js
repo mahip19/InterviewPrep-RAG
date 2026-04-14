@@ -21,15 +21,15 @@ app.use(express.json());
 
 const { Pool } = pg;
 
-// ── Config ──────────────────────────────────────────────────────────
+// how many chunks to retrieve per query
 const TOP_K = 10;
 const EMBEDDING_MODEL =
   process.env.EMBEDDING_MODEL || "Xenova/all-MiniLM-L6-v2";
 const CHAT_MODEL = process.env.CHAT_MODEL || "llama-3.3-70b-versatile";
 
-// ── DB client ────────────────────────────────────────────────────────
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
+// make sure postgres is up and the schema exists before taking requests
 async function initDB() {
   try {
     const client = await pool.connect();
@@ -37,7 +37,7 @@ async function initDB() {
     client.release();
     const res = await pool.query("SELECT COUNT(*) FROM chunks");
     console.log(
-      `Connected to PostgreSQL — ${res.rows[0].count} chunks indexed`,
+      `Connected to PostgreSQL - ${res.rows[0].count} chunks indexed`,
     );
   } catch (err) {
     console.error("Could not connect to PostgreSQL:", err.message);
@@ -51,7 +51,6 @@ async function initDB() {
   }
 }
 
-// ── System Prompt ───────────────────────────────────────────────────
 const SYSTEM_PROMPT = `You are an interview preparation assistant. You help the user prepare for software engineering interviews using THEIR OWN documents, experiences, and notes.
 
 CRITICAL RULES:
@@ -59,11 +58,11 @@ CRITICAL RULES:
 - When the user asks for something that exists in the context (an introduction, a STAR story, a response), quote it DIRECTLY from their documents. Do not rephrase or rewrite it.
 - When asked for STAR stories, use the exact content from their documents, structured as Situation, Task, Action, Result.
 - When asked about technical topics, reference the user's own notes and approaches verbatim.
-- If the context doesn't contain relevant info, say "I couldn't find this in your documents" — don't make things up.
-- Be concise and practical — this is interview prep, not an essay.
+- If the context doesn't contain relevant info, say "I couldn't find this in your documents" - don't make things up.
+- Be concise and practical - this is interview prep, not an essay.
 - Always cite which document the info comes from.`;
 
-// ── Embedder (lazy-loaded, shared across requests) ───────────────────
+// lazy-load the embedding model so it only downloads once
 let embedder;
 async function embedQuery(text) {
   if (!embedder)
@@ -72,7 +71,7 @@ async function embedQuery(text) {
   return Array.from(output.data);
 }
 
-// ── Similarity search ────────────────────────────────────────────────
+// cosine similarity search against pgvector
 async function retrieve(embedding, topK = TOP_K) {
   const res = await pool.query(
     `SELECT id, filename, chunk_index, content,
@@ -85,7 +84,7 @@ async function retrieve(embedding, topK = TOP_K) {
   return res.rows;
 }
 
-// ── Chat via Groq ───────────────────────────────────────────────────
+// send context + question to groq for answer generation
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 async function chat(userMessage) {
@@ -99,7 +98,7 @@ async function chat(userMessage) {
   return completion.choices[0]?.message?.content || "No response generated.";
 }
 
-// ── File upload (multer) ────────────────────────────────────────────
+// file upload config - only allow docs under 50MB
 if (!fs.existsSync(DOCS_DIR)) fs.mkdirSync(DOCS_DIR, { recursive: true });
 
 const upload = multer({
@@ -112,7 +111,7 @@ const upload = multer({
   },
 });
 
-// ── Retrieve-only endpoint ──────────────────────────────────────────
+// retrieval only - useful for testing without hitting the LLM
 app.post("/api/retrieve", async (req, res) => {
   const { query } = req.body;
   if (!query) return res.status(400).json({ error: "query is required" });
@@ -134,7 +133,7 @@ app.post("/api/retrieve", async (req, res) => {
   }
 });
 
-// ── Query endpoint ──────────────────────────────────────────────────
+// main RAG endpoint - embed query, retrieve chunks, ask LLM
 app.post("/api/query", async (req, res) => {
   const { query } = req.body;
   if (!query) return res.status(400).json({ error: "query is required" });
@@ -155,7 +154,7 @@ app.post("/api/query", async (req, res) => {
       answer = await chat(userMessage);
     } catch (chatErr) {
       console.error("Chat error:", chatErr);
-      answer = `[Chat model not available — use /api/retrieve to inspect raw chunks]`;
+      answer = `[Chat model not available - use /api/retrieve to inspect raw chunks]`;
     }
 
     res.json({
@@ -172,7 +171,7 @@ app.post("/api/query", async (req, res) => {
   }
 });
 
-// ── Upload + ingest endpoint ────────────────────────────────────────
+// upload a doc, convert it, chunk + embed, store in db
 app.post("/api/upload", upload.single("file"), async (req, res) => {
   if (!req.file)
     return res
@@ -186,10 +185,7 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
   const finalPath = path.join(DOCS_DIR, originalName);
 
   try {
-    // Rename from multer's random name to original filename
     fs.renameSync(tempPath, finalPath);
-
-    // Convert file to text and ingest
     const content = await processFile(finalPath, originalName);
     const result = await ingestDocument(pool, originalName, content);
 
@@ -199,7 +195,6 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
       chunkCount: result.chunkCount,
     });
   } catch (err) {
-    // Clean up temp file on error
     if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
     if (fs.existsSync(finalPath)) fs.unlinkSync(finalPath);
     console.error("Upload error:", err);
@@ -207,7 +202,7 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
   }
 });
 
-// ── List documents endpoint ─────────────────────────────────────────
+// list all ingested documents with their chunk counts
 app.get("/api/documents", async (_req, res) => {
   try {
     const result = await pool.query(
@@ -228,7 +223,7 @@ app.get("/api/documents", async (_req, res) => {
   }
 });
 
-// ── Delete document endpoint ────────────────────────────────────────
+// remove a doc from db and disk
 app.delete("/api/documents/:filename", async (req, res) => {
   const filename = decodeURIComponent(req.params.filename);
 
@@ -237,7 +232,6 @@ app.delete("/api/documents/:filename", async (req, res) => {
       filename,
     ]);
 
-    // Also delete the file from disk
     const filePath = path.join(DOCS_DIR, filename);
     if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
 
@@ -251,7 +245,6 @@ app.delete("/api/documents/:filename", async (req, res) => {
   }
 });
 
-// ── Stats endpoint ──────────────────────────────────────────────────
 app.get("/api/stats", async (_req, res) => {
   try {
     const result = await pool.query(
@@ -266,7 +259,6 @@ app.get("/api/stats", async (_req, res) => {
   }
 });
 
-// ── Start ────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3001;
 
 initDB().then(() => {

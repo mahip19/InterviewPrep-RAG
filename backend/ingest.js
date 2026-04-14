@@ -13,10 +13,11 @@ const { Pool } = pg;
 const DOCS_DIR = path.join(__dirname, "docs");
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
+// scan docs/ for supported file types
 function readDocFilenames() {
   if (!fs.existsSync(DOCS_DIR)) {
     fs.mkdirSync(DOCS_DIR, { recursive: true });
-    console.log(`Created docs/ — drop your files there and run again.`);
+    console.log("Created docs/ - drop your files there and run again.");
     process.exit(0);
   }
   const files = fs
@@ -32,6 +33,7 @@ function readDocFilenames() {
   return files;
 }
 
+// wipe all chunks, re-read every doc, chunk + embed + store
 async function ingest() {
   console.log("\nStarting ingestion...\n");
 
