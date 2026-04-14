@@ -7,10 +7,6 @@ node_modules/
 # OS files
 .DS_Store
 
-# ChromaDB data (legacy)
-chroma/
-chroma_data/
-
 # Personal interview docs
 backend/docs/*.md
 backend/docs/*.txt
