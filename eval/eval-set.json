@@ -1,0 +1,161 @@
+[
+  {
+    "id": "intro-ai-swe",
+    "question": "I have a prescreen for an AI Software Engineering Intern role. Give me an introduction to prepare.",
+    "relevant_chunks": [
+      "ai-ml-pitch__c0",
+      "ai-ml-pitch__c1",
+      "ai-ml-pitch__c2",
+      "ai-ml-pitch__c3",
+      "ml-ai-projects__c0",
+      "ml-ai-projects__c2",
+      "resume-ml__c2"
+    ],
+    "expected_facts": [
+      "mentions the Interview Prep RAG project",
+      "references AI/ML or RAG/embeddings work",
+      "does NOT lead with the GM behavioral intro verbatim"
+    ],
+    "notes": "REGRESSION TEST. Corpus now contains a purpose-built AI pitch (ai-ml-pitch), which is the primary ground truth. This is the key before/after: baseline had 0 recall@10 because no AI intro existed; it now does. Pair with intro-backend-swe."
+  },
+  {
+    "id": "intro-backend-swe",
+    "question": "I have an interview for a backend / general Software Engineer role. Give me an introduction.",
+    "relevant_chunks": [
+      "backend-swe-intro__c0",
+      "backend-swe-intro__c1",
+      "backend-swe-intro__c2",
+      "knowledge-base__c24",
+      "knowledge-base__c25",
+      "knowledge-base__c26",
+      "resume-ml__c1"
+    ],
+    "expected_facts": [
+      "emphasizes distributed file storage system (C++)",
+      "references production/reliability experience from India SWE role",
+      "different emphasis than the AI SWE intro"
+    ],
+    "notes": "CONTRAST CASE for intro-ai-swe. Now has a dedicated backend intro doc. Should retrieve backend-swe-intro chunks, NOT ai-ml-pitch chunks. If it pulls the AI pitch, retrieval is ignoring the role qualifier."
+  },
+  {
+    "id": "behavioral-production-incident",
+    "question": "Tell me about a time I dealt with a production issue or incident.",
+    "relevant_chunks": [
+      "knowledge-base__c12",
+      "knowledge-base__c13",
+      "amazon-behavioral__c3",
+      "mathworks-edg__c7",
+      "mathworks-edg__c8",
+      "gm-behavioral__c2",
+      "resume-ml__c1"
+    ],
+    "expected_facts": [
+      "draws on India SWE product-support role",
+      "mentions production systems / upgrades / QA before go-live",
+      "the stale-cache / publish-button incident where the client received email alerts"
+    ],
+    "notes": "Behavioral/STAR. Same stale-cache incident recurs across 4 docs; getting one good copy is a correct answer for the end user, so treat low recall here cautiously (it partly reflects redundant labeling, not failure)."
+  },
+  {
+    "id": "behavioral-code-quality",
+    "question": "Give me a STAR-format answer about a time I improved code quality or testing.",
+    "relevant_chunks": [
+      "gm-behavioral__c3",
+      "knowledge-base__c7",
+      "knowledge-base__c11",
+      "amazon-behavioral__c2",
+      "mathworks-edg__c5",
+      "mathworks-edg__c6"
+    ],
+    "expected_facts": [
+      "references Java calendar system (clean architecture, rigorous testing)",
+      "or the mutation-coverage testing push (100% target / 98% achieved)",
+      "the testing-disagreement story with the project partner"
+    ],
+    "notes": "Behavioral/STAR, quality theme. Two distinct quality stories: calendar testing disagreement, and the mutation-coverage checklist approach."
+  },
+  {
+    "id": "project-rag-architecture",
+    "question": "Explain the architecture of my Interview Prep RAG project so I can walk an interviewer through it.",
+    "relevant_chunks": [
+      "rag-project__c0",
+      "rag-project__c2",
+      "rag-project__c3",
+      "resume-ml__c2",
+      "ml-ai-projects__c2"
+    ],
+    "expected_facts": [
+      "end-to-end RAG pipeline: ingestion, chunking, embedding, pgvector storage, retrieval",
+      "React/Vite frontend, Express/Node backend",
+      "all-MiniLM-L6-v2 embeddings, Llama 3.3 via Groq",
+      "PostgreSQL + pgvector",
+      "Vercel + Neon deployment"
+    ],
+    "notes": "GAP NOW FILLED. Baseline scored 0.000 everywhere because no RAG-stack doc existed. The new rag-project doc adds React/Vite/Express/Llama/Groq/Vercel/Neon. This question is the clearest content-coverage before/after in the set."
+  },
+  {
+    "id": "project-distributed-storage",
+    "question": "What were the main challenges in my distributed file storage system?",
+    "relevant_chunks": [
+      "distributed-storage__c0",
+      "distributed-storage__c1",
+      "distributed-storage__c2",
+      "distributed-storage__c3",
+      "distributed-storage__c4",
+      "knowledge-base__c4",
+      "knowledge-base__c5",
+      "knowledge-base__c16",
+      "amazon-behavioral__c6",
+      "mathworks-edg__c12"
+    ],
+    "expected_facts": [
+      "C++",
+      "fault tolerance / recovery from replicas during node failures",
+      "data integrity via hash comparison",
+      "the TCP message-boundary bug solved with a length-prefix protocol"
+    ],
+    "notes": "Now has a dedicated consolidated doc (distributed-storage) plus the original scattered fragments. Good case to watch recall rise from content consolidation."
+  },
+  {
+    "id": "company-mathworks",
+    "question": "What should I focus on to prepare for my MathWorks interview?",
+    "relevant_chunks": [
+      "mathworks-edg__c0",
+      "mathworks-edg__c1",
+      "mathworks-edg__c18",
+      "mathworks-edg__c19",
+      "mathworks-edg__c20",
+      "knowledge-base__c1"
+    ],
+    "expected_facts": [
+      "content from the MathWorks EDG prep doc specifically",
+      "EDG program structure and engineering-culture themes",
+      "the personal MATLAB / father's-thesis connection"
+    ],
+    "notes": "SCOPING TEST. Ground truth is MathWorks-doc chunks. Retrieval should NOT bleed in GM behavioral content. Cross-contamination check."
+  },
+  {
+    "id": "skill-postgres-pgvector",
+    "question": "What's my experience with PostgreSQL and pgvector?",
+    "relevant_chunks": [
+      "resume-ml__c2",
+      "resume-ml__c4",
+      "ml-ai-projects__c2",
+      "rag-project__c2"
+    ],
+    "expected_facts": [
+      "pgvector used as the vector store in the RAG project",
+      "PostgreSQL appears in the skills/tools list"
+    ],
+    "notes": "KEYWORD-HEAVY. Best case for hybrid retrieval to beat pure dense — 'pgvector' is a rare exact token. Watch recall on the hybrid run specifically."
+  },
+  {
+    "id": "negative-abstention",
+    "question": "What's my professional experience with Rust?",
+    "relevant_chunks": [],
+    "expected_facts": [
+      "system should indicate it has no grounding for this / not fabricate experience"
+    ],
+    "notes": "ABSTENTION TEST. Confirmed: Rust appears nowhere in the corpus. relevant_chunks stays empty by design. Measures precision + hallucination resistance, not recall."
+  }
+]

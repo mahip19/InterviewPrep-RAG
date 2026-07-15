@@ -108,7 +108,20 @@ export async function setupSchema(client) {
 
 // chunk a document, embed each chunk, and store in postgres
 // deletes old chunks for this file first so re-uploads work
-export async function ingestDocument(pool, filename, content) {
+export function slugify(filename) {
+  return filename
+    .replace(/\.md\.pdf$/i, "")
+    .replace(/\.(pdf|md|html|txt)$/i, "")
+    .replace(/[—–]/g, "-")
+    .replace(/['']/g, "")
+    .replace(/[^a-zA-Z0-9-]/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+    .toLowerCase();
+}
+
+export async function ingestDocument(pool, filename, content, slug) {
+  const docSlug = slug || slugify(filename);
   const chunks = chunkText(content);
   if (chunks.length === 0) return { filename, chunkCount: 0 };
 
@@ -121,7 +134,7 @@ export async function ingestDocument(pool, filename, content) {
        VALUES ($1, $2, $3, $4, $5, $6)
        ON CONFLICT (id) DO UPDATE SET content = $5, embedding = $6`,
       [
-        `${filename}__chunk_${i}`,
+        `${docSlug}__c${i}`,
         filename,
         i,
         chunks.length,

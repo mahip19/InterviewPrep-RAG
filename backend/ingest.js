@@ -3,7 +3,7 @@ import path from "path";
 import pg from "pg";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
-import { setupSchema, processFile, ingestDocument } from "./ingestUtils.js";
+import { setupSchema, processFile, ingestDocument, slugify } from "./ingestUtils.js";
 
 dotenv.config();
 
@@ -11,6 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const { Pool } = pg;
 
 const DOCS_DIR = path.join(__dirname, "docs");
+const SLUGS_PATH = path.join(__dirname, "..", "eval", "doc-slugs.json");
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 // scan docs/ for supported file types
@@ -49,12 +50,17 @@ async function ingest() {
   const files = readDocFilenames();
   let total = 0;
 
+  const slugMap = fs.existsSync(SLUGS_PATH)
+    ? JSON.parse(fs.readFileSync(SLUGS_PATH, "utf-8"))
+    : {};
+
   for (const filename of files) {
+    const slug = slugMap[filename] || slugify(filename);
     const filePath = path.join(DOCS_DIR, filename);
     const content = await processFile(filePath, filename);
-    console.log(`\n   Processing ${filename}...`);
-    const result = await ingestDocument(pool, filename, content);
-    console.log(`   ${filename} -> ${result.chunkCount} chunks`);
+    console.log(`\n   Processing ${filename} [${slug}]...`);
+    const result = await ingestDocument(pool, filename, content, slug);
+    console.log(`   ${filename} -> ${result.chunkCount} chunks (${slug}__c0..c${result.chunkCount - 1})`);
     total += result.chunkCount;
   }
 

@@ -1,0 +1,961 @@
+[
+  {
+    "chunk_id": "ai-ml-pitch__c0",
+    "source_document": "ai-ml-pitch.md.pdf",
+    "chunk_index": 0,
+    "char_length": 1266,
+    "preview": "AI / ML Background and Pitch — Mahip Parekh\nIntro-shaped reference material for AI Software Engineering roles: a spoken-style\nintroduction, the motivation behind moving toward AI SWE work, and the rea"
+  },
+  {
+    "chunk_id": "ai-ml-pitch__c1",
+    "source_document": "ai-ml-pitch.md.pdf",
+    "chunk_index": 1,
+    "char_length": 1305,
+    "preview": "em I'm building for interview\npreparation. The language model is the easy part. The real work has been engineering the\npipeline around it — diagnosing why it retrieved the wrong context, cleaning and\n"
+  },
+  {
+    "chunk_id": "ai-ml-pitch__c2",
+    "source_document": "ai-ml-pitch.md.pdf",
+    "chunk_index": 2,
+    "char_length": 1316,
+    "preview": "fely as models evolve. That's\nalready how I like to work from my systems and production-support background, where\nreliability and careful change management were the whole job. AI Software Engineering\n"
+  },
+  {
+    "chunk_id": "ai-ml-pitch__c3",
+    "source_document": "ai-ml-pitch.md.pdf",
+    "chunk_index": 3,
+    "char_length": 1152,
+    "preview": "thesis above — the model is one component,\nand the engineering around it is where the work lives. (A separate detailed writeup covers\nits architecture and evaluation work.)\nCustomer churn prediction. "
+  },
+  {
+    "chunk_id": "ai-ml-pitch__c4",
+    "source_document": "ai-ml-pitch.md.pdf",
+    "chunk_index": 4,
+    "char_length": 103,
+    "preview": "than aspirational —\nthe reliability instincts already exist; applied AI is where they get pointed next."
+  },
+  {
+    "chunk_id": "backend-swe-intro__c0",
+    "source_document": "backend-swe-intro.md.pdf",
+    "chunk_index": 0,
+    "char_length": 1329,
+    "preview": "Backend / General Software Engineer — Introduction and Pitch\n— Mahip Parekh\nIntro-shaped reference material for backend and general software engineering roles. The\nemphasis here is systems, reliabilit"
+  },
+  {
+    "chunk_id": "backend-swe-intro__c1",
+    "source_document": "backend-swe-intro.md.pdf",
+    "chunk_index": 1,
+    "char_length": 1318,
+    "preview": ", and full-stack\napplications end to end. What I care about as an engineer is building things that hold up\nunder real conditions — systems that recover from failure, code that's tested well enough to\n"
+  },
+  {
+    "chunk_id": "backend-swe-intro__c2",
+    "source_document": "backend-swe-intro.md.pdf",
+    "chunk_index": 2,
+    "char_length": 1308,
+    "preview": ", consistent hashing for distributing data across storage nodes, and a lengthprefix protocol I designed to solve a message-framing bug over TCP (a stream protocol with\nno built-in message boundaries)."
+  },
+  {
+    "chunk_id": "backend-swe-intro__c3",
+    "source_document": "backend-swe-intro.md.pdf",
+    "chunk_index": 3,
+    "char_length": 679,
+    "preview": "lendar management application built with clean MVC design\nand a strong emphasis on rigorous testing. The project where I focused most on\narchitecture clarity and test quality.\nFull-stack applications."
+  },
+  {
+    "chunk_id": "distributed-storage__c0",
+    "source_document": "distributed-storage-writeup.md.pdf",
+    "chunk_index": 0,
+    "char_length": 1329,
+    "preview": "Distributed File Storage System — Technical Deep-Dive —\nMahip Parekh\nA consolidated technical writeup of Mahip's distributed file storage system, built in C++\nwith a focus on fault tolerance and data "
+  },
+  {
+    "chunk_id": "distributed-storage__c1",
+    "source_document": "distributed-storage-writeup.md.pdf",
+    "chunk_index": 1,
+    "char_length": 1302,
+    "preview": "fies integrity before returning the result.\nMetadata layer. Uses chain replication to keep metadata consistent across replicas, so\nthe system has a consistent view of where chunks live.\nStorage layer."
+  },
+  {
+    "chunk_id": "distributed-storage__c2",
+    "source_document": "distributed-storage-writeup.md.pdf",
+    "chunk_index": 2,
+    "char_length": 1320,
+    "preview": "ated.\n\n\fData integrity\nData integrity is verified through hashing. When a file is reconstructed from its chunks at\nretrieval time, the system compares hashes to confirm the reconstructed data matches\n"
+  },
+  {
+    "chunk_id": "distributed-storage__c3",
+    "source_document": "distributed-storage-writeup.md.pdf",
+    "chunk_index": 3,
+    "char_length": 1275,
+    "preview": "e stream.\nThe fix was to design a length-prefix protocol: every message is prepended with its length,\nso the receiver always knows exactly how many bytes to read before deserializing the next\nmessage."
+  },
+  {
+    "chunk_id": "distributed-storage__c4",
+    "source_document": "distributed-storage-writeup.md.pdf",
+    "chunk_index": 4,
+    "char_length": 601,
+    "preview": "d network settings would make it more robust and deployable.\n\nWhy this project matters (interview framing)\nThis is the project Mahip can discuss in the most technical depth. It demonstrates hands-on\n\n"
+  },
+  {
+    "chunk_id": "dsa-prep__c0",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 0,
+    "char_length": 1322,
+    "preview": "DSA Interview Revision Guide DSA Interview Revision Guide 1. Regular Expression Matching Hard DP Recursion + Memoization Intuition: * means zero or more of the preceding element, not a wildcard. Two c"
+  },
+  {
+    "chunk_id": "dsa-prep__c1",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 1,
+    "char_length": 1311,
+    "preview": "Recursion Backtracking Two Pointers Intuition: kSum fixes one element, calls (k-1)Sum recursively. Base case is 2Sum. current is a shared list → must backtrack. Use long for target to avoid overflow. "
+  },
+  {
+    "chunk_id": "dsa-prep__c2",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 2,
+    "char_length": 1338,
+    "preview": "ums[right]); result. add (combo); left++; right--; while (left 1 ]) left++; while (left 1 ]) right--; } else if (sum else right--; } }\n} Time: O(n^(k-1)) — e.g. 3Sum=O(n²), 4Sum=O(n³) | Space: O(k) 3."
+  },
+  {
+    "chunk_id": "dsa-prep__c3",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 3,
+    "char_length": 1333,
+    "preview": "ur); // skip }\n} Time: O(n^(target/min)) | Space: O(target/min) 4. Combination Sum II Medium Backtracking Bounded Skip Duplicates Intuition: Same pick/skip but pass index+1 when picking (can't reuse)."
+  },
+  {
+    "chunk_id": "dsa-prep__c4",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 4,
+    "char_length": 1253,
+    "preview": "/ handle negatives naturally. Bugs to avoid: (1) while(x > 0) fails for negatives — use x != 0 . (2) Math.abs() inside loop breaks negative handling. (3) Must check overflow before res*10 , not after."
+  },
+  {
+    "chunk_id": "dsa-prep__c5",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 5,
+    "char_length": 1285,
+    "preview": "i if (nums[i] == k) { m = i; break ; } Map < Integer , Integer > left = new HashMap <>(); left. put ( 0 , 1 ); int sum = 0 ; for ( int i = m- 1 ; i >= 0 ; i--) { sum += (nums[i] > k) ? 1 : - 1 ; left."
+  },
+  {
+    "chunk_id": "dsa-prep__c6",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 6,
+    "char_length": 1242,
+    "preview": "if (v > T) { profit = (profit + ( long )v*(v+ 1 )/ 2 - T*(T+ 1 )/ 2 ) % MOD; rem -= v - T; } } profit = (profit + rem * T) % MOD; return ( int ) profit; }\n} Time: O(n × log(max_val)) | Space: O(1) 8. "
+  },
+  {
+    "chunk_id": "dsa-prep__c7",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 7,
+    "char_length": 1345,
+    "preview": "ition: Find min element index first, then binary search in the correct half. Bugs to avoid: (1) mid = low + (high-low)/2 not high - (high-low)/2 . (2) low = mid+1 not low = mid — causes infinite loop."
+  },
+  {
+    "chunk_id": "dsa-prep__c8",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 8,
+    "char_length": 1321,
+    "preview": "th (); i++) { if (s. charAt (i) == ')' && stack. size () > 1 && s. charAt (stack. peek ()) == '(' ) { stack. pop (); res = Math. max (res, i - stack. peek ()); } else stack. push (i); } return res; }\n"
+  },
+  {
+    "chunk_id": "dsa-prep__c9",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 9,
+    "char_length": 1318,
+    "preview": "; }\n} Time: O(9^(empty cells)) | Space: O(81) 12. Find Duplicate Number (Floyd's Cycle) Linked List Cycle Tortoise & Hare Intuition: Treat array as linked list: index → nums[index]. Duplicate = cycle."
+  },
+  {
+    "chunk_id": "dsa-prep__c10",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 10,
+    "char_length": 1263,
+    "preview": "add ( new ArrayList <>(cur)); return ; } for ( int i = 0 ; i if (used[i]) continue ; used[i] = true ; cur. add (a[i]); solve (a, res, cur, used); cur. remove (cur. size ()- 1 ); used[i] = false ; } }\n"
+  },
+  {
+    "chunk_id": "dsa-prep__c11",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 11,
+    "char_length": 1304,
+    "preview": "int [] h) { int n = h.length; int [] mL = new int [n], mR = new int [n]; mL[ 0 ] = h[ 0 ]; mR[n- 1 ] = h[n- 1 ]; for ( int i= 1 ; i max (mL[i- 1 ], h[i]); for ( int i=n- 2 ; i>= 0 ; i--) mR[i] = Math."
+  },
+  {
+    "chunk_id": "dsa-prep__c12",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 12,
+    "char_length": 1240,
+    "preview": "}\n} Time: O(n) | Space: O(1) 18. First Missing Positive Hard In-place Marking Intuition: Replace out-of-range with n+1. Negate element at value's index to mark \"seen.\" First positive index+1 = answer."
+  },
+  {
+    "chunk_id": "dsa-prep__c13",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 13,
+    "char_length": 1314,
+    "preview": "} Time: O(n × m) | Space: O(m × log n) 20. Remove Nth Node From End Linked List Two Pointers Intuition: Dummy node + move fast n steps ahead, then both until fast hits end. Slow is before target node."
+  },
+  {
+    "chunk_id": "dsa-prep__c14",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 14,
+    "char_length": 1348,
+    "preview": "[] notPrime = new boolean [n]; int count = 0 ; for ( int i= 2 ; i if (!notPrime[i]) { count++; for ( long j=( long )i*i; j int )j] = true ; } } return count; }\n} Time: O(n log log n) | Space: O(n) 23."
+  },
+  {
+    "chunk_id": "dsa-prep__c15",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 15,
+    "char_length": 1212,
+    "preview": "rivate void solve ( int n, StringBuilder sb, int o, int c, List < String > res) { if (sb. length ()==n* 2 ) { res. add (sb. toString ()); return ; } if (o append ( '(' ); solve (n,sb,o+ 1 ,c,res); sb."
+  },
+  {
+    "chunk_id": "dsa-prep__c16",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 16,
+    "char_length": 1273,
+    "preview": "s); } }\n} Time: O(4^n) | Space: O(n) 26. Merge K Sorted Lists Hard Divide and Conquer Linked List Intuition: Split in half, merge recursively. Remaining nodes attach automatically with curr.next = a ."
+  },
+  {
+    "chunk_id": "dsa-prep__c17",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 17,
+    "char_length": 1250,
+    "preview": "rimes (m); int [] dp = new int [n+ 1 ]; Arrays . fill (dp, Integer.MAX_VALUE); dp[ 0 ] = 0 ; for ( int i= 1 ; i for ( int p : primes) { if (p>i) break ; if (dp[i-p] != Integer.MAX_VALUE) dp[i] = Math."
+  },
+  {
+    "chunk_id": "dsa-prep__c18",
+    "source_document": "dsa_prep.html",
+    "chunk_index": 18,
+    "char_length": 1004,
+    "preview": "loops Overflow before operation res*10+digit Check vs MAX/10 first Prefix sum + HashMap Count subarrays with sum/property Subarray Sum = K family Binary search on answer Optimize per-item to O(log) Se"
+  },
+  {
+    "chunk_id": "gm-behavioral__c0",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 0,
+    "char_length": 1297,
+    "preview": "GM Behavioral Interview Prep\nSWE Intern — Autonomous Driving, AI Training / Data Labeling\n30 min | Virtual | Microsoft Teams | Manager: Russ Brennan\n\nFORMAT\n~3-4 behavioral questions + time for your q"
+  },
+  {
+    "chunk_id": "gm-behavioral__c1",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 1,
+    "char_length": 1291,
+    "preview": "d\ndata integrity, a Java based calendar system focused on clean architecture and rigorous testing, and a full\nstack learning management system. This semester I'm diving into AWS and machine learning.\n"
+  },
+  {
+    "chunk_id": "gm-behavioral__c2",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 2,
+    "char_length": 1329,
+    "preview": "to map the live URL. During these checks, I found a UI bug with the publish button.\nTask: Before testing, I disabled the client email notification toggle so they wouldn't get alerts while I\ndebugged. "
+  },
+  {
+    "chunk_id": "gm-behavioral__c3",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 3,
+    "char_length": 1331,
+    "preview": ": Be Bold / Speak Fearlessly / Lead as One Team / Seek Truth\nUse Story B — Testing Disagreement\nSituation: Final phase of our calendar project. We had to add several new features and build a new GUI.\n"
+  },
+  {
+    "chunk_id": "gm-behavioral__c4",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 4,
+    "char_length": 1295,
+    "preview": "and proposed options,\" \"I optimized for quality first, then\nthroughput\"\n\n\fQ3: \"Tell me about a time you improved a process or innovated\"\nGM signals: Innovate Now / Takes Initiative / Solves Problems\nU"
+  },
+  {
+    "chunk_id": "gm-behavioral__c5",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 5,
+    "char_length": 1339,
+    "preview": "umented on Confluence and pushed to Bitbucket for reuse. Other teams asked for the report\nfor their own purposes. One person, one script, replaced what would have taken the whole team weeks\nmanually.\n"
+  },
+  {
+    "chunk_id": "gm-behavioral__c6",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 6,
+    "char_length": 1323,
+    "preview": "was no way to tell where one message ended and the next began. I designed\na length prefix protocol where every message is prepended with its size so the receiver always knows how\nmany bytes to read.\nR"
+  },
+  {
+    "chunk_id": "gm-behavioral__c7",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 7,
+    "char_length": 1341,
+    "preview": "right next to me. I had this mindset that I should figure it out myself.\nAction: After two weeks, my manager told me I wasn't ramping up fast enough. He knew exactly why and\nsaid the team has my back."
+  },
+  {
+    "chunk_id": "gm-behavioral__c8",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 8,
+    "char_length": 1314,
+    "preview": "king topics we thought were interesting, I wanted to understand what students\nactually needed.\nAction: I spent time talking to junior students about where they were struggling. Turns out they weren't\n"
+  },
+  {
+    "chunk_id": "gm-behavioral__c9",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 9,
+    "char_length": 1296,
+    "preview": "ms Teammate (adapted to different working style)\n\nfrom you\"\n\"Time you led something\"\n\nH — Coding Community Contest (organized regional event, 60-70\nparticipants)\n\n\"Time you delivered under pressure\"\n\n"
+  },
+  {
+    "chunk_id": "gm-behavioral__c10",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 10,
+    "char_length": 1325,
+    "preview": "team is where software engineering meets ML in the most tangible way. You're not building a\n\n\fconsumer app. You're building tools and pipelines that create training data for autonomous vehicles. The\nq"
+  },
+  {
+    "chunk_id": "gm-behavioral__c11",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 11,
+    "char_length": 1344,
+    "preview": "WEAVE IN NATURALLY\n\"I validated rather than assumed\" (Seek Truth)\n\"I raised the concern early and proposed options\" (Be Bold)\n\"I owned the outcome and drove the fix through verification\" (It's On Me)\n"
+  },
+  {
+    "chunk_id": "gm-behavioral__c12",
+    "source_document": "GM Behavioral Interview Prep — Mahip Parekh.pdf",
+    "chunk_index": 12,
+    "char_length": 641,
+    "preview": "ds.\nSafety is the lens. If you can connect any answer to quality, reliability, or verification, do it.\n\"Seek Truth\" matters here. GM is an engineering company that builds physical products. They care\n"
+  },
+  {
+    "chunk_id": "rag-project__c0",
+    "source_document": "interview-prep-rag-project.md.pdf",
+    "chunk_index": 0,
+    "char_length": 1334,
+    "preview": "Interview Prep RAG Assistant — Project Deep-Dive\nA reference writeup of Mahip Parekh's Interview Prep RAG Assistant: what it does, how it is\nbuilt, and the retrieval-quality engineering work behind it"
+  },
+  {
+    "chunk_id": "rag-project__c1",
+    "source_document": "interview-prep-rag-project.md.pdf",
+    "chunk_index": 1,
+    "char_length": 1319,
+    "preview": "ed. This makes the tool useful for interview prep specifically, where\nthe value is in rehearsing your own real experience accurately rather than generating\nplausible-sounding but fabricated stories.\n\n"
+  },
+  {
+    "chunk_id": "rag-project__c2",
+    "source_document": "interview-prep-rag-project.md.pdf",
+    "chunk_index": 2,
+    "char_length": 1328,
+    "preview": "version with the frontend on Vercel and the\ndatabase on Neon (managed Postgres), so the project can be shared as a live demo rather\nthan only running locally.\n\n\fThe retrieval-and-generation pipeline\nT"
+  },
+  {
+    "chunk_id": "rag-project__c3",
+    "source_document": "interview-prep-rag-project.md.pdf",
+    "chunk_index": 3,
+    "char_length": 1322,
+    "preview": "actively tuned rather than treated as fixed.\n6. Generation. The retrieved chunks are passed as context to Llama 3.3, which\ncomposes an answer grounded in that context.\n\nRetrieval-quality engineering\nT"
+  },
+  {
+    "chunk_id": "rag-project__c4",
+    "source_document": "interview-prep-rag-project.md.pdf",
+    "chunk_index": 4,
+    "char_length": 1287,
+    "preview": "s distinction — separating retrieval failures from generation failures — shaped\nthe entire approach that followed.\nCorpus cleanup. Inspecting the stored corpus revealed that the same source documents\n"
+  },
+  {
+    "chunk_id": "rag-project__c5",
+    "source_document": "interview-prep-rag-project.md.pdf",
+    "chunk_index": 5,
+    "char_length": 1348,
+    "preview": "s (dump every stored\nchunk with its source and a text preview), a labeled evaluation set of questions spanning\ndistinct query types — role-targeted introductions, behavioral/STAR retrieval, technical\n"
+  },
+  {
+    "chunk_id": "rag-project__c6",
+    "source_document": "interview-prep-rag-project.md.pdf",
+    "chunk_index": 6,
+    "char_length": 1348,
+    "preview": "etrieval-ranking problem, where the right content exists but ranks too low, and a contentcoverage problem, where the right content barely exists in the corpus at all. Each calls for a\ndifferent fix.\n\n"
+  },
+  {
+    "chunk_id": "rag-project__c7",
+    "source_document": "interview-prep-rag-project.md.pdf",
+    "chunk_index": 7,
+    "char_length": 440,
+    "preview": "ent\ncompact one.\n\n\fKnown limitations\nThe project is under active development. Retrieval quality on generic semantic queries is a\nknown weak point being addressed. The corpus is small and hand-curated."
+  },
+  {
+    "chunk_id": "knowledge-base__c0",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 0,
+    "char_length": 1287,
+    "preview": "MAHIP PAREKH — COMPLETE KNOWLEDGE BASE\nSECTION 1: PERSONAL PROFILE\nName: Mahip Parekh Phone: +1 857 565 4266 Email: parekh.mahi@northeastern.edu LinkedIn:\nlinkedin.com/in/mahip-parekh GitHub: github.c"
+  },
+  {
+    "chunk_id": "knowledge-base__c1",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 1,
+    "char_length": 1341,
+    "preview": "tually use MATLAB software. When Mahip\ntold his father about his MathWorks interview, his father got goosebumps. This is a deeply\npersonal connection to MathWorks.\n\nSECTION 2: PROFESSIONAL EXPERIENCE\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c2",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 2,
+    "char_length": 1342,
+    "preview": "ev, stage, and prod. Each required authentication.\nMahip managed access assignments through JIRA tickets.\nWhat Mahip did NOT do at IDX: He did not work directly with external customers. He did not do\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c3",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 3,
+    "char_length": 1302,
+    "preview": "istic regression using Python,\nScikit-learn, and Pandas. Achieved 82% prediction accuracy on customer churn datasets.\nPerformed exploratory data analysis on 50,000+ row datasets.\n\nSECTION 3: PROJECTS\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c4",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 4,
+    "char_length": 1265,
+    "preview": "n\narchitectural planning, mapping what to implement next and how components would connect\ndesign-wise. Both worked across layers after initial split.\nKey technical details of Mahip's networking code:\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c5",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 5,
+    "char_length": 1312,
+    "preview": "de. Root cause was that there was no way to\nknow where one message ended and the next began in the TCP stream. Solution was the lengthprefix format where every message gets prepended with its length.\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c6",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 6,
+    "char_length": 1349,
+    "preview": "code (interfaces, folder structures, starter\ntests) between meetings so they always had a clear path to follow.\nFeature not implemented due to time constraints: When a dead node comes back online, it\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c7",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 7,
+    "char_length": 1324,
+    "preview": "asking \"does this\nwork\" he started asking \"what could go wrong and would my test catch it.\"\nTesting disagreement with partner: Final phase required adding several new features and\nbuilding a new GUI. "
+  },
+  {
+    "chunk_id": "knowledge-base__c8",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 8,
+    "char_length": 1291,
+    "preview": "ding, real-time\nupdates via WebSockets for 500+ concurrent users. This was the project where Mahip got\ncomfortable with full-stack development end to end.\n\nSECTION 4: BEHAVIORAL STORIES (FULL DETAIL)\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c9",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 9,
+    "char_length": 1345,
+    "preview": "sion and\nproduct version, and listed company name, website URL, Drupal version, and product version in\nan Excel sheet. Built three versions of the program for dev, stage, and production environments.\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c10",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 10,
+    "char_length": 1344,
+    "preview": "ized data\ninsertion to bulk writes. His team lead handled the hosting side (moving it off the laptop to run\nindependently) since the team lead had more experience with their infrastructure. Mahip was\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c11",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 11,
+    "char_length": 1292,
+    "preview": "ddle ground: test each\nfeature's core working behavior during implementation, save edge case testing for later. Never\nhave pile of untested code but don't slow implementation chasing every edge case.\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c12",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 12,
+    "char_length": 1343,
+    "preview": "en flag would the hosting team map the live URL of the company's website with the upgraded\nproduction website.\nWhat happened: During post-upgrade QA checks, Mahip was working on a simple UI bug where\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c13",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 13,
+    "char_length": 1320,
+    "preview": "and what\ncaused it. They figured out the cache of the client website had to be cleared from the server,\nwhich resolved the issue. In the meeting, Mahip explained the situation honestly, followed by a\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c14",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 14,
+    "char_length": 1274,
+    "preview": "re within him that made him think he could tackle\nany problem himself without reaching out.\nWhat happened: Was given view rights to the company's product code base and asked to\nunderstand the product."
+  },
+  {
+    "chunk_id": "knowledge-base__c15",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 15,
+    "char_length": 1337,
+    "preview": "crolling through code in isolation\nto understanding the product through the people who built it.\n\n\fLearning: Asking for help isn't a weakness. It's how you learn faster and build relationships. Still\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c16",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 16,
+    "char_length": 1315,
+    "preview": "clean wrapper classes (TCPServer, TCPClient)\nthat abstracted low-level details like byte ordering and connection handling.\nThe bug: Messages sent from server to client weren't deserializing correctly."
+  },
+  {
+    "chunk_id": "knowledge-base__c17",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 17,
+    "char_length": 1303,
+    "preview": "port is like apartment number (which app gets the data), socket is the\nopen connection between two machines\nTCP is a stream protocol with no message boundaries, hence need for length-prefix\nprotocol\n\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c18",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 18,
+    "char_length": 1342,
+    "preview": ", Have Backbone, Integrity, Process Discipline,\nStrengths.\n\nStory H — Coding Community Contest (Undergrad)\nFull context: Professor noticed Mahip's interest in competitive programming and asked him to\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c19",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 19,
+    "char_length": 1270,
+    "preview": "submission process.\nPromotion: The college had promotion teams that personally traveled to different colleges in\nneighboring cities to promote the festival. Mahip had done this himself as a freshman.\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c20",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 20,
+    "char_length": 1346,
+    "preview": "ofile.\nAction: Designed entire event calendar around student needs. Every session came from listening\nfirst, not assuming. Prioritized topics based on how many students mentioned the same pain\npoint.\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c21",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 21,
+    "char_length": 1341,
+    "preview": "style. Would\ncall casually and ask how he'd like to implement a particular feature or what kind of fault\ntolerance he'd prefer. Collected ideas over time. By the time they finally sat down together,\nM"
+  },
+  {
+    "chunk_id": "knowledge-base__c22",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 22,
+    "char_length": 1338,
+    "preview": "Had an assignment deadline approaching and was behind. Pulled two all-nighters to get\nit done. Delivered on time. Not his proudest planning moment but learned to start earlier and\nmanage time better. "
+  },
+  {
+    "chunk_id": "knowledge-base__c23",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 23,
+    "char_length": 1314,
+    "preview": "gramming Languages: Python, C++, C, Linux/Unix, Bash Scripting, Java, JavaScript, SQL\nTools and Technologies: Git/GitLab, Jenkins, Docker, JIRA, Agile/Scrum, CI/CD, Artifactory,\nBitbucket, Confluence\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c24",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 24,
+    "char_length": 1324,
+    "preview": "ent in CS at Northeastern. Before grad school, I worked as a software\nengineer in India for a year on a product support team where I helped developers and client\nmanagers troubleshoot platform issues."
+  },
+  {
+    "chunk_id": "knowledge-base__c25",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 25,
+    "char_length": 1326,
+    "preview": "system. I also built a distributed file storage system in C++ focused\non fault tolerance. And I built a Java based calendar management system, where I focused on\nclean MVC design and rigorous testing."
+  },
+  {
+    "chunk_id": "knowledge-base__c26",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 26,
+    "char_length": 1346,
+    "preview": "nt live, and\n\n\fsupport internal developers when they hit platform issues. That experience gave me a strong\nappreciation for production reliability and quality. Since starting my masters, I've built a\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c27",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 27,
+    "char_length": 1334,
+    "preview": "my previous job, nobody told\nme to do it. I saw the problem, proposed the solution, and owned the whole thing. I want to be in\nan environment where that's the norm, not the exception.\n\nWhy MathWorks?\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c28",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 28,
+    "char_length": 1319,
+    "preview": "y. Second, the tech breadth.\nTypeScript, React, Python, Golang, ML pipelines, workflow orchestration. Not a narrow intern\nrole. Third, the culture. GM combines startup agility with enterprise scale.\n\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c29",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 29,
+    "char_length": 1334,
+    "preview": "If I'm the same engineer a year from now, that's\na failure.\n\nHow do you handle multiple tasks?\nPrioritize based on urgency and impact. At IDX, juggled JIRA tickets, QA checks, and SSO\nrequests daily. "
+  },
+  {
+    "chunk_id": "knowledge-base__c30",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 30,
+    "char_length": 1338,
+    "preview": "d JUnit files. Thinking was his, AI\nhandled repetitive typing. Never uses AI to make decisions or generate code he doesn't\nunderstand. If he can't explain every line, it shouldn't be in the project.\n\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c31",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 31,
+    "char_length": 1346,
+    "preview": "General Motors\nVision: Zero crashes, zero emissions, zero congestion\nBrands: Chevrolet, GMC, Cadillac, Buick\nCruise: Was GM's robotaxi subsidiary. Shut down in December 2024 after over $10 billion in\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c32",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 32,
+    "char_length": 1319,
+    "preview": "requires hybrid work\n\nSECTION 8: INTERVIEW HISTORY AND OUTCOMES\nMathWorks EDG Intern\nTechnical interview: Passed. Interviewer showed how EDG works (started Java, moved to\nsupport, now cybersecurity).\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c33",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 33,
+    "char_length": 1324,
+    "preview": "pplication submitted.\n\nSECTION 9: LP AND COMPANY FRAMEWORK MAPPINGS\nAmazon LP to Story Map\nLP\n\nPrimary Story\n\nCustomer Obsession\n\nI — Community Events\n\nOwnership\n\nA — Automation\n\nInvent and Simplify\n\n"
+  },
+  {
+    "chunk_id": "knowledge-base__c34",
+    "source_document": "Mahip Parekh — Complete RAG Knowledge Base.pdf",
+    "chunk_index": 34,
+    "char_length": 982,
+    "preview": "ion preferences: High-level simple language. No hyphens. STAR format for all\nstories. Answers kept to 60-90 seconds before pausing for interviewer to pull details. \"I\" not \"we\"\nfor Amazon especially.\n"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c0",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 0,
+    "char_length": 1328,
+    "preview": "Amazon SDE Intern — Behavioral Prep\nMahip Parekh\n\nSTORIES\n\nA — Automation Script (IDX)\nUse for: Ownership, Bias for Action, Invent and Simplify, Frugality, Deliver Results\nSituation: My team was asked"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c1",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 1,
+    "char_length": 1345,
+    "preview": "d to use it for their own\npurposes.\nFollow ups:\nWhy Java/Selenium → comfortable with Java, Selenium was right for browser automation\nHardest part → handling dead URLs and edge cases across 900+ sites\n"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c2",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 2,
+    "char_length": 1336,
+    "preview": "later. We made a checklist, split the work, and rotated\nbetween implementing and testing.\nResult: We finished before the deadline with 100% functionality and 98% mutation test coverage. The approach\nw"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c3",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 3,
+    "char_length": 1252,
+    "preview": "while I debugged. But the site's cache was stale, so my toggle change never took effect.\nAction: Every click I made fired an email to the actual client. It got escalated. Before the meeting with the\nc"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c4",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 4,
+    "char_length": 1311,
+    "preview": "ness\nSituation: This was my first job out of college. I joined the product support team and was given access to the\ncodebase to ramp up. I had this mindset that I should figure out everything myself.\n"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c5",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 5,
+    "char_length": 1344,
+    "preview": "bout team output\nHow did you feel → embarrassed, but he said it supportively so I absorbed it\n\nE — Distributed File System (Northeastern)\nUse for: Invent and Simplify, Learn and Be Curious, Dive Deep\n"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c6",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 6,
+    "char_length": 1297,
+    "preview": "ity\nduring node failures. We built automated tests that killed nodes mid operation and verified file recovery from\nreplicas.\nFollow ups:\nConsistent hashing → nodes and chunks placed on a virtual ring."
+  },
+  {
+    "chunk_id": "amazon-behavioral__c7",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 7,
+    "char_length": 1318,
+    "preview": "my reasoning, that I needed to maintain a record of who has access to what site for what\nproject.\nResult: It maintained a proper paper trail for who has access to production environments. My manager\ns"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c8",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 8,
+    "char_length": 1293,
+    "preview": "knew the logic but couldn't figure out how to submit on the\nplatform. I quickly set up volunteers to guide them through it.\nResult: We had 60-70 participants from multiple colleges across the region. "
+  },
+  {
+    "chunk_id": "amazon-behavioral__c9",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 9,
+    "char_length": 1346,
+    "preview": "Task: Instead of just picking topics we thought were interesting, I wanted to understand what students actually\nneeded. So I spent time talking to juniors to figure out where they were struggling.\nAct"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c10",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 10,
+    "char_length": 1284,
+    "preview": "stributed Systems Teammate (Northeastern)\nUse for: Are Right A Lot, Bias for Action, Deliver Results\nSituation: For my distributed systems project, my teammate and I had very different working styles."
+  },
+  {
+    "chunk_id": "amazon-behavioral__c11",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 11,
+    "char_length": 1348,
+    "preview": "ore our next meeting. Interfaces, folder\nstructures, basic assumptions, and starter tests. So every time we worked together, we had a solid path to follow\ninstead of figuring things out from scratch.\n"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c12",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 12,
+    "char_length": 1320,
+    "preview": "ne.\nResult: Delivered on time. Not my proudest planning moment, but I learned to start earlier.\nOnly use if nothing else fits.\n\nLP COVERAGE\n#\n\nLeadership Principle\n\nStory\n\nFit\n\n1\n\nCustomer Obsession\n\n"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c13",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 13,
+    "char_length": 1327,
+    "preview": "I — Community Events\n\n\"Time you took ownership\"\n\nA — Automation\n\n\"Time you simplified something complex\"\n\nA — Automation or E — Distributed System\n\n\"Time your judgment was right despite uncertainty\"\n\n"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c14",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 14,
+    "char_length": 1328,
+    "preview": "a teammate\"\n\nJ — Distributed Systems Teammate\n\nBOILERPLATE ANSWERS\n\"Tell me about yourself\"\nI'm Mahip, a Master's student in CS at Northeastern. Before grad school, I worked as a software engineer in\n"
+  },
+  {
+    "chunk_id": "amazon-behavioral__c15",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 15,
+    "char_length": 1293,
+    "preview": "e norm, not the exception.\n\n\"What are your future goals?\"\nShort term, I want to get solid industry experience, work on systems at scale, and learn from engineers who've\nbeen doing this longer than me."
+  },
+  {
+    "chunk_id": "amazon-behavioral__c16",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 16,
+    "char_length": 1343,
+    "preview": "better than I found them. Personally, success is also growth. If I'm the same engineer a year from now,\nthat's a failure.\n\n\"How do you handle multiple tasks?\"\nI prioritize based on urgency and impact."
+  },
+  {
+    "chunk_id": "amazon-behavioral__c17",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 17,
+    "char_length": 1338,
+    "preview": "0-30 minutes, I reach out.\n\n\"Questions for the interviewer\"\n1. \"What does a typical day look like for an intern on your team?\"\n2. \"What separates interns who do really well from those who do okay?\"\n3."
+  },
+  {
+    "chunk_id": "amazon-behavioral__c18",
+    "source_document": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf",
+    "chunk_index": 18,
+    "char_length": 722,
+    "preview": "bSockets. The project where I got comfortable with the full stack end to end.\n\nPAST EXPERIENCE\nQuick version: At IDX India, I was a software engineer on the product support team for about a year. Our\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c0",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 0,
+    "char_length": 1316,
+    "preview": "MathWorks EDG Intern — Manager Interview Prep\nMahip Parekh | Complete Guide\n\n1. INTRODUCTION (~90 seconds)\nHi, I'm Mahip. I'm a Master's student in Computer Science at Northeastern University in Bosto"
+  },
+  {
+    "chunk_id": "mathworks-edg__c1",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 1,
+    "char_length": 1309,
+    "preview": "he fresh smell of coffee. And\nI recently realized I can cook almost as good as my mom.\nWhat drew me to the EDG program is the mix of strong engineering culture, collaboration, and continuous\nlearning."
+  },
+  {
+    "chunk_id": "mathworks-edg__c2",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 2,
+    "char_length": 1279,
+    "preview": "g with a team on improving the product itself. Either way, you're learning by\ndoing meaningful work, not busywork. That's the kind of environment I thrive in.\n\n\f3. STAR: INITIATIVE / AUTOMATION (IDX)\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c3",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 3,
+    "char_length": 1283,
+    "preview": "nto something unexpected — a bunch of old dev and staging URLs were completely\ndead. Either the client had left or their environments had been deleted, but there was no single place that tracked\nthis."
+  },
+  {
+    "chunk_id": "mathworks-edg__c4",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 4,
+    "char_length": 1347,
+    "preview": "sed automation.\n\"What was the hardest part?\" → Handling dead URLs and edge cases across 900+ sites.\n\"What would you do differently?\" → The script had to run on my laptop for about a week. If doing it\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c5",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 5,
+    "char_length": 1288,
+    "preview": "aining time to writing tests. I was concerned about leaving all the testing to the end\nbecause our target was 100% mutation coverage — that's a lot of test writing to cram into whatever time is left.\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c6",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 6,
+    "char_length": 1337,
+    "preview": "strong enough to catch mutants. That takes time and thought. Cramming it would mean weaker\ntests.\n\"How did you split the work?\" → We made a checklist of features. I'd take two or three and implement\nt"
+  },
+  {
+    "chunk_id": "mathworks-edg__c7",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 7,
+    "char_length": 1340,
+    "preview": "en flag would the hosting team map the live URL to the newly upgraded production site. During\none of these post-upgrade checks, I was assigned a UI bug — the website administrator couldn't publish an\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c8",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 8,
+    "char_length": 1307,
+    "preview": "s what was causing the weird behavior. In the meeting, I explained the situation honestly and\ngave a live demonstration showing how a website behaves when its server-side cache isn't cleared — how it\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c9",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 9,
+    "char_length": 1271,
+    "preview": "e after this?\" → I stopped assuming my changes took effect just because I made\nthem. Especially on live sites with caching, I now always verify the change is actually reflected before\nmoving forward.\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c10",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 10,
+    "char_length": 1288,
+    "preview": "er two weeks, I reported to my manager and explained the product as best as I understood it.\nAction: He was disappointed — he told me I was too slow and hadn't learned enough. And he knew exactly\nwhy."
+  },
+  {
+    "chunk_id": "mathworks-edg__c11",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 11,
+    "char_length": 1311,
+    "preview": "ere, but now I set a\nmental timer. If I'm stuck for more than 20-30 minutes, I reach out. The instinct to be independent isn't\nbad — I just needed to learn when to switch from solo mode to team mode.\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c12",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 12,
+    "char_length": 1279,
+    "preview": "with three layers — a client that splits files into chunks, a metadata layer using\nchain replication for consistency, and a storage layer using a consistent hash ring for data distribution. It needed\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c13",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 13,
+    "char_length": 1344,
+    "preview": "with a format — prepend each\nmessage with its length, so the receiver always knows how many bytes to read before deserializing. Once that\nclicked, the rest of the communication layer fell into place.\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c14",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 14,
+    "char_length": 1307,
+    "preview": "ading about it beforehand.\n\"What would you do differently?\" → Add persistent storage with something like RocksDB so data\nsurvives restarts, and improve configuration to avoid hardcoded IPs and ports.\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c15",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 15,
+    "char_length": 1290,
+    "preview": "listed companies — so think financial disclosures, shareholder communications, that kind of thing. I\nwas on the product-support team. Our company had its own platform built on Drupal, and my team was\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c16",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 16,
+    "char_length": 1295,
+    "preview": "it into chunks, and stores them on different storage nodes. At retrieval time, it\ncollects chunks from nodes, reconstructs the file, verifies integrity by comparing hashes, and returns the final\nfile."
+  },
+  {
+    "chunk_id": "mathworks-edg__c17",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 17,
+    "char_length": 1289,
+    "preview": "stack —\nReact frontend, Node/Express backend, MongoDB, REST APIs, and WebSockets all tied together.\n\n10. QUESTIONS FOR THE MANAGER\n1. \"What does a typical day or week look like for an EDG intern?\"\n2. "
+  },
+  {
+    "chunk_id": "mathworks-edg__c18",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 18,
+    "char_length": 1324,
+    "preview": "ve to\nshare one quick thing that's personally meaningful to me about this opportunity...\"\nIn 1994, my dad was completing his master's thesis in mathematics on linear control theory. His professor was\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c19",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 19,
+    "char_length": 1182,
+    "preview": "...\n\nUse story...\n\n\"Leadership\"\n\n#3 Automation (IDX)\n\n\"Conflict with a teammate\"\n\n#4 Testing disagreement (Calendar)\n\n\"A time you failed / messed up\"\n\n#5 Client escalation (IDX)\n\n\"Negative feedback\"\n\n"
+  },
+  {
+    "chunk_id": "mathworks-edg__c20",
+    "source_document": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf",
+    "chunk_index": 20,
+    "char_length": 132,
+    "preview": "~25-30 minutes — pace yourself\nManager may reference your HireVue recording — stay consistent\nYou've got this, Mahip. Go get it.\n\n🎯"
+  },
+  {
+    "chunk_id": "ml-ai-projects__c0",
+    "source_document": "ml-ai-projects.md.pdf",
+    "chunk_index": 0,
+    "char_length": 1290,
+    "preview": "Completed ML / AI Projects — Mahip\nA reference list of finished machine learning and AI projects, with a high-level description\nof what each one does and how it works. Written for interview prep and R"
+  },
+  {
+    "chunk_id": "ml-ai-projects__c1",
+    "source_document": "ml-ai-projects.md.pdf",
+    "chunk_index": 1,
+    "char_length": 1329,
+    "preview": "al network as the best model — the actual\nexperimental results put Random Forest on top. Use the Random Forest / 0.9763 figure\nin interviews.)\nStack / tools: Python, scikit-learn, standard ML tooling."
+  },
+  {
+    "chunk_id": "ml-ai-projects__c2",
+    "source_document": "ml-ai-projects.md.pdf",
+    "chunk_index": 2,
+    "char_length": 837,
+    "preview": "around AI-assisted failure detection.\nHow it does it:\nRetrieval: Documents are chunked and embedded with the all-MiniLM-L6-v2\nsentence-transformer model. Embeddings are stored in PostgreSQL using the\n"
+  },
+  {
+    "chunk_id": "resume-ml__c0",
+    "source_document": "Resume_Mahip_ML2.pdf",
+    "chunk_index": 0,
+    "char_length": 1323,
+    "preview": "Mahip Parekh\n+1 857 565 4266 | parekh.mahi@northeastern.edu | linkedin.com/in/mahip-parekh | github.com/mahip19 | Boston, MA\n\nEducation\nNortheastern University, Khoury College of Computer Sciences\nMas"
+  },
+  {
+    "chunk_id": "resume-ml__c1",
+    "source_document": "Resume_Mahip_ML2.pdf",
+    "chunk_index": 1,
+    "char_length": 1286,
+    "preview": "endering with Next.js, reducing page load\ntimes by 50%+ and improving SEO.\n• Handled production incidents and release reliability using JIRA, maintaining 95% uptime through rapid issue resolution and\n"
+  },
+  {
+    "chunk_id": "resume-ml__c2",
+    "source_document": "Resume_Mahip_ML2.pdf",
+    "chunk_index": 2,
+    "char_length": 1271,
+    "preview": "API tools to take actions against live data instead of answering from context.\n• Architected an end-to-end RAG pipeline — document ingestion, chunking, embedding generation, pgvector vector storage,\na"
+  },
+  {
+    "chunk_id": "resume-ml__c3",
+    "source_document": "Resume_Mahip_ML2.pdf",
+    "chunk_index": 3,
+    "char_length": 1331,
+    "preview": "s.\n• Conducted 60 experiments across 4 classifiers, 5 feature sets, and 3 imbalance strategies, demonstrating that a curated top-20 feature\nsubset outperforms all 83 features by reducing overfitting.\n"
+  },
+  {
+    "chunk_id": "resume-ml__c4",
+    "source_document": "Resume_Mahip_ML2.pdf",
+    "chunk_index": 4,
+    "char_length": 489,
+    "preview": ", Bash, Node.js, Express, REST APIs, FastAPI, WebSockets\nCloud & Databases: AWS (EC2, S3, Lambda, RDS, ECS, Cognito, API Gateway), Docker, CI/CD, Terraform, Git, PostgreSQL +\npgvector, MongoDB, MySQL\n"
+  }
+]

@@ -1,0 +1,577 @@
+{
+  "timestamp": "2026-07-15T08:48:59.373Z",
+  "pipeline_version": "baseline-expanded-corpus",
+  "k_values": [
+    5,
+    10,
+    20
+  ],
+  "default_k": 10,
+  "evaluated_count": 8,
+  "skipped_count": 1,
+  "skipped_ids": [
+    "negative-abstention"
+  ],
+  "aggregate": {
+    "avg_recall@5": 0.21607142857142858,
+    "avg_mrr@5": 0.7916666666666666,
+    "avg_recall@10": 0.3800595238095238,
+    "avg_mrr@10": 0.8072916666666666,
+    "avg_recall@20": 0.5223214285714286,
+    "avg_mrr@20": 0.8072916666666666
+  },
+  "results": [
+    {
+      "id": "intro-ai-swe",
+      "question": "I have a prescreen for an AI Software Engineering Intern role. Give me an introduction to prepare.",
+      "metrics": {
+        "recall@5": 0.2857142857142857,
+        "mrr@5": 1,
+        "recall@10": 0.2857142857142857,
+        "mrr@10": 1,
+        "recall@20": 0.42857142857142855,
+        "mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "ai-ml-pitch__c0",
+          "knowledge-base__c28",
+          "backend-swe-intro__c0",
+          "ai-ml-pitch__c1",
+          "gm-behavioral__c0"
+        ],
+        "top_10": [
+          "ai-ml-pitch__c0",
+          "knowledge-base__c28",
+          "backend-swe-intro__c0",
+          "ai-ml-pitch__c1",
+          "gm-behavioral__c0",
+          "knowledge-base__c32",
+          "mathworks-edg__c17",
+          "mathworks-edg__c0",
+          "knowledge-base__c29",
+          "gm-behavioral__c10"
+        ],
+        "top_20": [
+          "ai-ml-pitch__c0",
+          "knowledge-base__c28",
+          "backend-swe-intro__c0",
+          "ai-ml-pitch__c1",
+          "gm-behavioral__c0",
+          "knowledge-base__c32",
+          "mathworks-edg__c17",
+          "mathworks-edg__c0",
+          "knowledge-base__c29",
+          "gm-behavioral__c10",
+          "knowledge-base__c30",
+          "gm-behavioral__c9",
+          "knowledge-base__c27",
+          "ai-ml-pitch__c2",
+          "ai-ml-pitch__c4",
+          "mathworks-edg__c1",
+          "knowledge-base__c23",
+          "resume-ml__c1",
+          "knowledge-base__c24",
+          "rag-project__c0"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "ai-ml-pitch__c0",
+        "ai-ml-pitch__c1",
+        "ai-ml-pitch__c2",
+        "ai-ml-pitch__c3",
+        "ml-ai-projects__c0",
+        "ml-ai-projects__c2",
+        "resume-ml__c2"
+      ]
+    },
+    {
+      "id": "intro-backend-swe",
+      "question": "I have an interview for a backend / general Software Engineer role. Give me an introduction.",
+      "metrics": {
+        "recall@5": 0.14285714285714285,
+        "mrr@5": 1,
+        "recall@10": 0.42857142857142855,
+        "mrr@10": 1,
+        "recall@20": 0.5714285714285714,
+        "mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "backend-swe-intro__c0",
+          "gm-behavioral__c0",
+          "mathworks-edg__c17",
+          "rag-project__c0",
+          "backend-swe-intro__c3"
+        ],
+        "top_10": [
+          "backend-swe-intro__c0",
+          "gm-behavioral__c0",
+          "mathworks-edg__c17",
+          "rag-project__c0",
+          "backend-swe-intro__c3",
+          "backend-swe-intro__c1",
+          "knowledge-base__c23",
+          "ai-ml-pitch__c1",
+          "gm-behavioral__c1",
+          "knowledge-base__c24"
+        ],
+        "top_20": [
+          "backend-swe-intro__c0",
+          "gm-behavioral__c0",
+          "mathworks-edg__c17",
+          "rag-project__c0",
+          "backend-swe-intro__c3",
+          "backend-swe-intro__c1",
+          "knowledge-base__c23",
+          "ai-ml-pitch__c1",
+          "gm-behavioral__c1",
+          "knowledge-base__c24",
+          "knowledge-base__c28",
+          "ai-ml-pitch__c0",
+          "ai-ml-pitch__c2",
+          "mathworks-edg__c19",
+          "resume-ml__c1",
+          "amazon-behavioral__c17",
+          "gm-behavioral__c10",
+          "gm-behavioral__c9",
+          "mathworks-edg__c15",
+          "gm-behavioral__c8"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "backend-swe-intro__c0",
+        "backend-swe-intro__c1",
+        "backend-swe-intro__c2",
+        "knowledge-base__c24",
+        "knowledge-base__c25",
+        "knowledge-base__c26",
+        "resume-ml__c1"
+      ]
+    },
+    {
+      "id": "behavioral-production-incident",
+      "question": "Tell me about a time I dealt with a production issue or incident.",
+      "metrics": {
+        "recall@5": 0,
+        "mrr@5": 0,
+        "recall@10": 0.14285714285714285,
+        "mrr@10": 0.125,
+        "recall@20": 0.42857142857142855,
+        "mrr@20": 0.125
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "mathworks-edg__c9",
+          "knowledge-base__c9",
+          "mathworks-edg__c2",
+          "amazon-behavioral__c13",
+          "gm-behavioral__c6"
+        ],
+        "top_10": [
+          "mathworks-edg__c9",
+          "knowledge-base__c9",
+          "mathworks-edg__c2",
+          "amazon-behavioral__c13",
+          "gm-behavioral__c6",
+          "mathworks-edg__c15",
+          "gm-behavioral__c4",
+          "amazon-behavioral__c3",
+          "mathworks-edg__c6",
+          "amazon-behavioral__c0"
+        ],
+        "top_20": [
+          "mathworks-edg__c9",
+          "knowledge-base__c9",
+          "mathworks-edg__c2",
+          "amazon-behavioral__c13",
+          "gm-behavioral__c6",
+          "mathworks-edg__c15",
+          "gm-behavioral__c4",
+          "amazon-behavioral__c3",
+          "mathworks-edg__c6",
+          "amazon-behavioral__c0",
+          "mathworks-edg__c20",
+          "amazon-behavioral__c18",
+          "amazon-behavioral__c17",
+          "mathworks-edg__c3",
+          "amazon-behavioral__c11",
+          "mathworks-edg__c7",
+          "gm-behavioral__c12",
+          "knowledge-base__c12",
+          "mathworks-edg__c4",
+          "knowledge-base__c32"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "knowledge-base__c12",
+        "knowledge-base__c13",
+        "amazon-behavioral__c3",
+        "mathworks-edg__c7",
+        "mathworks-edg__c8",
+        "gm-behavioral__c2",
+        "resume-ml__c1"
+      ]
+    },
+    {
+      "id": "behavioral-code-quality",
+      "question": "Give me a STAR-format answer about a time I improved code quality or testing.",
+      "metrics": {
+        "recall@5": 0.16666666666666666,
+        "mrr@5": 1,
+        "recall@10": 0.3333333333333333,
+        "mrr@10": 1,
+        "recall@20": 0.5,
+        "mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "mathworks-edg__c6",
+          "mathworks-edg__c4",
+          "knowledge-base__c30",
+          "gm-behavioral__c0",
+          "knowledge-base__c10"
+        ],
+        "top_10": [
+          "mathworks-edg__c6",
+          "mathworks-edg__c4",
+          "knowledge-base__c30",
+          "gm-behavioral__c0",
+          "knowledge-base__c10",
+          "knowledge-base__c33",
+          "knowledge-base__c34",
+          "knowledge-base__c18",
+          "amazon-behavioral__c13",
+          "knowledge-base__c7"
+        ],
+        "top_20": [
+          "mathworks-edg__c6",
+          "mathworks-edg__c4",
+          "knowledge-base__c30",
+          "gm-behavioral__c0",
+          "knowledge-base__c10",
+          "knowledge-base__c33",
+          "knowledge-base__c34",
+          "knowledge-base__c18",
+          "amazon-behavioral__c13",
+          "knowledge-base__c7",
+          "knowledge-base__c11",
+          "amazon-behavioral__c12",
+          "rag-project__c3",
+          "dsa-prep__c17",
+          "dsa-prep__c0",
+          "knowledge-base__c6",
+          "rag-project__c4",
+          "backend-swe-intro__c2",
+          "dsa-prep__c12",
+          "amazon-behavioral__c17"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "gm-behavioral__c3",
+        "knowledge-base__c7",
+        "knowledge-base__c11",
+        "amazon-behavioral__c2",
+        "mathworks-edg__c5",
+        "mathworks-edg__c6"
+      ]
+    },
+    {
+      "id": "project-rag-architecture",
+      "question": "Explain the architecture of my Interview Prep RAG project so I can walk an interviewer through it.",
+      "metrics": {
+        "recall@5": 0.2,
+        "mrr@5": 1,
+        "recall@10": 0.2,
+        "mrr@10": 1,
+        "recall@20": 0.4,
+        "mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "rag-project__c0",
+          "knowledge-base__c34",
+          "gm-behavioral__c8",
+          "ai-ml-pitch__c0",
+          "ai-ml-pitch__c2"
+        ],
+        "top_10": [
+          "rag-project__c0",
+          "knowledge-base__c34",
+          "gm-behavioral__c8",
+          "ai-ml-pitch__c0",
+          "ai-ml-pitch__c2",
+          "resume-ml__c1",
+          "gm-behavioral__c10",
+          "backend-swe-intro__c0",
+          "amazon-behavioral__c17",
+          "knowledge-base__c32"
+        ],
+        "top_20": [
+          "rag-project__c0",
+          "knowledge-base__c34",
+          "gm-behavioral__c8",
+          "ai-ml-pitch__c0",
+          "ai-ml-pitch__c2",
+          "resume-ml__c1",
+          "gm-behavioral__c10",
+          "backend-swe-intro__c0",
+          "amazon-behavioral__c17",
+          "knowledge-base__c32",
+          "gm-behavioral__c0",
+          "rag-project__c1",
+          "backend-swe-intro__c3",
+          "mathworks-edg__c19",
+          "rag-project__c3",
+          "ai-ml-pitch__c1",
+          "mathworks-edg__c17",
+          "mathworks-edg__c16",
+          "mathworks-edg__c18",
+          "knowledge-base__c21"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "rag-project__c0",
+        "rag-project__c2",
+        "rag-project__c3",
+        "resume-ml__c2",
+        "ml-ai-projects__c2"
+      ]
+    },
+    {
+      "id": "project-distributed-storage",
+      "question": "What were the main challenges in my distributed file storage system?",
+      "metrics": {
+        "recall@5": 0.1,
+        "mrr@5": 1,
+        "recall@10": 0.4,
+        "mrr@10": 1,
+        "recall@20": 0.6,
+        "mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "distributed-storage__c0",
+          "amazon-behavioral__c17",
+          "amazon-behavioral__c5",
+          "resume-ml__c3",
+          "backend-swe-intro__c2"
+        ],
+        "top_10": [
+          "distributed-storage__c0",
+          "amazon-behavioral__c17",
+          "amazon-behavioral__c5",
+          "resume-ml__c3",
+          "backend-swe-intro__c2",
+          "knowledge-base__c3",
+          "distributed-storage__c3",
+          "knowledge-base__c5",
+          "distributed-storage__c4",
+          "backend-swe-intro__c1"
+        ],
+        "top_20": [
+          "distributed-storage__c0",
+          "amazon-behavioral__c17",
+          "amazon-behavioral__c5",
+          "resume-ml__c3",
+          "backend-swe-intro__c2",
+          "knowledge-base__c3",
+          "distributed-storage__c3",
+          "knowledge-base__c5",
+          "distributed-storage__c4",
+          "backend-swe-intro__c1",
+          "mathworks-edg__c13",
+          "gm-behavioral__c5",
+          "distributed-storage__c1",
+          "amazon-behavioral__c6",
+          "mathworks-edg__c11",
+          "mathworks-edg__c15",
+          "mathworks-edg__c16",
+          "amazon-behavioral__c13",
+          "mathworks-edg__c14",
+          "gm-behavioral__c0"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "distributed-storage__c0",
+        "distributed-storage__c1",
+        "distributed-storage__c2",
+        "distributed-storage__c3",
+        "distributed-storage__c4",
+        "knowledge-base__c4",
+        "knowledge-base__c5",
+        "knowledge-base__c16",
+        "amazon-behavioral__c6",
+        "mathworks-edg__c12"
+      ]
+    },
+    {
+      "id": "company-mathworks",
+      "question": "What should I focus on to prepare for my MathWorks interview?",
+      "metrics": {
+        "recall@5": 0.3333333333333333,
+        "mrr@5": 1,
+        "recall@10": 0.5,
+        "mrr@10": 1,
+        "recall@20": 0.5,
+        "mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "mathworks-edg__c0",
+          "mathworks-edg__c17",
+          "amazon-behavioral__c16",
+          "gm-behavioral__c8",
+          "mathworks-edg__c18"
+        ],
+        "top_10": [
+          "mathworks-edg__c0",
+          "mathworks-edg__c17",
+          "amazon-behavioral__c16",
+          "gm-behavioral__c8",
+          "mathworks-edg__c18",
+          "mathworks-edg__c19",
+          "amazon-behavioral__c9",
+          "knowledge-base__c23",
+          "knowledge-base__c24",
+          "knowledge-base__c29"
+        ],
+        "top_20": [
+          "mathworks-edg__c0",
+          "mathworks-edg__c17",
+          "amazon-behavioral__c16",
+          "gm-behavioral__c8",
+          "mathworks-edg__c18",
+          "mathworks-edg__c19",
+          "amazon-behavioral__c9",
+          "knowledge-base__c23",
+          "knowledge-base__c24",
+          "knowledge-base__c29",
+          "knowledge-base__c28",
+          "knowledge-base__c27",
+          "knowledge-base__c34",
+          "gm-behavioral__c1",
+          "gm-behavioral__c0",
+          "backend-swe-intro__c0",
+          "amazon-behavioral__c15",
+          "knowledge-base__c30",
+          "gm-behavioral__c10",
+          "rag-project__c0"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "mathworks-edg__c0",
+        "mathworks-edg__c1",
+        "mathworks-edg__c18",
+        "mathworks-edg__c19",
+        "mathworks-edg__c20",
+        "knowledge-base__c1"
+      ]
+    },
+    {
+      "id": "skill-postgres-pgvector",
+      "question": "What's my experience with PostgreSQL and pgvector?",
+      "metrics": {
+        "recall@5": 0.5,
+        "mrr@5": 0.3333333333333333,
+        "recall@10": 0.75,
+        "mrr@10": 0.3333333333333333,
+        "recall@20": 0.75,
+        "mrr@20": 0.3333333333333333
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "rag-project__c1",
+          "resume-ml__c1",
+          "rag-project__c2",
+          "ml-ai-projects__c2",
+          "ai-ml-pitch__c2"
+        ],
+        "top_10": [
+          "rag-project__c1",
+          "resume-ml__c1",
+          "rag-project__c2",
+          "ml-ai-projects__c2",
+          "ai-ml-pitch__c2",
+          "mathworks-edg__c14",
+          "mathworks-edg__c16",
+          "resume-ml__c4",
+          "mathworks-edg__c15",
+          "amazon-behavioral__c17"
+        ],
+        "top_20": [
+          "rag-project__c1",
+          "resume-ml__c1",
+          "rag-project__c2",
+          "ml-ai-projects__c2",
+          "ai-ml-pitch__c2",
+          "mathworks-edg__c14",
+          "mathworks-edg__c16",
+          "resume-ml__c4",
+          "mathworks-edg__c15",
+          "amazon-behavioral__c17",
+          "backend-swe-intro__c3",
+          "amazon-behavioral__c18",
+          "rag-project__c6",
+          "knowledge-base__c23",
+          "resume-ml__c3",
+          "distributed-storage__c0",
+          "gm-behavioral__c0",
+          "backend-swe-intro__c1",
+          "knowledge-base__c24",
+          "knowledge-base__c25"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "resume-ml__c2",
+        "resume-ml__c4",
+        "ml-ai-projects__c2",
+        "rag-project__c2"
+      ]
+    }
+  ],
+  "probes": {
+    "negative-abstention": [
+      {
+        "id": "mathworks-edg__c15",
+        "score": "0.2736"
+      },
+      {
+        "id": "amazon-behavioral__c18",
+        "score": "0.2362"
+      },
+      {
+        "id": "backend-swe-intro__c1",
+        "score": "0.2207"
+      },
+      {
+        "id": "knowledge-base__c15",
+        "score": "0.2184"
+      },
+      {
+        "id": "amazon-behavioral__c17",
+        "score": "0.2179"
+      },
+      {
+        "id": "ai-ml-pitch__c2",
+        "score": "0.2175"
+      },
+      {
+        "id": "backend-swe-intro__c0",
+        "score": "0.2165"
+      },
+      {
+        "id": "amazon-behavioral__c5",
+        "score": "0.2159"
+      },
+      {
+        "id": "mathworks-edg__c3",
+        "score": "0.2113"
+      },
+      {
+        "id": "knowledge-base__c25",
+        "score": "0.2037"
+      }
+    ]
+  }
+}

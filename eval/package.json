@@ -1,0 +1,15 @@
+{
+  "name": "interview-rag-eval",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dump-corpus": "node dump-corpus.js",
+    "eval": "node run-eval.js"
+  },
+  "dependencies": {
+    "pg": "^8.12.0",
+    "dotenv": "^16.4.5",
+    "@huggingface/transformers": "^4.0.1"
+  }
+}

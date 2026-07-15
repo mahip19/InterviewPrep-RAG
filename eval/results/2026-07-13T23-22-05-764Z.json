@@ -1,0 +1,591 @@
+{
+  "timestamp": "2026-07-13T23:22:05.760Z",
+  "pipeline_version": "baseline",
+  "k_values": [
+    5,
+    10,
+    20
+  ],
+  "default_k": 10,
+  "evaluated_count": 8,
+  "skipped_count": 1,
+  "skipped_ids": [
+    "negative-abstention"
+  ],
+  "aggregate": {
+    "avg_recall@5": 0.20550595238095237,
+    "avg_mrr@5": 0.525,
+    "avg_recall@10": 0.29077380952380955,
+    "avg_mrr@10": 0.525,
+    "avg_recall@20": 0.46473214285714287,
+    "avg_mrr@20": 0.5339285714285714
+  },
+  "results": [
+    {
+      "id": "intro-ai-swe",
+      "question": "I have a prescreen for an AI Software Engineering Intern role. Give me an introduction to prepare.",
+      "metrics": {
+        "recall@5": 0,
+        "mrr@5": 0,
+        "recall@10": 0,
+        "mrr@10": 0,
+        "recall@20": 0.375,
+        "mrr@20": 0.07142857142857142
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_28",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_32",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_0"
+        ],
+        "top_10": [
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_28",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_32",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_0",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_29",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_10",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_30",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_9",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_27"
+        ],
+        "top_20": [
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_28",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_32",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_0",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_29",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_10",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_30",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_9",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_27",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_1",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_23",
+          "Resume_Mahip_ML2.pdf__chunk_1",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_24",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_1",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_19",
+          "ml-ai-projects.md.pdf__chunk_1",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_14",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_25",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_8"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "ml-ai-projects.md.pdf__chunk_0",
+        "ml-ai-projects.md.pdf__chunk_1",
+        "ml-ai-projects.md.pdf__chunk_2",
+        "Resume_Mahip_ML2.pdf__chunk_2",
+        "Resume_Mahip_ML2.pdf__chunk_3",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_3",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_24",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_25"
+      ]
+    },
+    {
+      "id": "intro-backend-swe",
+      "question": "I have an interview for a backend / general Software Engineer role. Give me an introduction.",
+      "metrics": {
+        "recall@5": 0.125,
+        "mrr@5": 0.2,
+        "recall@10": 0.25,
+        "mrr@10": 0.2,
+        "recall@20": 0.5,
+        "mrr@20": 0.2
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_23",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_1",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_24"
+        ],
+        "top_10": [
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_23",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_1",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_24",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_28",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_19",
+          "Resume_Mahip_ML2.pdf__chunk_1",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_10"
+        ],
+        "top_20": [
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_23",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_1",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_24",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_28",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_19",
+          "Resume_Mahip_ML2.pdf__chunk_1",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_10",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_9",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_15",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_8",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_0",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_18",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_14",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_14",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_12",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_15",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_16"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_24",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_25",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_26",
+        "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_14",
+        "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_18",
+        "Resume_Mahip_ML2.pdf__chunk_0",
+        "Resume_Mahip_ML2.pdf__chunk_1",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_3"
+      ]
+    },
+    {
+      "id": "behavioral-production-incident",
+      "question": "Tell me about a time I dealt with a production issue or incident.",
+      "metrics": {
+        "recall@5": 0.14285714285714285,
+        "mrr@5": 1,
+        "recall@10": 0.2857142857142857,
+        "mrr@10": 1,
+        "recall@20": 0.5714285714285714,
+        "mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_9",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_9",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_2",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_13",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_6"
+        ],
+        "top_10": [
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_9",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_9",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_2",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_13",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_6",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_15",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_4",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_3",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_6",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_0"
+        ],
+        "top_20": [
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_9",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_9",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_2",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_13",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_6",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_15",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_4",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_3",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_6",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_0",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_20",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_18",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_3",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_11",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_7",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_12",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_12",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_4",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_32"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_2",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_12",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_13",
+        "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_3",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_7",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_8",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_9"
+      ]
+    },
+    {
+      "id": "behavioral-code-quality",
+      "question": "Give me a STAR-format answer about a time I improved code quality or testing.",
+      "metrics": {
+        "recall@5": 0.16666666666666666,
+        "mrr@5": 1,
+        "recall@10": 0.3333333333333333,
+        "mrr@10": 1,
+        "recall@20": 0.6666666666666666,
+        "mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_6",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_4",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_30",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_10"
+        ],
+        "top_10": [
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_6",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_4",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_30",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_10",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_33",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_34",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_18",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_13",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_7"
+        ],
+        "top_20": [
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_6",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_4",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_30",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_10",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_33",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_34",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_18",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_13",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_7",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_11",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_12",
+          "dsa_prep.html__chunk_17",
+          "dsa_prep.html__chunk_0",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_6",
+          "dsa_prep.html__chunk_12",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_1",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_23",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_3"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_3",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_7",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_11",
+        "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_2",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_5",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_6"
+      ]
+    },
+    {
+      "id": "project-rag-architecture",
+      "question": "Explain the architecture of my Interview Prep RAG project so I can walk an interviewer through it.",
+      "metrics": {
+        "recall@5": 0,
+        "mrr@5": 0,
+        "recall@10": 0,
+        "mrr@10": 0,
+        "recall@20": 0,
+        "mrr@20": 0
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_34",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_8",
+          "Resume_Mahip_ML2.pdf__chunk_1",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_10",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17"
+        ],
+        "top_10": [
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_34",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_8",
+          "Resume_Mahip_ML2.pdf__chunk_1",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_10",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_32",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_19",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_16"
+        ],
+        "top_20": [
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_34",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_8",
+          "Resume_Mahip_ML2.pdf__chunk_1",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_10",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_32",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_19",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_16",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_18",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_21",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_11",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_12",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_9",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_20",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_1",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_10",
+          "ml-ai-projects.md.pdf__chunk_1",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_23"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "ml-ai-projects.md.pdf__chunk_2",
+        "Resume_Mahip_ML2.pdf__chunk_2",
+        "Resume_Mahip_ML2.pdf__chunk_4"
+      ]
+    },
+    {
+      "id": "project-distributed-storage",
+      "question": "What were the main challenges in my distributed file storage system?",
+      "metrics": {
+        "recall@5": 0.4,
+        "mrr@5": 0.5,
+        "recall@10": 0.6,
+        "mrr@10": 0.5,
+        "recall@20": 0.7,
+        "mrr@20": 0.5
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_5",
+          "Resume_Mahip_ML2.pdf__chunk_3",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_3",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_5"
+        ],
+        "top_10": [
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_5",
+          "Resume_Mahip_ML2.pdf__chunk_3",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_3",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_5",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_13",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_5",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_6",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_11",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_15"
+        ],
+        "top_20": [
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_5",
+          "Resume_Mahip_ML2.pdf__chunk_3",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_3",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_5",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_13",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_5",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_6",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_11",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_15",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_16",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_13",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_14",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_15",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_24",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_10",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_1",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_14",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_10"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_3",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_4",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_5",
+        "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_16",
+        "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_5",
+        "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_6",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_12",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_13",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_14",
+        "Resume_Mahip_ML2.pdf__chunk_3"
+      ]
+    },
+    {
+      "id": "company-mathworks",
+      "question": "What should I focus on to prepare for my MathWorks interview?",
+      "metrics": {
+        "recall@5": 0.14285714285714285,
+        "mrr@5": 1,
+        "recall@10": 0.19047619047619047,
+        "mrr@10": 1,
+        "recall@20": 0.23809523809523808,
+        "mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_0",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_16",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_8",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_18"
+        ],
+        "top_10": [
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_0",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_16",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_8",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_18",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_19",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_9",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_23",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_24",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_29"
+        ],
+        "top_20": [
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_0",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_16",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_8",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_18",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_19",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_9",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_23",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_24",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_29",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_28",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_27",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_34",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_1",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_15",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_30",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_10",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_11",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_1"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_0",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_1",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_2",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_3",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_4",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_5",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_6",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_7",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_8",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_9",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_10",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_11",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_12",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_13",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_14",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_15",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_16",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_18",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_19",
+        "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_20"
+      ]
+    },
+    {
+      "id": "skill-postgres-pgvector",
+      "question": "What's my experience with PostgreSQL and pgvector?",
+      "metrics": {
+        "recall@5": 0.6666666666666666,
+        "mrr@5": 0.5,
+        "recall@10": 0.6666666666666666,
+        "mrr@10": 0.5,
+        "recall@20": 0.6666666666666666,
+        "mrr@20": 0.5
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "Resume_Mahip_ML2.pdf__chunk_1",
+          "ml-ai-projects.md.pdf__chunk_2",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_14",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_16",
+          "Resume_Mahip_ML2.pdf__chunk_4"
+        ],
+        "top_10": [
+          "Resume_Mahip_ML2.pdf__chunk_1",
+          "ml-ai-projects.md.pdf__chunk_2",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_14",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_16",
+          "Resume_Mahip_ML2.pdf__chunk_4",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_15",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_18",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_23",
+          "Resume_Mahip_ML2.pdf__chunk_3"
+        ],
+        "top_20": [
+          "Resume_Mahip_ML2.pdf__chunk_1",
+          "ml-ai-projects.md.pdf__chunk_2",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_14",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_16",
+          "Resume_Mahip_ML2.pdf__chunk_4",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_15",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17",
+          "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_18",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_23",
+          "Resume_Mahip_ML2.pdf__chunk_3",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_0",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_24",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_25",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_17",
+          "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_0",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_12",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_2",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_31",
+          "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_3",
+          "GM Behavioral Interview Prep — Mahip Parekh.pdf__chunk_1"
+        ]
+      },
+      "relevant_chunk_ids": [
+        "ml-ai-projects.md.pdf__chunk_2",
+        "Resume_Mahip_ML2.pdf__chunk_2",
+        "Resume_Mahip_ML2.pdf__chunk_4"
+      ]
+    }
+  ],
+  "probes": {
+    "negative-abstention": [
+      {
+        "id": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_15",
+        "score": "0.2736"
+      },
+      {
+        "id": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_18",
+        "score": "0.2362"
+      },
+      {
+        "id": "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_15",
+        "score": "0.2184"
+      },
+      {
+        "id": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_17",
+        "score": "0.2179"
+      },
+      {
+        "id": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_5",
+        "score": "0.2159"
+      },
+      {
+        "id": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_3",
+        "score": "0.2113"
+      },
+      {
+        "id": "Mahip Parekh — Complete RAG Knowledge Base.pdf__chunk_25",
+        "score": "0.2037"
+      },
+      {
+        "id": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_9",
+        "score": "0.2018"
+      },
+      {
+        "id": "Mahip's Amazon SDE Intern — Complete Behavioral Prep Guide.pdf__chunk_6",
+        "score": "0.1985"
+      },
+      {
+        "id": "Mahip's MathWorks EDG Manager Interview — Complete Prep Guide.pdf__chunk_0",
+        "score": "0.1936"
+      }
+    ]
+  }
+}
