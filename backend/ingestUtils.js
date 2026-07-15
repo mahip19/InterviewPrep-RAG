@@ -104,6 +104,15 @@ export async function setupSchema(client) {
     ON chunks
     USING hnsw (embedding vector_cosine_ops)
   `);
+  await client.query(`
+    ALTER TABLE chunks
+    ADD COLUMN IF NOT EXISTS content_tsv tsvector
+    GENERATED ALWAYS AS (to_tsvector('english', content)) STORED
+  `);
+  await client.query(`
+    CREATE INDEX IF NOT EXISTS chunks_content_tsv_idx
+    ON chunks USING gin(content_tsv)
+  `);
 }
 
 // chunk a document, embed each chunk, and store in postgres

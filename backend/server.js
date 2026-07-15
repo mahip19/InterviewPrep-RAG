@@ -23,6 +23,9 @@ const { Pool } = pg;
 
 // how many chunks to retrieve per query
 const TOP_K = 10;
+const RRF_K = 60;
+const RRF_FETCH = 50;
+const RETRIEVER = process.env.RETRIEVER || "dense";
 const EMBEDDING_MODEL =
   process.env.EMBEDDING_MODEL || "Xenova/all-MiniLM-L6-v2";
 const CHAT_MODEL = process.env.CHAT_MODEL || "llama-3.3-70b-versatile";
@@ -71,8 +74,7 @@ async function embedQuery(text) {
   return Array.from(output.data);
 }
 
-// cosine similarity search against pgvector
-async function retrieve(embedding, topK = TOP_K) {
+async function retrieveDense(embedding, topK = TOP_K) {
   const res = await pool.query(
     `SELECT id, filename, chunk_index, content,
             1 - (embedding <=> $1::vector) AS score
@@ -82,6 +84,55 @@ async function retrieve(embedding, topK = TOP_K) {
     [`[${embedding.join(",")}]`, topK],
   );
   return res.rows;
+}
+
+async function retrieveKeyword(query, topK) {
+  const { rows: tsqRows } = await pool.query(
+    `SELECT replace(plainto_tsquery('english', $1)::text, ' & ', ' | ') AS orq`,
+    [query],
+  );
+  const orQuery = tsqRows[0].orq;
+  if (!orQuery || orQuery === "") return [];
+  const { rows } = await pool.query(
+    `SELECT id, filename, chunk_index, content,
+            ts_rank(content_tsv, to_tsquery('english', $1)) AS score
+     FROM chunks
+     WHERE content_tsv @@ to_tsquery('english', $1)
+     ORDER BY score DESC
+     LIMIT $2`,
+    [orQuery, topK],
+  );
+  return rows;
+}
+
+function rrfFuse(denseResults, keywordResults, topK) {
+  const scores = new Map();
+  const meta = new Map();
+  for (let i = 0; i < denseResults.length; i++) {
+    const r = denseResults[i];
+    scores.set(r.id, 1 / (RRF_K + i + 1));
+    meta.set(r.id, r);
+  }
+  for (let i = 0; i < keywordResults.length; i++) {
+    const r = keywordResults[i];
+    scores.set(r.id, (scores.get(r.id) || 0) + 1 / (RRF_K + i + 1));
+    if (!meta.has(r.id)) meta.set(r.id, r);
+  }
+  return [...scores.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, topK)
+    .map(([id, score]) => ({ ...meta.get(id), score }));
+}
+
+async function retrieve(query, embedding, topK = TOP_K) {
+  if (RETRIEVER === "dense") {
+    return retrieveDense(embedding, topK);
+  }
+  const [denseResults, keywordResults] = await Promise.all([
+    retrieveDense(embedding, RRF_FETCH),
+    retrieveKeyword(query, RRF_FETCH),
+  ]);
+  return rrfFuse(denseResults, keywordResults, topK);
 }
 
 // send context + question to groq for answer generation
@@ -118,7 +169,7 @@ app.post("/api/retrieve", async (req, res) => {
 
   try {
     const embedding = await embedQuery(query);
-    const rows = await retrieve(embedding);
+    const rows = await retrieve(query, embedding);
     res.json({
       chunks: rows.map((r) => ({
         text: r.content,
@@ -140,7 +191,7 @@ app.post("/api/query", async (req, res) => {
 
   try {
     const embedding = await embedQuery(query);
-    const rows = await retrieve(embedding);
+    const rows = await retrieve(query, embedding);
 
     const context = rows
       .map(

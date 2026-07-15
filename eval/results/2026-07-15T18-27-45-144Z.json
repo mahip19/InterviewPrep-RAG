@@ -1,0 +1,898 @@
+{
+  "timestamp": "2026-07-15T18:27:45.144Z",
+  "pipeline_version": "hybrid-unit-scored",
+  "retriever": "hybrid",
+  "k_values": [
+    5,
+    10,
+    20
+  ],
+  "default_k": 10,
+  "evaluated_count": 8,
+  "skipped_count": 1,
+  "skipped_ids": [
+    "negative-abstention"
+  ],
+  "aggregate": {
+    "avg_unit_recall@5": 0.3398809523809524,
+    "avg_unit_mrr@5": 0.7291666666666666,
+    "avg_flat_recall@5": 0.24821428571428572,
+    "avg_flat_mrr@5": 0.7291666666666666,
+    "avg_unit_recall@10": 0.4961309523809524,
+    "avg_unit_mrr@10": 0.7470238095238094,
+    "avg_flat_recall@10": 0.36279761904761904,
+    "avg_flat_mrr@10": 0.7470238095238094,
+    "avg_unit_recall@20": 0.6973214285714285,
+    "avg_unit_mrr@20": 0.7470238095238094,
+    "avg_flat_recall@20": 0.6139880952380952,
+    "avg_flat_mrr@20": 0.7470238095238094
+  },
+  "results": [
+    {
+      "id": "intro-ai-swe",
+      "question": "I have a prescreen for an AI Software Engineering Intern role. Give me an introduction to prepare.",
+      "metrics": {
+        "unit_recall@5": 0.2857142857142857,
+        "unit_mrr@5": 1,
+        "flat_recall@5": 0.2857142857142857,
+        "flat_mrr@5": 1,
+        "unit_recall@10": 0.2857142857142857,
+        "unit_mrr@10": 1,
+        "flat_recall@10": 0.2857142857142857,
+        "flat_mrr@10": 1,
+        "unit_recall@20": 0.42857142857142855,
+        "unit_mrr@20": 1,
+        "flat_recall@20": 0.42857142857142855,
+        "flat_mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "ai-ml-pitch__c0",
+          "backend-swe-intro__c0",
+          "ai-ml-pitch__c1",
+          "gm-behavioral__c0",
+          "knowledge-base__c32"
+        ],
+        "top_10": [
+          "ai-ml-pitch__c0",
+          "backend-swe-intro__c0",
+          "ai-ml-pitch__c1",
+          "gm-behavioral__c0",
+          "knowledge-base__c32",
+          "mathworks-edg__c0",
+          "rag-project__c0",
+          "knowledge-base__c27",
+          "gm-behavioral__c9",
+          "knowledge-base__c28"
+        ],
+        "top_20": [
+          "ai-ml-pitch__c0",
+          "backend-swe-intro__c0",
+          "ai-ml-pitch__c1",
+          "gm-behavioral__c0",
+          "knowledge-base__c32",
+          "mathworks-edg__c0",
+          "rag-project__c0",
+          "knowledge-base__c27",
+          "gm-behavioral__c9",
+          "knowledge-base__c28",
+          "knowledge-base__c30",
+          "gm-behavioral__c10",
+          "ai-ml-pitch__c2",
+          "knowledge-base__c29",
+          "gm-behavioral__c1",
+          "mathworks-edg__c17",
+          "knowledge-base__c26",
+          "mathworks-edg__c1",
+          "knowledge-base__c24",
+          "rag-project__c3"
+        ]
+      },
+      "relevant_units": [
+        {
+          "unit": "ai-pitch-intro",
+          "any_of": [
+            "ai-ml-pitch__c0"
+          ],
+          "desc": "Opening of the AI/ML pitch — motivation for moving toward AI SWE work."
+        },
+        {
+          "unit": "ai-pitch-rag",
+          "any_of": [
+            "ai-ml-pitch__c1"
+          ],
+          "desc": "RAG system as the centerpiece — pipeline engineering emphasis."
+        },
+        {
+          "unit": "ai-pitch-reliability",
+          "any_of": [
+            "ai-ml-pitch__c2"
+          ],
+          "desc": "Reliability mindset applied to AI — production-support background framing."
+        },
+        {
+          "unit": "ai-pitch-projects",
+          "any_of": [
+            "ai-ml-pitch__c3"
+          ],
+          "desc": "AI project portfolio — churn prediction, RAG architecture thesis."
+        },
+        {
+          "unit": "ml-projects-overview",
+          "any_of": [
+            "ml-ai-projects__c0"
+          ],
+          "desc": "ML/AI projects overview doc opening."
+        },
+        {
+          "unit": "ml-projects-rag-detail",
+          "any_of": [
+            "ml-ai-projects__c2"
+          ],
+          "desc": "RAG project detail from the ML projects doc."
+        },
+        {
+          "unit": "resume-ai-skills",
+          "any_of": [
+            "resume-ml__c2"
+          ],
+          "desc": "Resume listing of AI/ML skills and RAG project bullet."
+        }
+      ],
+      "relevant_flat": [
+        "ai-ml-pitch__c0",
+        "ai-ml-pitch__c1",
+        "ai-ml-pitch__c2",
+        "ai-ml-pitch__c3",
+        "ml-ai-projects__c0",
+        "ml-ai-projects__c2",
+        "resume-ml__c2"
+      ]
+    },
+    {
+      "id": "intro-backend-swe",
+      "question": "I have an interview for a backend / general Software Engineer role. Give me an introduction.",
+      "metrics": {
+        "unit_recall@5": 0.6666666666666666,
+        "unit_mrr@5": 1,
+        "flat_recall@5": 0.3333333333333333,
+        "flat_mrr@5": 1,
+        "unit_recall@10": 0.6666666666666666,
+        "unit_mrr@10": 1,
+        "flat_recall@10": 0.5,
+        "flat_mrr@10": 1,
+        "unit_recall@20": 0.6666666666666666,
+        "unit_mrr@20": 1,
+        "flat_recall@20": 0.5,
+        "flat_mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "backend-swe-intro__c0",
+          "rag-project__c0",
+          "backend-swe-intro__c1",
+          "gm-behavioral__c0",
+          "ai-ml-pitch__c1"
+        ],
+        "top_10": [
+          "backend-swe-intro__c0",
+          "rag-project__c0",
+          "backend-swe-intro__c1",
+          "gm-behavioral__c0",
+          "ai-ml-pitch__c1",
+          "ai-ml-pitch__c0",
+          "gm-behavioral__c1",
+          "backend-swe-intro__c3",
+          "ai-ml-pitch__c2",
+          "knowledge-base__c24"
+        ],
+        "top_20": [
+          "backend-swe-intro__c0",
+          "rag-project__c0",
+          "backend-swe-intro__c1",
+          "gm-behavioral__c0",
+          "ai-ml-pitch__c1",
+          "ai-ml-pitch__c0",
+          "gm-behavioral__c1",
+          "backend-swe-intro__c3",
+          "ai-ml-pitch__c2",
+          "knowledge-base__c24",
+          "mathworks-edg__c0",
+          "knowledge-base__c23",
+          "knowledge-base__c1",
+          "mathworks-edg__c17",
+          "amazon-behavioral__c14",
+          "gm-behavioral__c10",
+          "amazon-behavioral__c17",
+          "gm-behavioral__c9",
+          "knowledge-base__c28",
+          "mathworks-edg__c14"
+        ]
+      },
+      "relevant_units": [
+        {
+          "unit": "intro-pitch",
+          "any_of": [
+            "backend-swe-intro__c0",
+            "knowledge-base__c24"
+          ],
+          "desc": "Core spoken intro — Master's at Northeastern, India SWE product-support role, project highlights."
+        },
+        {
+          "unit": "engineering-emphasis",
+          "any_of": [
+            "backend-swe-intro__c1",
+            "knowledge-base__c26"
+          ],
+          "desc": "What I emphasize for backend roles — production reliability, distributed-systems fundamentals, reliability-first mindset."
+        },
+        {
+          "unit": "project-highlights",
+          "any_of": [
+            "backend-swe-intro__c2",
+            "knowledge-base__c25"
+          ],
+          "desc": "Specific project summaries framed for backend — distributed storage (C++), calendar (Java/testing), full-stack apps."
+        }
+      ],
+      "relevant_flat": [
+        "backend-swe-intro__c0",
+        "knowledge-base__c24",
+        "backend-swe-intro__c1",
+        "knowledge-base__c26",
+        "backend-swe-intro__c2",
+        "knowledge-base__c25"
+      ]
+    },
+    {
+      "id": "behavioral-production-incident",
+      "question": "Tell me about a time I dealt with a production issue or incident.",
+      "metrics": {
+        "unit_recall@5": 0,
+        "unit_mrr@5": 0,
+        "flat_recall@5": 0,
+        "flat_mrr@5": 0,
+        "unit_recall@10": 0.5,
+        "unit_mrr@10": 0.14285714285714285,
+        "flat_recall@10": 0.3333333333333333,
+        "flat_mrr@10": 0.14285714285714285,
+        "unit_recall@20": 0.5,
+        "unit_mrr@20": 0.14285714285714285,
+        "flat_recall@20": 0.6666666666666666,
+        "flat_mrr@20": 0.14285714285714285
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "gm-behavioral__c6",
+          "gm-behavioral__c4",
+          "mathworks-edg__c15",
+          "mathworks-edg__c9",
+          "amazon-behavioral__c13"
+        ],
+        "top_10": [
+          "gm-behavioral__c6",
+          "gm-behavioral__c4",
+          "mathworks-edg__c15",
+          "mathworks-edg__c9",
+          "amazon-behavioral__c13",
+          "mathworks-edg__c2",
+          "knowledge-base__c12",
+          "mathworks-edg__c7",
+          "gm-behavioral__c0",
+          "knowledge-base__c9"
+        ],
+        "top_20": [
+          "gm-behavioral__c6",
+          "gm-behavioral__c4",
+          "mathworks-edg__c15",
+          "mathworks-edg__c9",
+          "amazon-behavioral__c13",
+          "mathworks-edg__c2",
+          "knowledge-base__c12",
+          "mathworks-edg__c7",
+          "gm-behavioral__c0",
+          "knowledge-base__c9",
+          "mathworks-edg__c6",
+          "amazon-behavioral__c18",
+          "amazon-behavioral__c3",
+          "gm-behavioral__c2",
+          "knowledge-base__c14",
+          "mathworks-edg__c14",
+          "amazon-behavioral__c17",
+          "gm-behavioral__c7",
+          "gm-behavioral__c1",
+          "knowledge-base__c1"
+        ]
+      },
+      "relevant_units": [
+        {
+          "unit": "incident-story",
+          "any_of": [
+            "knowledge-base__c12",
+            "amazon-behavioral__c3",
+            "mathworks-edg__c7",
+            "gm-behavioral__c2"
+          ],
+          "desc": "Core stale-cache/publish-button story (Situation+Task+Action). Told 4 times across 4 docs — any one is sufficient."
+        },
+        {
+          "unit": "incident-result",
+          "any_of": [
+            "knowledge-base__c13",
+            "mathworks-edg__c8"
+          ],
+          "desc": "Result + learning + follow-up Q&A for the incident. Continuation chunks that complete the story."
+        }
+      ],
+      "relevant_flat": [
+        "knowledge-base__c12",
+        "amazon-behavioral__c3",
+        "mathworks-edg__c7",
+        "gm-behavioral__c2",
+        "knowledge-base__c13",
+        "mathworks-edg__c8"
+      ]
+    },
+    {
+      "id": "behavioral-code-quality",
+      "question": "Give me a STAR-format answer about a time I improved code quality or testing.",
+      "metrics": {
+        "unit_recall@5": 0.5,
+        "unit_mrr@5": 0.5,
+        "flat_recall@5": 0.16666666666666666,
+        "flat_mrr@5": 0.5,
+        "unit_recall@10": 1,
+        "unit_mrr@10": 0.5,
+        "flat_recall@10": 0.3333333333333333,
+        "flat_mrr@10": 0.5,
+        "unit_recall@20": 1,
+        "unit_mrr@20": 0.5,
+        "flat_recall@20": 0.6666666666666666,
+        "flat_mrr@20": 0.5
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "gm-behavioral__c0",
+          "mathworks-edg__c6",
+          "knowledge-base__c33",
+          "mathworks-edg__c4",
+          "knowledge-base__c10"
+        ],
+        "top_10": [
+          "gm-behavioral__c0",
+          "mathworks-edg__c6",
+          "knowledge-base__c33",
+          "mathworks-edg__c4",
+          "knowledge-base__c10",
+          "knowledge-base__c30",
+          "knowledge-base__c34",
+          "amazon-behavioral__c13",
+          "gm-behavioral__c3",
+          "gm-behavioral__c1"
+        ],
+        "top_20": [
+          "gm-behavioral__c0",
+          "mathworks-edg__c6",
+          "knowledge-base__c33",
+          "mathworks-edg__c4",
+          "knowledge-base__c10",
+          "knowledge-base__c30",
+          "knowledge-base__c34",
+          "amazon-behavioral__c13",
+          "gm-behavioral__c3",
+          "gm-behavioral__c1",
+          "knowledge-base__c11",
+          "knowledge-base__c7",
+          "knowledge-base__c18",
+          "amazon-behavioral__c12",
+          "knowledge-base__c6",
+          "rag-project__c3",
+          "backend-swe-intro__c2",
+          "amazon-behavioral__c17",
+          "resume-ml__c1",
+          "amazon-behavioral__c8"
+        ]
+      },
+      "relevant_units": [
+        {
+          "unit": "testing-disagreement-setup",
+          "any_of": [
+            "gm-behavioral__c3",
+            "knowledge-base__c7",
+            "mathworks-edg__c5"
+          ],
+          "desc": "Testing disagreement story setup: calendar project, 100% mutation coverage target, teammate wanted to test at end. Told 3 times — any one is sufficient."
+        },
+        {
+          "unit": "testing-disagreement-result",
+          "any_of": [
+            "knowledge-base__c11",
+            "amazon-behavioral__c2",
+            "mathworks-edg__c6"
+          ],
+          "desc": "Result: checklist approach, role rotation, 98% mutation coverage, finished before deadline. Told 3 times — any one is sufficient."
+        }
+      ],
+      "relevant_flat": [
+        "gm-behavioral__c3",
+        "knowledge-base__c7",
+        "mathworks-edg__c5",
+        "knowledge-base__c11",
+        "amazon-behavioral__c2",
+        "mathworks-edg__c6"
+      ]
+    },
+    {
+      "id": "project-rag-architecture",
+      "question": "Explain the architecture of my Interview Prep RAG project so I can walk an interviewer through it.",
+      "metrics": {
+        "unit_recall@5": 0.2,
+        "unit_mrr@5": 1,
+        "flat_recall@5": 0.2,
+        "flat_mrr@5": 1,
+        "unit_recall@10": 0.2,
+        "unit_mrr@10": 1,
+        "flat_recall@10": 0.2,
+        "flat_mrr@10": 1,
+        "unit_recall@20": 0.4,
+        "unit_mrr@20": 1,
+        "flat_recall@20": 0.4,
+        "flat_mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "rag-project__c0",
+          "ai-ml-pitch__c2",
+          "ai-ml-pitch__c0",
+          "resume-ml__c1",
+          "rag-project__c1"
+        ],
+        "top_10": [
+          "rag-project__c0",
+          "ai-ml-pitch__c2",
+          "ai-ml-pitch__c0",
+          "resume-ml__c1",
+          "rag-project__c1",
+          "gm-behavioral__c0",
+          "amazon-behavioral__c17",
+          "backend-swe-intro__c0",
+          "mathworks-edg__c19",
+          "ml-ai-projects__c1"
+        ],
+        "top_20": [
+          "rag-project__c0",
+          "ai-ml-pitch__c2",
+          "ai-ml-pitch__c0",
+          "resume-ml__c1",
+          "rag-project__c1",
+          "gm-behavioral__c0",
+          "amazon-behavioral__c17",
+          "backend-swe-intro__c0",
+          "mathworks-edg__c19",
+          "ml-ai-projects__c1",
+          "rag-project__c3",
+          "knowledge-base__c34",
+          "gm-behavioral__c10",
+          "distributed-storage__c0",
+          "backend-swe-intro__c3",
+          "rag-project__c5",
+          "knowledge-base__c30",
+          "knowledge-base__c32",
+          "mathworks-edg__c0",
+          "mathworks-edg__c16"
+        ]
+      },
+      "relevant_units": [
+        {
+          "unit": "rag-overview",
+          "any_of": [
+            "rag-project__c0"
+          ],
+          "desc": "RAG project overview — pipeline architecture, tech stack intro."
+        },
+        {
+          "unit": "rag-backend-stack",
+          "any_of": [
+            "rag-project__c2"
+          ],
+          "desc": "Backend stack detail — Express, pgvector, embedding pipeline."
+        },
+        {
+          "unit": "rag-deployment",
+          "any_of": [
+            "rag-project__c3"
+          ],
+          "desc": "Deployment and infrastructure — Vercel, Neon, Groq."
+        },
+        {
+          "unit": "resume-rag-bullet",
+          "any_of": [
+            "resume-ml__c2"
+          ],
+          "desc": "Resume RAG project bullet — end-to-end pipeline summary."
+        },
+        {
+          "unit": "ml-projects-rag",
+          "any_of": [
+            "ml-ai-projects__c2"
+          ],
+          "desc": "RAG project from the ML projects doc — architecture and eval."
+        }
+      ],
+      "relevant_flat": [
+        "rag-project__c0",
+        "rag-project__c2",
+        "rag-project__c3",
+        "resume-ml__c2",
+        "ml-ai-projects__c2"
+      ]
+    },
+    {
+      "id": "project-distributed-storage",
+      "question": "What were the main challenges in my distributed file storage system?",
+      "metrics": {
+        "unit_recall@5": 0.16666666666666666,
+        "unit_mrr@5": 1,
+        "flat_recall@5": 0.1,
+        "flat_mrr@5": 1,
+        "unit_recall@10": 0.16666666666666666,
+        "unit_mrr@10": 1,
+        "flat_recall@10": 0.1,
+        "flat_mrr@10": 1,
+        "unit_recall@20": 0.8333333333333334,
+        "unit_mrr@20": 1,
+        "flat_recall@20": 0.5,
+        "flat_mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "distributed-storage__c0",
+          "amazon-behavioral__c17",
+          "amazon-behavioral__c5",
+          "backend-swe-intro__c2",
+          "gm-behavioral__c5"
+        ],
+        "top_10": [
+          "distributed-storage__c0",
+          "amazon-behavioral__c17",
+          "amazon-behavioral__c5",
+          "backend-swe-intro__c2",
+          "gm-behavioral__c5",
+          "mathworks-edg__c11",
+          "resume-ml__c3",
+          "knowledge-base__c3",
+          "mathworks-edg__c16",
+          "backend-swe-intro__c1"
+        ],
+        "top_20": [
+          "distributed-storage__c0",
+          "amazon-behavioral__c17",
+          "amazon-behavioral__c5",
+          "backend-swe-intro__c2",
+          "gm-behavioral__c5",
+          "mathworks-edg__c11",
+          "resume-ml__c3",
+          "knowledge-base__c3",
+          "mathworks-edg__c16",
+          "backend-swe-intro__c1",
+          "mathworks-edg__c15",
+          "distributed-storage__c1",
+          "distributed-storage__c2",
+          "knowledge-base__c24",
+          "distributed-storage__c3",
+          "amazon-behavioral__c13",
+          "mathworks-edg__c13",
+          "knowledge-base__c5",
+          "gm-behavioral__c0",
+          "amazon-behavioral__c14"
+        ]
+      },
+      "relevant_units": [
+        {
+          "unit": "architecture",
+          "any_of": [
+            "distributed-storage__c0",
+            "mathworks-edg__c12"
+          ],
+          "desc": "System overview and 3-layer design (client, metadata via chain replication, storage via consistent hash ring)."
+        },
+        {
+          "unit": "fault-tolerance",
+          "any_of": [
+            "distributed-storage__c1",
+            "amazon-behavioral__c6"
+          ],
+          "desc": "Replication for node failure recovery; automated tests that killed nodes mid-operation and verified recovery."
+        },
+        {
+          "unit": "data-integrity",
+          "any_of": [
+            "distributed-storage__c2"
+          ],
+          "desc": "Hash comparison at retrieval time to verify reconstructed file matches original; consistent hashing for even distribution."
+        },
+        {
+          "unit": "length-prefix-story",
+          "any_of": [
+            "knowledge-base__c4",
+            "knowledge-base__c5",
+            "knowledge-base__c16"
+          ],
+          "desc": "TCP message-boundary bug and length-prefix protocol fix — told 3 times across the knowledge base."
+        },
+        {
+          "unit": "limitations",
+          "any_of": [
+            "distributed-storage__c3"
+          ],
+          "desc": "Known limitations (rejoin handling, no persistent storage, hardcoded config) and protocol-level debugging reflection."
+        },
+        {
+          "unit": "interview-framing",
+          "any_of": [
+            "distributed-storage__c4"
+          ],
+          "desc": "Why this project matters — demonstrates distributed-systems fundamentals and reliability mindset."
+        }
+      ],
+      "relevant_flat": [
+        "distributed-storage__c0",
+        "mathworks-edg__c12",
+        "distributed-storage__c1",
+        "amazon-behavioral__c6",
+        "distributed-storage__c2",
+        "knowledge-base__c4",
+        "knowledge-base__c5",
+        "knowledge-base__c16",
+        "distributed-storage__c3",
+        "distributed-storage__c4"
+      ]
+    },
+    {
+      "id": "company-mathworks",
+      "question": "What should I focus on to prepare for my MathWorks interview?",
+      "metrics": {
+        "unit_recall@5": 0.4,
+        "unit_mrr@5": 1,
+        "flat_recall@5": 0.4,
+        "flat_mrr@5": 1,
+        "unit_recall@10": 0.4,
+        "unit_mrr@10": 1,
+        "flat_recall@10": 0.4,
+        "flat_mrr@10": 1,
+        "unit_recall@20": 1,
+        "unit_mrr@20": 1,
+        "flat_recall@20": 1,
+        "flat_mrr@20": 1
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "mathworks-edg__c0",
+          "mathworks-edg__c18",
+          "knowledge-base__c30",
+          "amazon-behavioral__c16",
+          "knowledge-base__c24"
+        ],
+        "top_10": [
+          "mathworks-edg__c0",
+          "mathworks-edg__c18",
+          "knowledge-base__c30",
+          "amazon-behavioral__c16",
+          "knowledge-base__c24",
+          "mathworks-edg__c17",
+          "knowledge-base__c32",
+          "rag-project__c0",
+          "backend-swe-intro__c0",
+          "gm-behavioral__c0"
+        ],
+        "top_20": [
+          "mathworks-edg__c0",
+          "mathworks-edg__c18",
+          "knowledge-base__c30",
+          "amazon-behavioral__c16",
+          "knowledge-base__c24",
+          "mathworks-edg__c17",
+          "knowledge-base__c32",
+          "rag-project__c0",
+          "backend-swe-intro__c0",
+          "gm-behavioral__c0",
+          "ai-ml-pitch__c0",
+          "mathworks-edg__c1",
+          "mathworks-edg__c19",
+          "knowledge-base__c34",
+          "knowledge-base__c27",
+          "knowledge-base__c1",
+          "knowledge-base__c0",
+          "ai-ml-pitch__c2",
+          "gm-behavioral__c11",
+          "ai-ml-pitch__c1"
+        ]
+      },
+      "relevant_units": [
+        {
+          "unit": "edg-intro-prep",
+          "any_of": [
+            "mathworks-edg__c0"
+          ],
+          "desc": "MathWorks EDG manager interview intro — 90-second introduction script."
+        },
+        {
+          "unit": "edg-culture-fit",
+          "any_of": [
+            "mathworks-edg__c1"
+          ],
+          "desc": "EDG program culture fit — engineering culture, collaboration, continuous learning."
+        },
+        {
+          "unit": "matlab-personal-story",
+          "any_of": [
+            "mathworks-edg__c18"
+          ],
+          "desc": "Dad's MATLAB thesis story — full narrative version for the interview."
+        },
+        {
+          "unit": "question-story-map",
+          "any_of": [
+            "mathworks-edg__c19"
+          ],
+          "desc": "Quick-reference question-to-story map for the manager interview."
+        },
+        {
+          "unit": "kb-idx-experience",
+          "any_of": [
+            "knowledge-base__c1"
+          ],
+          "desc": "IDX professional experience details (with brief MATLAB mention) — behavioral story source material."
+        }
+      ],
+      "relevant_flat": [
+        "mathworks-edg__c0",
+        "mathworks-edg__c1",
+        "mathworks-edg__c18",
+        "mathworks-edg__c19",
+        "knowledge-base__c1"
+      ]
+    },
+    {
+      "id": "skill-postgres-pgvector",
+      "question": "What's my experience with PostgreSQL and pgvector?",
+      "metrics": {
+        "unit_recall@5": 0.5,
+        "unit_mrr@5": 0.3333333333333333,
+        "flat_recall@5": 0.5,
+        "flat_mrr@5": 0.3333333333333333,
+        "unit_recall@10": 0.75,
+        "unit_mrr@10": 0.3333333333333333,
+        "flat_recall@10": 0.75,
+        "flat_mrr@10": 0.3333333333333333,
+        "unit_recall@20": 0.75,
+        "unit_mrr@20": 0.3333333333333333,
+        "flat_recall@20": 0.75,
+        "flat_mrr@20": 0.3333333333333333
+      },
+      "retrieved_ids": {
+        "top_5": [
+          "rag-project__c1",
+          "resume-ml__c1",
+          "ml-ai-projects__c2",
+          "rag-project__c2",
+          "ai-ml-pitch__c2"
+        ],
+        "top_10": [
+          "rag-project__c1",
+          "resume-ml__c1",
+          "ml-ai-projects__c2",
+          "rag-project__c2",
+          "ai-ml-pitch__c2",
+          "resume-ml__c4",
+          "resume-ml__c3",
+          "mathworks-edg__c14",
+          "amazon-behavioral__c17",
+          "amazon-behavioral__c18"
+        ],
+        "top_20": [
+          "rag-project__c1",
+          "resume-ml__c1",
+          "ml-ai-projects__c2",
+          "rag-project__c2",
+          "ai-ml-pitch__c2",
+          "resume-ml__c4",
+          "resume-ml__c3",
+          "mathworks-edg__c14",
+          "amazon-behavioral__c17",
+          "amazon-behavioral__c18",
+          "mathworks-edg__c15",
+          "backend-swe-intro__c3",
+          "knowledge-base__c2",
+          "mathworks-edg__c0",
+          "gm-behavioral__c0",
+          "amazon-behavioral__c14",
+          "ai-ml-pitch__c3",
+          "knowledge-base__c23",
+          "amazon-behavioral__c5",
+          "knowledge-base__c24"
+        ]
+      },
+      "relevant_units": [
+        {
+          "unit": "resume-db-skills",
+          "any_of": [
+            "resume-ml__c2"
+          ],
+          "desc": "Resume listing — PostgreSQL and pgvector in skills/tools and RAG project bullet."
+        },
+        {
+          "unit": "resume-tech-stack",
+          "any_of": [
+            "resume-ml__c4"
+          ],
+          "desc": "Resume technical skills section — database technologies listed."
+        },
+        {
+          "unit": "ml-projects-pgvector",
+          "any_of": [
+            "ml-ai-projects__c2"
+          ],
+          "desc": "ML projects doc — pgvector as vector store in the RAG project."
+        },
+        {
+          "unit": "rag-pgvector-detail",
+          "any_of": [
+            "rag-project__c2"
+          ],
+          "desc": "RAG project doc — pgvector storage layer and embedding pipeline detail."
+        }
+      ],
+      "relevant_flat": [
+        "resume-ml__c2",
+        "resume-ml__c4",
+        "ml-ai-projects__c2",
+        "rag-project__c2"
+      ]
+    }
+  ],
+  "probes": {
+    "negative-abstention": [
+      {
+        "id": "knowledge-base__c15",
+        "score": "0.0303"
+      },
+      {
+        "id": "amazon-behavioral__c18",
+        "score": "0.0295"
+      },
+      {
+        "id": "amazon-behavioral__c17",
+        "score": "0.0289"
+      },
+      {
+        "id": "mathworks-edg__c15",
+        "score": "0.0289"
+      },
+      {
+        "id": "amazon-behavioral__c5",
+        "score": "0.0286"
+      },
+      {
+        "id": "knowledge-base__c25",
+        "score": "0.0286"
+      },
+      {
+        "id": "knowledge-base__c26",
+        "score": "0.0278"
+      },
+      {
+        "id": "mathworks-edg__c0",
+        "score": "0.0265"
+      },
+      {
+        "id": "knowledge-base__c28",
+        "score": "0.0264"
+      },
+      {
+        "id": "amazon-behavioral__c14",
+        "score": "0.0261"
+      }
+    ]
+  }
+}
