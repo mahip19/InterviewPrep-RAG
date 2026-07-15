@@ -48,14 +48,14 @@ have them), I had Claude Code run the actual retrieval and print the top-10
 retrieved chunks + scores for that one query. **Rule I enforced: read-only, no
 changes to the retriever or scoring — just surface the evidence.**
 
-**Finding:** The relevant story chunks *were* being retrieved, just ranked low.
+**Finding:** The relevant story chunks _were_ being retrieved, just ranked low.
 The abstract query ("a time I dealt with a production issue") didn't embed close
 to the concrete story language ("toggle", "stale cache", "email fired to client").
 
 **Where I pushed back (important):** The AI initially proposed rewriting my chunk
 to add search-friendly vocabulary. I rejected this: **real user data isn't
 hand-polished, and the system has to work on messy input as-is.** I also pointed
-out the retrieved story *was* a genuine production incident — so retrieval wasn't
+out the retrieved story _was_ a genuine production incident — so retrieval wasn't
 as broken as the score implied. This reframed the problem from "fix retrieval" to
 "fix the eval labels."
 
@@ -71,13 +71,13 @@ label fix. No retriever or data changes.
 
 **Result:**
 
-| Metric     | Before | After | Delta  |
-|------------|--------|-------|--------|
-| recall@5   | 0.000  | 0.500 | +0.500 |
-| recall@10  | 0.500  | 1.000 | +0.500 |
-| mrr@10     | 0.125  | 1.000 | +0.875 |
+| Metric    | Before | After | Delta  |
+| --------- | ------ | ----- | ------ |
+| recall@5  | 0.000  | 0.500 | +0.500 |
+| recall@10 | 0.500  | 1.000 | +0.500 |
+| mrr@10    | 0.125  | 1.000 | +0.875 |
 
-**Lesson:** This was a *labeling gap, not a retrieval gap.* The retriever was
+**Lesson:** This was a _labeling gap, not a retrieval gap._ The retriever was
 already finding the right content; the eval just wasn't crediting it. Worth
 remembering — a bad metric can make a working system look broken.
 
@@ -95,7 +95,7 @@ a wash across k. Hybrid demotes correct hits on the behavioral questions and on
 
 **Decision: drop hybrid, keep dense.** It adds complexity and hurts ranking for
 no net recall gain on this corpus. Noted for the future: if keyword search is
-ever revisited, use *weighted* fusion (dense-heavy) rather than vanilla RRF —
+ever revisited, use _weighted_ fusion (dense-heavy) rather than vanilla RRF —
 that's the source of the noise.
 
 ---
@@ -103,6 +103,18 @@ that's the source of the noise.
 ## Decision 5 — Lock dense as the baseline
 
 Saved the dense results as the baseline reference; hybrid dropped.
+
+---
+
+## Decision 6 — Generation quality check
+
+Ran three questions through the full pipeline (retrieval + LLM), read answers against retrieved chunks, no scoring. Findings: abstention (Rust) passed clean — model said "couldn't find this in your documents," no fabrication. Incident answer correct but retrieval noisy. rag-architecture answer incomplete — missing deployment/pipeline detail because those chunks weren't retrieved. The eval had predicted this (rag-architecture recall@10 = 0.20).
+
+---
+
+## Decision 7 — Fix rag-architecture retrieval with contextual chunk headers
+
+Diagnosed first (read-only top-10): c2/c3 ranked 15+ / off-map. Root cause — query said "architecture," chunks said "Express, pgvector, pipeline"; vocabulary mismatch, low embedding similarity. Tried the free fix first: labeled c1 relevant (it was a genuine gap), but it sat at rank 12 so recall barely moved. Then the data fix: prepended a context header naming project + topic to each rag-project chunk before embedding, re-ingested that doc only.
 
 ---
 
@@ -121,6 +133,7 @@ A running theme worth being able to speak to:
    failure; I identified it as a labeling gap, which was the actual root cause.
 5. **The final call was mine.** AI produced analysis and options; the
    keep-dense/drop-hybrid decision came from reading the tradeoffs myself.
+6. I stopped at "good enough" instead of maximizing the metric — declined to header every doc just to lift recall, because the remaining chunks were redundant, not informative.
 
 ---
 
