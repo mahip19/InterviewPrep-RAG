@@ -115,6 +115,19 @@ export async function setupSchema(client) {
   `);
 }
 
+const CHUNK_HEADERS = {
+  "rag-project": [
+    "Interview Prep RAG project — overview and design goals:\n",
+    "Interview Prep RAG project — architecture and tech stack (React/Vite, Express, pgvector, MiniLM, Llama 3.3, Vercel/Neon):\n",
+    "Interview Prep RAG project — RAG pipeline stages (ingestion, chunking, embedding, storage, retrieval, generation):\n",
+    "Interview Prep RAG project — retrieval-quality engineering and failure diagnosis:\n",
+    "Interview Prep RAG project — corpus cleanup and evaluation harness:\n",
+    "Interview Prep RAG project — evaluation methodology and labeled test set:\n",
+    "Interview Prep RAG project — retrieval ranking vs content coverage analysis:\n",
+    "Interview Prep RAG project — known limitations and active development:\n",
+  ],
+};
+
 // chunk a document, embed each chunk, and store in postgres
 // deletes old chunks for this file first so re-uploads work
 export function slugify(filename) {
@@ -136,8 +149,12 @@ export async function ingestDocument(pool, filename, content, slug) {
 
   await pool.query(`DELETE FROM chunks WHERE filename = $1`, [filename]);
 
+  const headers = CHUNK_HEADERS[docSlug];
+
   for (let i = 0; i < chunks.length; i++) {
-    const embedding = await embed(chunks[i]);
+    const header = headers && i < headers.length ? headers[i] : "";
+    const textToEmbed = header + chunks[i];
+    const embedding = await embed(textToEmbed);
     await pool.query(
       `INSERT INTO chunks (id, filename, chunk_index, total_chunks, content, embedding)
        VALUES ($1, $2, $3, $4, $5, $6)

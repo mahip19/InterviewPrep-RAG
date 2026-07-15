@@ -127,6 +127,11 @@
         "desc": "RAG project overview — pipeline architecture, tech stack intro."
       },
       {
+        "unit": "rag-arch-stack",
+        "any_of": ["rag-project__c1"],
+        "desc": "Full architecture and stack listing — React/Vite, Express, pgvector, MiniLM, Llama 3.3, Vercel/Neon."
+      },
+      {
         "unit": "rag-backend-stack",
         "any_of": ["rag-project__c2"],
         "desc": "Backend stack detail — Express, pgvector, embedding pipeline."
