@@ -2,6 +2,7 @@ import fs from "fs";
 import { execFile } from "child_process";
 import { promisify } from "util";
 import { pipeline } from "@huggingface/transformers";
+import Groq from "groq-sdk";
 
 const execFileAsync = promisify(execFile);
 
@@ -115,18 +116,36 @@ export async function setupSchema(client) {
   `);
 }
 
-const CHUNK_HEADERS = {
-  "rag-project": [
-    "Interview Prep RAG project — overview and design goals:\n",
-    "Interview Prep RAG project — architecture and tech stack (React/Vite, Express, pgvector, MiniLM, Llama 3.3, Vercel/Neon):\n",
-    "Interview Prep RAG project — RAG pipeline stages (ingestion, chunking, embedding, storage, retrieval, generation):\n",
-    "Interview Prep RAG project — retrieval-quality engineering and failure diagnosis:\n",
-    "Interview Prep RAG project — corpus cleanup and evaluation harness:\n",
-    "Interview Prep RAG project — evaluation methodology and labeled test set:\n",
-    "Interview Prep RAG project — retrieval ranking vs content coverage analysis:\n",
-    "Interview Prep RAG project — known limitations and active development:\n",
-  ],
-};
+async function generateDocHeader(content, filename) {
+  const snippet = content.slice(0, 1500);
+  try {
+    const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+    const completion = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You generate a short topic header for a document. " +
+            "Return ONLY the header text — no quotes, no explanation. " +
+            "The header should be ~8 words summarizing what the document covers.",
+        },
+        {
+          role: "user",
+          content: `Generate a topic header for this document:\n\n${snippet}`,
+        },
+      ],
+      temperature: 0,
+      max_tokens: 30,
+    });
+    const header = completion.choices[0]?.message?.content?.trim();
+    if (header && header.length > 3 && header.length < 120) return header;
+  } catch (err) {
+    console.warn(`  LLM header generation failed for ${filename}: ${err.message}`);
+  }
+  const firstLine = content.split("\n").find((l) => l.trim().length > 0) || "";
+  return `${slugify(filename)} — ${firstLine.slice(0, 60).trim()}`;
+}
 
 // chunk a document, embed each chunk, and store in postgres
 // deletes old chunks for this file first so re-uploads work
@@ -149,11 +168,11 @@ export async function ingestDocument(pool, filename, content, slug) {
 
   await pool.query(`DELETE FROM chunks WHERE filename = $1`, [filename]);
 
-  const headers = CHUNK_HEADERS[docSlug];
+  const docHeader = await generateDocHeader(content, filename);
+  console.log(`  Header for ${docSlug}: "${docHeader}"`);
 
   for (let i = 0; i < chunks.length; i++) {
-    const header = headers && i < headers.length ? headers[i] : "";
-    const textToEmbed = header + chunks[i];
+    const textToEmbed = docHeader + ":\n" + chunks[i];
     const embedding = await embed(textToEmbed);
     await pool.query(
       `INSERT INTO chunks (id, filename, chunk_index, total_chunks, content, embedding)
