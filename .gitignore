@@ -3,16 +3,13 @@ node_modules/
 
 # Environment variables
 .env
+backend/.env
 
 # OS files
 .DS_Store
 
 # Personal interview docs
-backend/docs/*.md
-backend/docs/*.txt
-backend/docs/*.html
-backend/docs/*.pdf
+backend/docs/
 
 # Claude Code
 .claude/
-backend/.env
