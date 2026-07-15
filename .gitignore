@@ -15,3 +15,4 @@ backend/docs/*.pdf
 
 # Claude Code
 .claude/
+backend/.env
